@@ -1,0 +1,21 @@
+#!/bin/bash
+
+ENV="${HOME}/Dropbox/env/"
+OS=`uname`
+
+# link to bash config files
+ln -sf ${ENV}/bash 	        ${HOME}/.bash
+ln -sf ${ENV}/bash_profile  ${HOME}/.bash_profile
+ln -sf ${ENV}/bashrc 		${HOME}/.bashrc
+
+# link to vim files
+ln -sf ${ENV}/vim 		    ${HOME}/.vim
+ln -sf ${ENV}/gvimrc 	    ${HOME}/.gvimrc
+cp -n  ${ENV}/vimrc         ${HOME}/.vimrc || echo "vimrc exists not overwriting"
+
+# application configurations
+ln -sf ${ENV}/slate.js 	    ${HOME}/.slate.js
+ln -sf ${ENV}/tmux.conf     ${HOME}/.tmux.conf
+# synergy.conf
+ln -sf ${ENV}/i3            ${HOME}/.i3
+
