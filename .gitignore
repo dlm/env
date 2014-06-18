@@ -2,3 +2,5 @@ Icon
 bundle
 cleanup
 .DS_Store
+.dropbox
+vim/.netrwhist
