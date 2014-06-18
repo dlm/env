@@ -50,8 +50,9 @@ Plugin 'fugalh/desert.vim'
 
 " ohter plugins
 Plugin 'scrooloose/syntastic'
-Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'tpope/vim-markdown'
 
 filetype plugin indent on     " required
 " To ignore plugin indent changes, instead use:
@@ -93,10 +94,10 @@ set mouse=a		" enable mouse usage (all modes)
 
 "-- 10 GUI
 "set guifont=Monaco:h12  " font used in gui
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h14
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
 set guioptions-=T       " remove the toolbar from the gui
 if has("gui_running")
-    set transparency=0  " transparancy of the background (as a precent)
+    set transparency=1  " transparancy of the background (as a precent)
 endif
 
 "-- 11 printing
@@ -267,6 +268,7 @@ map qq gwap
 " turn spell checking on for tex and html files
 autocmd FileType tex set spell
 autocmd FileType html set spell
+autocmd FileType md set spell
 " turn smart line breaking on for tex
 autocmd FileType tex set linebreak
 autocmd FileType tex set display+=lastline
@@ -420,31 +422,20 @@ iab xsh #!/bin/shell<cr>
     \# Purpose: <TODO><cr>
     \#
 
-" create the oxLibCSG header
-iab xcsg /**<cr>
-    \Filename: <c-r>=expand("%:t")<cr><cr>
-    \Project name: oxLibCSG<cr>
-    \Created on: <c-r>=strftime("%d %b %Y")<cr><cr>
-    \Author: David L. Millman <dave@cs.unc.edu><cr>
-    \/
+iab xcpp /**<cr>
+    \* Author: Dave Millman <dave@production><cr>
+    \* Created: <c-r>=strftime("%d %b %Y")<cr><cr>
+    \* Copyright (C) <c-r>=strftime("%d %b %Y")<cr> ProductionPro Inc.  All rights reserved.<cr>
+    \* Purpose: <TODO><cr>
+    \*/<esc>^<C-v>4kI<space><esc>2j
 
-" create the ddad header
-iab xddad /**<cr>
-    \Filename: <c-r>=expand("%:t")<cr><cr>
-    \Project name: degDrivenAlgoDesign<cr>
-    \Created on: <c-r>=strftime("%d %b %Y")<cr><cr>
-    \Author: David L. Millman <dave@cs.unc.edu><cr>
-    \/
+iab xh /**<cr>
+    \* Author: Dave Millman <dave@production><cr>
+    \* Created: <c-r>=strftime("%d %b %Y")<cr><cr>
+    \* Copyright (C) <c-r>=strftime("%d %b %Y")<cr> ProductionPro Inc.  All rights reserved.<cr>
+    \* Purpose: <TODO><cr>
+    \*/<esc>^<C-v>4kI<space><esc>4j
 
-" create the defines for a h file
-iab xnh <cr>
-    \<c-r>=expand("%:t")<cr><esc>gUUi#ifndef _<esc>$a_<esc>:s/\./_/g<cr>o
-    \<c-r>=expand("%:t")<cr><esc>gUUi#define _<esc>$a_<esc>:s/\./_/g<cr>o
-    \<cr>
-    \#endif<esc>
-    
-" create the include for a cpp file
-iab xncpp <c-r>=expand("%:t")<cr><bs><bs><bs>h"<esc>^i#include "<esc>$a
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" => Editing mappings
@@ -507,7 +498,7 @@ endfunc
 
 " load hilighting
 autocmd BufRead \(CMakeLists.txt\)\|\(*.py\|cpp\|cc\|h\|md\) :call DeleteTrailingWS()
-autocmd BufWrite \(CMakeLists.txt\)\|\(*.py\|cpp\|cc\|h\|mc\) :call DeleteTrailingWS()
+autocmd BufWrite \(CMakeLists.txt\)\|\(*.py\|cpp\|cc\|h\|md\) :call DeleteTrailingWS()
 
 func! ToggleHilighting()
     if !exists('w:highlighting')
@@ -698,7 +689,28 @@ set grepprg=/bin/grep\ -nH
 "
 "map <leader>bb :cd ..<cr>
 
-" settings for netrw
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => markdown settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => netrw settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:netrw_liststyle = 3  " by default open in tree view (hit i to change the view)
 let g:netrw_list_hide = '.DS_Store, .localized'  " hide these files
+
+" function to close netrw buffers without prompting
+function! QuitNetrw()
+  for i in range(1, bufnr($))
+    if buflisted(i)
+      if getbufvar(i, '&filetype') == "netrw"
+        silent exe 'bwipeout ' . i
+      endif
+    endif
+  endfor
+endfunction
+
+autocmd VimLeavePre *  call QuitNetrw()
 
