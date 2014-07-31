@@ -514,8 +514,8 @@ func! UnhilightOverLength()
 endfunc
 
 " load hilighting
-autocmd BufRead \(CMakeLists.txt\)\|\(*.py\|cpp\|cc\|h\|md\) :call DeleteTrailingWS()
-autocmd BufWrite \(CMakeLists.txt\)\|\(*.py\|cpp\|cc\|h\|md\) :call DeleteTrailingWS()
+autocmd BufRead \(CMakeLists.txt\)\|\(*.py\|cpp\|cc\|h\|md\|R\) :call DeleteTrailingWS()
+autocmd BufWrite \(CMakeLists.txt\)\|\(*.py\|cpp\|cc\|h\|md\|R\) :call DeleteTrailingWS()
 
 func! ToggleHilighting()
     if !exists('w:highlighting')
