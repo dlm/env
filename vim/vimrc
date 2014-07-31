@@ -414,8 +414,7 @@ inoremap ;n <down><tab>
 iab xdate <c-r>=strftime("%d %b %Y")
 iab xfn <c-r>=expand("%:t")
 
-iab xsh
-    \#!/bin/shell<cr>
+iab xsh #!/bin/shell<cr>
     \#<cr>
     \# Author: Dave Millman <dave@production><cr>
     \# Created: <c-r>=strftime("%d %b %Y")<cr><cr>
@@ -423,30 +422,28 @@ iab xsh
     \# Purpose: <TODO><cr>
     \#
 
-iab xpy
-    \#!/usr/bin/env python<cr>
-    \#<cr>
+iab xpy #<cr>
     \# Author: Dave Millman <dave@production><cr>
     \# Created: <c-r>=strftime("%d %b %Y")<cr><cr>
     \# Copyright (C) <c-r>=strftime("%Y")<cr> ProductionPro, Inc.  All rights reserved.<cr>
     \# Purpose: <TODO><cr>
+    \#
 
-iab xmd
-    \<!-- Author: Dave Millman <dave@production> --><cr>
-    \<!-- Created: <c-r>=strftime("%d %b %Y")<cr> --><cr>
-    \<!-- Copyright (C) <c-r>=strftime("%Y")<cr> ProductionPro, Inc.  All rights reserved. --><cr>
-    \<!-- Purpose: <TODO> --><cr>
+iab xmd <!-- <cr>
+    \# Author: Dave Millman <dave@production> <cr>
+    \# Created: <c-r>=strftime("%d %b %Y")<cr><cr>
+    \# Copyright (C) <c-r>=strftime("%Y")<cr> ProductionPro, Inc.  All rights reserved. <cr>
+    \# Purpose: <TODO> <cr>
+    \--><cr>
 
-iab xcpp
-    \/**<cr>
+iab xcpp /**<cr>
     \* Author: Dave Millman <dave@production><cr>
     \* Created: <c-r>=strftime("%d %b %Y")<cr><cr>
     \* Copyright (C) <c-r>=strftime("%d %b %Y")<cr> ProductionPro, Inc.  All rights reserved.<cr>
     \* Purpose: <TODO><cr>
     \*/<esc>^<C-v>4kI<space><esc>2j
 
-iab xh
-    \/**<cr>
+iab xh /**<cr>
     \* Author: Dave Millman <dave@production><cr>
     \* Created: <c-r>=strftime("%d %b %Y")<cr><cr>
     \* Copyright (C) <c-r>=strftime("%d %b %Y")<cr> ProductionPro, Inc.  All rights reserved.<cr>
