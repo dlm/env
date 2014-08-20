@@ -53,6 +53,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-markdown'
+Plugin 'hynek/vim-python-pep8-indent'
 
 filetype plugin indent on     " required
 " To ignore plugin indent changes, instead use:
@@ -265,7 +266,7 @@ map qq gwap
 " Do not expand tabs in makefiles
 "autocmd FileType make set noexpandtab shiftwidth=8O
 
-" turn spell checking on for tex and html files
+" turn spell checking on for tex and html and markdown files
 autocmd FileType tex set spell
 autocmd FileType html set spell
 autocmd FileType md set spell
