@@ -53,7 +53,10 @@ Plugin 'scrooloose/syntastic'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Raimondi/delimitMate'
+" markdown plugins
 Plugin 'tpope/vim-markdown'
+
+" python plugins
 Plugin 'hynek/vim-python-pep8-indent'
 
 " javascript plugins
