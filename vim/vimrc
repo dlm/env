@@ -82,6 +82,7 @@ set linebreak           " wrap long lines at 'breakat' characters
 filetype plugin indent on " Enable filetype based plugins and indentation rules  
 syntax on               " Enable syntax highlighing
 set background=dark     " background color brightness
+set colorcolumn=80
 
 "-- 6 multiple windows
 set hidden      " allow opening new buffers without writing the current buffer
