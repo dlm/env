@@ -55,6 +55,12 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-markdown'
 Plugin 'hynek/vim-python-pep8-indent'
 
+" javascript plugins
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'pangloss/vim-javascript'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'marijnh/tern_for_vim'
+
 filetype plugin indent on     " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
@@ -409,6 +415,7 @@ inoremap ;4 {<esc>o}<esc>O
 inoremap ;if if () {<esc>o}<esc>O<up>
 inoremap ;e <esc>$a
 inoremap ;n <down><tab>
+imap <C-c> <CR><Esc>O
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General Abbrevs
