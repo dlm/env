@@ -422,6 +422,7 @@ imap <C-c> <CR><Esc>O
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 iab xdate <c-r>=strftime("%Y-%m-%d")
 iab xfn <c-r>=expand("%:t")
+iab xcl console.log(
 
 iab xsh #!/bin/shell<cr>
     \#<cr>
