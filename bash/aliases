@@ -8,6 +8,8 @@ alias cgrep='grep --color=always'
 alias grep='grep --color=auto'
 alias rm='rm -i'
 
+alias pyclean='find . -name "*.pyc" -exec rm -f {} \;'
+
 alias ..='cd ..'
 alias rr='cd ~/Documents/research'
 alias rd='cd ~/Dropbox/Research'
