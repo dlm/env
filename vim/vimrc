@@ -185,7 +185,10 @@ nmap <leader>wq :wq!<cr>
 " Fast editing of the .vimrc
 map <leader>e :e! ~/.vim/vimrc<cr>
 " When vimrc is edited, reload it
-autocmd! bufwritepost ~/.vim/vimrc nested source %
+augroup reload_vimrc 
+    autocmd!
+    autocmd bufwritepost ~/.vim/vimrc nested source ~/.vim/vimrc
+augroup end
 
 
 
@@ -396,7 +399,7 @@ endfunction
 set laststatus=2
 
 " Format the statusline
-set statusline=%f%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+"set statusline=%f%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Parenthesis/bracket expanding
