@@ -9,6 +9,7 @@ alias grep='grep --color=auto'
 alias rm='rm -i'
 
 alias pyclean='find . -name "*.pyc" -exec rm -f {} \;'
+alias clean_build='rm -rf ../build/*'
 
 alias ..='cd ..'
 alias rr='cd ~/Documents/research'
