@@ -635,6 +635,9 @@ map <leader>ss :setlocal spell!<cr>
 """""""""""""""""""""""""""""""
 "" => Python section
 """""""""""""""""""""""""""""""
+" don't be too smart with handling #
+autocmd FileType python inoremap # X#
+
 "let python_highlight_all = 1
 "au FileType python syn keyword pythonDecorator True None False self
 "
