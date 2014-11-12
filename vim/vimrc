@@ -452,20 +452,11 @@ iab xmd <!-- <cr>
     \# Purpose: <TODO> <cr>
     \--><cr>
 
-iab xcpp /**<cr>
-    \* Author: Dave Millman <dave@production.pro><cr>
-    \* Created: <c-r>=strftime("%d %b %Y")<cr><cr>
-    \* Copyright (C) <c-r>=strftime("%d %b %Y")<cr> ProductionPro, Inc.  All rights reserved.<cr>
-    \* Purpose: <TODO><cr>
-    \*/<esc>^<C-v>4kI<space><esc>2j
-
-iab xh /**<cr>
-    \* Author: Dave Millman <dave@production.pro><cr>
-    \* Created: <c-r>=strftime("%d %b %Y")<cr><cr>
-    \* Copyright (C) <c-r>=strftime("%d %b %Y")<cr> ProductionPro, Inc.  All rights reserved.<cr>
-    \* Purpose: <TODO><cr>
-    \*/<esc>^<C-v>4kI<space><esc>4j
-
+iab xc /**<cr>
+    \Author: Dave Millman <dave@production.pro><cr>
+    \Created: <c-r>=strftime("%d %b %Y")<cr><cr>
+    \Copyright (C) <c-r>=strftime("%d %b %Y")<cr> ProductionPro, Inc.  All rights reserved.<cr>
+    \/
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" => Editing mappings
