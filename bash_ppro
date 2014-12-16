@@ -42,7 +42,12 @@ export PPRO_DEPLOYMENT_NAME="`whoami`_`hostname -s`"
 
 # set the server to run on
 #export PPRO_ADDRESS='http://127.0.0.1:8000' 
-ppro_set_local() { export PPRO_ADDRESS='http://127.0.0.1:8000'; }
+ppro_set_local() {
+    export PPRO_ADDRESS='http://127.0.0.1:8000';
+    export PPROPY_SERVER=${PPRO_ADDRESS}
+    export PPROPY_USERNAME='regular@test.com'
+    export PPROPY_PASSWORD='123456789'
+}
 ppro_set_internal() { export PPRO_ADDRESS='http://internal.production.pro:8000'; }
 ppro_set_alphatest() { export PPRO_ADDRESS='https://alphatest.production.pro'; }
 ppro_set_masterpiece() { export PPRO_ADDRESS='https://alphatest.production.pro'; }
@@ -67,6 +72,13 @@ ppro_upload()  { \
         -F "file=@$1" \
         -X POST $PPRO_ADDRESS/ppro/media/library/creative_force/
 }
+ppro_create_production() { \
+    media_id=`ppro_upload $1 | tail -1 | cut -d' ' -f 2 | sed 's/,//'`
+    curl -v \
+        -H "Authorization: Token $PPRO_TOKEN" \
+        -X POST $PPRO_ADDRESS/ppro/production/ \
+        -d "media_id=$media_id;name=$1;born_active=true;type=None" | python -m json.tool
+}
 ppro_token() { 
     if [ $# -eq 1 ]; then
         _ppro_username=$1
@@ -85,4 +97,32 @@ ppro_token() {
     echo "**RESPONSE** $PPRO_TOKEN"
     unset _ppro_username
     unset _ppro_userpass
+}
+
+# production tools
+ppro_set_production() {
+    export PPRO_PRODUCTION=$1
+    export PPRO_PRODUCTION_MEMBER=$2
+}
+ppro_production_invite() {
+    ppro_post /ppro/production/${PPRO_PRODUCTION}/invite/?pmid=${PPRO_PRODUCTION_MEMBER} "recipient=$1;group=power"
+}
+ppro_production_add_media() { \
+    media_id=`ppro_upload $1 | tail -1 | cut -d' ' -f 2 | sed 's/,//'`
+    ppro_post /ppro/production/${PPRO_PRODUCTION}/media/?pmid=${PPRO_PRODUCTION_MEMBER} "cfmedia_id=$media_id"
+}
+ppro_production_get_media() { \
+    ppro_get /ppro/production/${PPRO_PRODUCTION}/media/?pmid=${PPRO_PRODUCTION_MEMBER} | python -m json.tool
+}
+ppro_production_set_poster() {
+    if [ "$#" -eq 2 ]; then
+        ppro_patch /ppro/production/${PPRO_PRODUCTION}/media/poster/?pmid=${PPRO_PRODUCTION_MEMBER} \
+            "slice_key=$1;production_media_id=$2"
+    else
+        ppro_patch /ppro/production/${PPRO_PRODUCTION}/media/poster/?pmid=${PPRO_PRODUCTION_MEMBER} \
+            "slice_key=$1"
+    fi
+}
+ppro_production_get_poster() {
+    ppro_get /ppro/production/${PPRO_PRODUCTION}/media/poster/?pmid=${PPRO_PRODUCTION_MEMBER} | python -m json.tool
 }
