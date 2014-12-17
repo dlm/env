@@ -168,7 +168,7 @@ set shell=/bin/bash
 "-- 23 running make and jumping to errors
 "-- 24 language specific
 "-- 25 multi-byte characters
-set encoding=utf8       " character encoding use in vim
+set encoding=utf-8       " character encoding use in vim
 
 "-- 26 various
 
