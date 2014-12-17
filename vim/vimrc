@@ -60,6 +60,7 @@ Plugin 'tpope/vim-markdown'
 
 " python plugins
 Plugin 'hynek/vim-python-pep8-indent'
+Plugin 'tmhedberg/SimpylFold'
 
 " javascript plugins
 Plugin 'jelera/vim-javascript-syntax'
@@ -137,6 +138,11 @@ set autoindent          " automatically set indent of a new line
 set smartindent         " use smart indenting (good for c-like language)
 
 "-- 16 folding
+set foldmethod=syntax   " use syntax forlding by default
+
+" open files unfolded
+au BufRead * normal zR
+
 "-- 17 diff mode
 "-- 18 mapping
 "-- 19 reading and writing files
@@ -190,6 +196,9 @@ augroup reload_vimrc
     autocmd bufwritepost ~/.vim/vimrc nested source ~/.vim/vimrc
 augroup end
 
+" folding shortcuts
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+vnoremap <Space> zf
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -267,9 +276,6 @@ endfunction
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
-
-" Source folding configuration
-source $HOME/.vim/my_plugins/folding.vim
 
 " key maps
 map j gj
