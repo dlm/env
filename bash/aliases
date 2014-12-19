@@ -19,11 +19,15 @@ alias pc='pcui.py ~/Dropbox/var/pc.sqlite'
 calc(){ awk "BEGIN{ print $* }" ;}
 dl() { mv -f $* ~/tmp/trash/; }
 
-t() { 
+t() {
     bname=`basename "${PWD/$HOME/~}"`
     if [[ $# -lt 1 ]]; then
         echo -ne "\033]0;${USER}@${HOSTNAME}: ${bname}\007"
     else 
         echo -ne "\033]0;$1\007"
     fi
+}
+
+pdfunlock() {
+    gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=$2 -c .setpdfwrite -f $1
 }
