@@ -79,7 +79,7 @@ filetype plugin indent on     " required
 set ignorecase          " ignore case when searching
 set smartcase           " override ignorecase when patter has upper case chars
 set incsearch           " show matches as search is typed
-set hlsearch		" highlight matches of last search pattern
+set hlsearch		    " highlight matches of last search pattern
 set magic               " make backshash in regex more predictable
 
 "-- 3 tags
