@@ -438,6 +438,7 @@ imap <C-c> <CR><Esc>O
 iab xdate <c-r>=strftime("%Y-%m-%d")
 iab xfn <c-r>=expand("%:t")
 iab xcl console.log(
+iab xpep8ify pep8ify some code
 
 iab xsh #!/bin/shell<cr>
     \#<cr>
