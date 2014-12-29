@@ -644,6 +644,7 @@ map <leader>ss :setlocal spell!<cr>
 """""""""""""""""""""""""""""""
 " don't be too smart with handling #
 autocmd FileType python inoremap # X#
+iab xpdb import ipdb; ipdb.set_trace()
 
 "let python_highlight_all = 1
 "au FileType python syn keyword pythonDecorator True None False self
