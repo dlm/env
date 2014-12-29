@@ -33,13 +33,20 @@ esac
 trap 'echo -ne "\033[00m"' DEBUG
 
 # get the status for git
-function parse_git_dirty {
-      [[ $(git status 2> /dev/null | \
-              tail -n1) != "nothing to commit, working directory clean" ]] && echo "*"
-}
+source ~/.bash/git-prompt.sh
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWSTASHSTATE=1
+export GIT_PS1_SHOWUNTRACKEDFILES=1
+export GIT_PS1_SHOWUPSTREAM='verbose'
+export GIT_PS1_SHOWCOLORHINTS=1
+#function parse_git_dirty {
+#      [[ $(git status 2> /dev/null | \
+#              tail -n1) != "nothing to commit, working directory clean" ]] && echo "*"
+#}
 function parse_git_branch {
-      git branch --no-color 2> /dev/null | \
-          sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
+    __git_ps1
+    #git branch --no-color 2> /dev/null | \
+    #    sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
 }
  
 # generate the prompt
