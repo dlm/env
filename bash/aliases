@@ -13,7 +13,6 @@ alias clean_build='rm -rf ../build/*'
 
 alias ..='cd ..'
 alias rr='cd ~/Documents/research'
-alias rd='cd ~/Dropbox/Research'
 alias class='cd ~/Dropbox/Classes'
 alias pc='pcui.py ~/Dropbox/var/pc.sqlite'
 calc(){ awk "BEGIN{ print $* }" ;}
