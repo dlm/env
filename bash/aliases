@@ -13,7 +13,7 @@ alias pyclean='find . -name "*.pyc" -exec rm -f {} \;'
 alias clean_build='rm -rf ../build/*'
 alias gitx='gitx -c'
 
-alias ..='cd ..'
+alias ..='cd ..; ls'
 alias rr='cd ~/Documents/research'
 alias class='cd ~/Dropbox/Classes'
 alias pc='pcui.py ~/Dropbox/var/pc.sqlite'
