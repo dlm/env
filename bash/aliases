@@ -1,4 +1,5 @@
-alias reload='source ~/.bashrc'
+alias my-shell='ps -o command -p $$ | tail -n +2 | cut -d" " -f1 | sed "s/[^a-zA-Z]//"'
+alias reload='rc=~/.`my-shell`rc; echo Loading $rc; source $rc'
 
 alias ll='ls -l'
 alias la='ls -lA'
