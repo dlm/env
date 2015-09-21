@@ -4,3 +4,4 @@ cleanup
 .DS_Store
 .dropbox
 vim/.netrwhist
+vim/colors/*
