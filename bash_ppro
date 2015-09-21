@@ -28,6 +28,11 @@ export FIREBASE_SECRET=${FIREBASE_DEV_00_SECRET}
 export TRELLO_KEY=${TRELLO_DEV_KEY}
 export TRELLO_SECRET=${TRELLO_DEV_SECRET}
 
+# Belly buster bear has a dependency on boost, since this takes an eternity
+# to build, we have it prebuilt locally and link to the one version on the
+# disk.
+export PPRO_BOOST_FRAMEWORK="${HOME}/Applications/src/boost/ios/framework/boost.framework"
+
 # This flag specifies if we should run the ppro code in debug or not
 # Set to 1 for debug and 0 for not debug.
 export PPRO_ALLOW_DEBUG='1'
