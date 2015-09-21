@@ -24,6 +24,10 @@ export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_KEY}
 export FIREBASE_ROOT=${FIREBASE_DEV_00_URL}
 export FIREBASE_SECRET=${FIREBASE_DEV_00_SECRET}
 
+# pull in the trello dev key and secret
+export TRELLO_KEY=${TRELLO_DEV_KEY}
+export TRELLO_SECRET=${TRELLO_DEV_SECRET}
+
 # This flag specifies if we should run the ppro code in debug or not
 # Set to 1 for debug and 0 for not debug.
 export PPRO_ALLOW_DEBUG='1'
