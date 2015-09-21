@@ -40,4 +40,12 @@ export PPRO_DEPLOYMENT_NAME="`whoami`_`hostname -s`"
 # When doing local development, it is sometimes useful to have these nice curl
 # routines.
 
+# setup for ppropy
+PPRO_PY_HOME="${HOME}/Documents/ppro_code/ppro_py/"
+source $PPRO_PY_HOME/bin/functions.sh
+export PATH=$PATH:$PPRO_PY_HOME/bin
+ppro-set-local
+#export PPROPY_SERVER=${PPRO_ADDRESS}
+#export PPROPY_USERNAME='regular@test.com'
+#export PPROPY_PASSWORD='123456789'
 
