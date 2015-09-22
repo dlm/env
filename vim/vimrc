@@ -54,6 +54,7 @@ Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Raimondi/delimitMate'
 Plugin 'jamessan/vim-gnupg'
+Plugin 'junegunn/fzf', {'rtp': '~/.fzf'}
 
 " markdown plugins
 Plugin 'tpope/vim-markdown'
