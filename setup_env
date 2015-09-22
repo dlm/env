@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ENV="${HOME}/Dropbox/env/"
+ENV=`pwd`
 OS=`uname`
 
 # link to bash config files
