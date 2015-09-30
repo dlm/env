@@ -55,6 +55,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'Raimondi/delimitMate'
 Plugin 'jamessan/vim-gnupg'
 Plugin 'junegunn/fzf', {'rtp': '~/.fzf'}
+Plugin 'tpope/vim-fugitive'
 
 " markdown plugins
 Plugin 'tpope/vim-markdown'
