@@ -3,13 +3,19 @@
 ENV=`pwd`
 OS=`uname`
 
+# link to shell base
+ln -sf ${ENV}/shell 		${HOME}/.shell
+
 # link to bash config files
 ln -sf ${ENV}/bash 	        ${HOME}/.bash
 ln -sf ${ENV}/bash_profile  ${HOME}/.bash_profile
 ln -sf ${ENV}/bashrc 		${HOME}/.bashrc
 
+# link to zsh config files
+ln -sf ${ENV}/zsh 	        ${HOME}/.zsh
+
 # link to vim files
-ln -sf ${ENV}/vim 		    ${HOME}/.vim
+ln -sf ${ENV}/vim  		    ${HOME}/.vim
 ln -sf ${ENV}/gvimrc 	    ${HOME}/.gvimrc
 cp -n  ${ENV}/vimrc         ${HOME}/.vimrc || echo "vimrc exists not overwriting"
 
