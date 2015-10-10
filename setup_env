@@ -20,8 +20,8 @@ ln -sf ${ENV}/gvimrc 	    ${HOME}/.gvimrc
 cp -n  ${ENV}/vimrc         ${HOME}/.vimrc || echo "vimrc exists not overwriting"
 
 # application configurations
-ln -sf ${ENV}/slate.js 	    ${HOME}/.slate.js
 ln -sf ${ENV}/tmux.conf     ${HOME}/.tmux.conf
-# synergy.conf
-ln -sf ${ENV}/i3            ${HOME}/.i3
 
+# disabled applications
+# synergy
+# ln -sf ${ENV}/i3            ${HOME}/.i3
