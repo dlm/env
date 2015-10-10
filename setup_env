@@ -3,24 +3,40 @@
 ENV=`pwd`
 OS=`uname`
 
+function link_if_does_not_exist_src_dst() {
+    local src="${ENV}/$1"
+    local dst="${HOME}/$2"
+    if [ -e $dst ]
+    then
+        echo "Not linking: $1"
+    else
+        echo "Linking: $1"
+        ln -sf "${src}" "${dst}"
+    fi
+}
+
+function link_if_does_not_exist() {
+    link_if_does_not_exist_src_dst "$1" ".$1"
+}
+
 # link to shell base
-ln -sf ${ENV}/shell 		${HOME}/.shell
+link_if_does_not_exist shell
 
 # link to bash config files
-ln -sf ${ENV}/bash 	        ${HOME}/.bash
-ln -sf ${ENV}/bash_profile  ${HOME}/.bash_profile
-ln -sf ${ENV}/bashrc 		${HOME}/.bashrc
+link_if_does_not_exist bash
+link_if_does_not_exist bash_profile
+link_if_does_not_exist bashrc
 
 # link to zsh config files
-ln -sf ${ENV}/zsh 	        ${HOME}/.zsh
+link_if_does_not_exist zsh
 
 # link to vim files
-ln -sf ${ENV}/vim  		    ${HOME}/.vim
-ln -sf ${ENV}/gvimrc 	    ${HOME}/.gvimrc
+link_if_does_not_exist vim
+link_if_does_not_exist gvimrc
 cp -n  ${ENV}/vimrc         ${HOME}/.vimrc || echo "vimrc exists not overwriting"
 
 # application configurations
-ln -sf ${ENV}/tmux.conf     ${HOME}/.tmux.conf
+link_if_does_not_exist tmux.conf
 
 # disabled applications
 # synergy
