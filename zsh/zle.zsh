@@ -1,7 +1,7 @@
 # Additional bindings
-#
+
 ### FZF awesomeness
-# fe [FUZZY PATTERN] - Open the selected file with the default editor
+# fo [FUZZY PATTERN] - Open the selected file with the default editor
 #   - Exit if there's no match (--exit-0)
 #   - CTRL-O to open with `open` command,
 #   - CTRL-E or Enter key to open with the $EDITOR
