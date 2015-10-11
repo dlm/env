@@ -362,7 +362,7 @@ map <leader>ba :1,300 bd!<cr>
 " Use the arrows to something usefull
 map <right> :bn<cr>
 map <left> :bp<cr>
-"
+
 " Tab configuration
 map <leader>tn :tabnew<cr>
 map <leader>te :tabedit
@@ -438,7 +438,7 @@ imap <C-c> <CR><Esc>O
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General Abbrevs
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-iab xdate <c-r>=strftime("%Y-%m-%d")
+iab xdate <c-r>=strftime("%Y-%m-%d") 
 iab xfn <c-r>=expand("%:t")
 iab xcl console.log
 iab xpep8ify pep8ify some code
