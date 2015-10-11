@@ -54,7 +54,6 @@ Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Raimondi/delimitMate'
 Plugin 'jamessan/vim-gnupg'
-Plugin 'junegunn/fzf', {'rtp': '~/.fzf'}
 Plugin 'tpope/vim-fugitive'
 Plugin 'easymotion/vim-easymotion'
 
