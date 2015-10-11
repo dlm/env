@@ -48,6 +48,9 @@ Plugin 'gmarik/vundle'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'fugalh/desert.vim'
 
+" navigation plugins
+Plugin 'kien/ctrlp.vim'
+
 " other plugins
 Plugin 'scrooloose/syntastic'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
