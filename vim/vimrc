@@ -403,6 +403,8 @@ endfunction
 """"""""""""""""""""""""""""""
 " => Statusline
 """"""""""""""""""""""""""""""
+" most status line is provided by powerline.
+" All we have to do here is set some variables
 " Always hide the statusline
 set laststatus=2
 
@@ -412,9 +414,9 @@ set laststatus=2
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Parenthesis/bracket expanding
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-vnoremap ;( <esc>`>a)<esc>`<i(<esc>
-vnoremap ;$ <esc>`>a$<esc>`<i$<esc>
-vnoremap ;[ <esc>`>a]<esc>`<i[<esc>
+" auto completion of (), [], and single and double quotes are provided by
+" delimitMate plugin.  Shortcuts below are for highlighting some text and then
+" wrapping the text in the delimiter
 vnoremap ;{ <esc>`>a}<esc>`<i{<esc>
 vnoremap ;" <esc>`>a"<esc>`<i"<esc>
 vnoremap ;' <esc>`>a'<esc>`<i'<esc>
