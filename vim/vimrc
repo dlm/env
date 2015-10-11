@@ -74,7 +74,9 @@ filetype plugin indent on     " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 
-
+"-- some nice global variables
+let g:default_text_width=80
+let g:default_tabwidth=4
 
 "-- 1 important
 "-- 2 moving around, searching and patterns
@@ -97,7 +99,7 @@ set linebreak           " wrap long lines at 'breakat' characters
 filetype plugin indent on " Enable filetype based plugins and indentation rules  
 syntax on               " Enable syntax highlighing
 set background=dark     " background color brightness
-set colorcolumn=80
+let &colorcolumn=default_text_width
 
 "-- 6 multiple windows
 set hidden      " allow opening new buffers without writing the current buffer
@@ -125,19 +127,19 @@ set showcmd	        " show (partial) command in status line.
 set clipboard=unnamed  " Setting allows vim to interact with system clipboard  
 
 "-- 14 editing text
-set backspace=eol,start,indent  " Set backspace functionality in insert mode
-set showmatch           " when inserting bracket, short jump to  match
-set matchtime=2         " tenth of a second to show match for 'showmatch' 
-set textwidth=80        " line lenght above with to wrap a line.
+set backspace=eol,start,indent   " Set backspace functionality in insert mode
+set showmatch                    " when inserting bracket, short jump to  match
+set matchtime=2                  " tenth of a second to show match for 'showmatch' 
+let &textwidth=default_text_width " line length above with to wrap a line.
  
 "-- 15 tabs and indenting
-set expandtab           " In insert mode, expand <Tab> to spaces 
-set shiftwidth=4        " number of spaces in each steop of (auto)indent
-set softtabstop=4       " number of spaces to remove when deleting insert mode
-set tabstop=4           " number of spaces a <Tab> in the text stands for
-set smarttab            " On an indent, <Tab> inserts 'shiftwidth' num spaces
-set autoindent          " automatically set indent of a new line
-set smartindent         " use smart indenting (good for c-like language)
+set expandtab                       " In insert mode, expand <Tab> to spaces 
+let &shiftwidth=default_tabwidth    " number of spaces in each steop of (auto)indent
+let &softtabstop=default_tabwidth   " number of spaces to remove when deleting insert mode
+let &tabstop=default_tabwidth       " number of spaces a <Tab> in the text stands for
+set smarttab                        " On an indent, <Tab> inserts 'shiftwidth' num spaces
+set autoindent                      " automatically set indent of a new line
+set smartindent                     " use smart indenting (good for c-like language)
 
 "-- 16 folding
 set foldmethod=syntax   " use syntax forlding by default
