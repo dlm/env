@@ -408,33 +408,19 @@ endfunction
 " Always hide the statusline
 set laststatus=2
 
-" Format the statusline
-"set statusline=%f%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Parenthesis/bracket expanding
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " auto completion of (), [], and single and double quotes are provided by
 " delimitMate plugin.  Shortcuts below are for highlighting some text and then
 " wrapping the text in the delimiter
-vnoremap ;{ <esc>`>a}<esc>`<i{<esc>
-vnoremap ;" <esc>`>a"<esc>`<i"<esc>
-vnoremap ;' <esc>`>a'<esc>`<i'<esc>
-vnoremap ;t <esc>`>a><esc>`<i<<esc>
-
-" Map auto complete of (, ", ', [
-inoremap ;( ()<esc>i
-inoremap ;[ []<esc>i
-inoremap ;{ {}<esc>i
-inoremap ;' ''<esc>i
-inoremap ;" ""<esc>i
-inoremap ;t <><esc>i
-
-inoremap ;4 {<esc>o}<esc>O
-inoremap ;if if () {<esc>o}<esc>O<up>
-inoremap ;e <esc>$a
-inoremap ;n <down><tab>
-imap <C-c> <CR><Esc>O
+vnoremap <leader>$ <esc>`>a$<esc>`<i$<esc>
+vnoremap <leader>( <esc>`>a)<esc>`<i(<esc>
+vnoremap <leader>[ <esc>`>a]<esc>`<i[<esc>
+vnoremap <leader>{ <esc>`>a}<esc>`<i{<esc>
+vnoremap <leader>" <esc>`>a"<esc>`<i"<esc>
+vnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
+vnoremap <leader>t <esc>`>a><esc>`<i<<esc>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General Abbrevs
