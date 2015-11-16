@@ -24,7 +24,7 @@ t() {
     bname=`basename "${PWD/$HOME/~}"`
     if [[ $# -lt 1 ]]; then
         echo -ne "\033]0;${USER}@${HOSTNAME}: ${bname}\007"
-    else 
+    else
         echo -ne "\033]0;$1\007"
     fi
 }
