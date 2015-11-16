@@ -99,7 +99,7 @@ set wrap                " wrap long lines
 set linebreak           " wrap long lines at 'breakat' characters
 
 "-- 5 syntax, highlighting and spelling
-filetype plugin indent on " Enable filetype based plugins and indentation rules  
+filetype plugin indent on " Enable filetype based plugins and indentation rules
 syntax on               " Enable syntax highlighing
 set background=dark     " background color brightness
 let &colorcolumn=default_text_width
@@ -127,16 +127,16 @@ endif
 set showcmd	        " show (partial) command in status line.
 
 "-- 13 selecting text
-set clipboard=unnamed  " Setting allows vim to interact with system clipboard  
+set clipboard=unnamed  " Setting allows vim to interact with system clipboard
 
 "-- 14 editing text
 set backspace=eol,start,indent   " Set backspace functionality in insert mode
 set showmatch                    " when inserting bracket, short jump to  match
-set matchtime=2                  " tenth of a second to show match for 'showmatch' 
+set matchtime=2                  " tenth of a second to show match for 'showmatch'
 let &textwidth=default_text_width " line length above with to wrap a line.
- 
+
 "-- 15 tabs and indenting
-set expandtab                       " In insert mode, expand <Tab> to spaces 
+set expandtab                       " In insert mode, expand <Tab> to spaces
 let &shiftwidth=default_tabwidth    " number of spaces in each steop of (auto)indent
 let &softtabstop=default_tabwidth   " number of spaces to remove when deleting insert mode
 let &tabstop=default_tabwidth       " number of spaces a <Tab> in the text stands for
@@ -155,14 +155,14 @@ au BufRead * normal zR
 "-- 19 reading and writing files
 set fileformats=unix,dos,mac    " file formats to consider when editing a file
 set autoread            " auto reread files changed externally
-set autowrite	        " auto save when leaving a modified buffer
+set autowrite           " auto save when leaving a modified buffer
 set nobackup            " do not keep backup after overwriting a file
 set nowritebackup       " do not write backup after overwriting a file
 
 "-- 20 the swap file
-set noswapfile          " do not keep a swap file 
+set noswapfile          " do not keep a swap file
 
-"-- 21 command line editing 
+"-- 21 command line editing
 set undodir=~/.vim_runtime/undodir " directory for undo files
 set undofile            " automatically save and restore undo history
 set history=700         " number of lines of history that vim remembers
@@ -198,13 +198,13 @@ set encoding=utf-8       " character encoding use in vim
 let mapleader = ";"             " use mapleader for extra quick key combinations
 imap ;; <Esc>
 " fast save
-nmap <leader>w :w!<cr>          
+nmap <leader>w :w!<cr>
 " Fast save and quit
 nmap <leader>wq :wq!<cr>
 " Fast editing of the .vimrc
 map <leader>e :e! ~/.vim/vimrc<cr>
 " When vimrc is edited, reload it
-augroup reload_vimrc 
+augroup reload_vimrc
     autocmd!
     autocmd bufwritepost ~/.vim/vimrc nested source ~/.vim/vimrc
 augroup end
@@ -436,7 +436,7 @@ vnoremap <leader>t <esc>`>a><esc>`<i<<esc>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General Abbrevs
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-iab xdate <c-r>=strftime("%Y-%m-%d") 
+iab xdate <c-r>=strftime("%Y-%m-%d")
 iab xfn <c-r>=expand("%:t")
 iab xcl console.log
 iab xpep8ify pep8ify some code
