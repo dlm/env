@@ -745,6 +745,7 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:netrw_liststyle = 3  " by default open in tree view (hit i to change the view)
 let g:netrw_list_hide = '.DS_Store, .localized'  " hide these files
+let g:netrw_preview = 1 " use 'p' to open file on the right
 
 " function to close netrw buffers without prompting
 function! QuitNetrw()
