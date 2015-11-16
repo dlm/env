@@ -17,6 +17,7 @@ alias ..='cd ..; ls'
 alias rr='cd ~/Documents/research'
 alias class='cd ~/Dropbox/Classes'
 alias pc='pcui.py ~/Dropbox/var/pc.sqlite'
+alias be='bundle exec'
 calc(){ awk "BEGIN{ print $* }" ;}
 dl() { mv -f $* ~/tmp/trash/; }
 
