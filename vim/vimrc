@@ -364,18 +364,20 @@ noremap <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
-map <C-u> gT
-map <C-i> gt
+
+" smart way to move between tabs
+map <left> :tabpreview<cr>
+map <right> :tabnext<cr>
+
+" smart way to move between buffers
+map <C-u> :bp<cr>
+map <C-i> :bn<cr>
 
 " Close the current buffer
 map <leader>bd :Bclose<cr>
 
 " Close all the buffers
 map <leader>ba :1,300 bd!<cr>
-
-" Use the arrows to something usefull
-map <right> :bn<cr>
-map <left> :bp<cr>
 
 " Tab configuration
 map <leader>tn :tabnew<cr>
