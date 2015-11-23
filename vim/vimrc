@@ -50,6 +50,7 @@ Plugin 'fugalh/desert.vim'
 
 " navigation plugins
 Plugin 'kien/ctrlp.vim'
+Plugin 'bling/vim-bufferline'
 
 " other plugins
 Plugin 'scrooloose/syntastic'
@@ -550,15 +551,6 @@ func! ToggleHilighting()
 endfunc
 
 nnoremap <Leader>h :call ToggleHilighting()<cr>
-
-" Source tablable configuration
-source $HOME/.vim/my_plugins/tabLabel.vim
-
-set guitablabel=%{GuiTabLabel()}
-set guitabtooltip=%{GuiTabToolTip()}
-"autocmd BufEnter * let &titlestring = hostname() . "[vim(" . expand("%:t") . ")]"
-autocmd BufEnter * let &titlestring = hostname() . " -- vim -- " . expand("%:t") . " "
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Cope
