@@ -146,10 +146,12 @@ set autoindent                      " automatically set indent of a new line
 set smartindent                     " use smart indenting (good for c-like language)
 
 "-- 16 folding
+set foldlevelstart=99   " don't fold when entering a file
 set foldmethod=syntax   " use syntax forlding by default
+" folding shortcuts
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
-" open files unfolded
-au BufRead * normal zR
+
 
 "-- 17 diff mode
 "-- 18 mapping
@@ -209,11 +211,6 @@ augroup reload_vimrc
     autocmd!
     autocmd bufwritepost ~/.vim/vimrc nested source ~/.vim/vimrc
 augroup end
-
-" folding shortcuts
-nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
-vnoremap <Space> zf
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Abandoned options
