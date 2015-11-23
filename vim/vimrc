@@ -103,7 +103,7 @@ set linebreak           " wrap long lines at 'breakat' characters
 filetype plugin indent on " Enable filetype based plugins and indentation rules
 syntax on               " Enable syntax highlighing
 set background=dark     " background color brightness
-let &colorcolumn=default_text_width
+let &colorcolumn=default_text_width+1
 
 "-- 6 multiple windows
 set hidden      " allow opening new buffers without writing the current buffer
@@ -188,6 +188,12 @@ set shell=/bin/bash
 let g:git_text_width=72
 au FileType gitcommit let &textwidth=git_text_width
 au FileType gitcommit let &colorcolumn=git_text_width
+
+" ruby specific settings
+let g:ruby_tabwidth=2
+let &shiftwidth=ruby_tabwidth
+let &softtabstop=ruby_tabwidth
+let &tabstop=ruby_tabwidth
 
 "-- 25 multi-byte characters
 set encoding=utf-8       " character encoding use in vim
