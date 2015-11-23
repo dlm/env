@@ -21,6 +21,9 @@ alias be='bundle exec'
 calc(){ awk "BEGIN{ print $* }" ;}
 dl() { mv -f $* ~/tmp/trash/; }
 
+# database
+alias pg-start='postgres -D /usr/local/var/postgres'
+
 t() {
     bname=`basename "${PWD/$HOME/~}"`
     if [[ $# -lt 1 ]]; then
