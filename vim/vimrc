@@ -154,8 +154,6 @@ set foldmethod=syntax   " use syntax forlding by default
 " folding shortcuts
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
-
-
 "-- 17 diff mode
 "-- 18 mapping
 "-- 19 reading and writing files
