@@ -60,6 +60,7 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'jamessan/vim-gnupg'
 Plugin 'tpope/vim-fugitive'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'bronson/vim-trailing-whitespace'
 
 " markdown plugins
 Plugin 'tpope/vim-markdown'
@@ -77,6 +78,7 @@ Plugin 'marijnh/tern_for_vim'
 filetype plugin indent on     " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
+autocmd BufWritePre * FixWhitespace
 
 "-- some nice global variables
 let g:default_text_width=80
@@ -502,60 +504,6 @@ iab xobjc //<cr>
 "  vmap <D-k> <M-k>
 "endif
 
-
-
-"Manage traling white space
-func! HilightTrailingWS()
-    highlight ExtraWhitespace ctermbg=red guibg=#592929
-    au ColorScheme * highlight ExtraWhitespace guibg=#592929
-    au BufEnter * match ExtraWhitespace /\s\+$/
-    au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-    au InsertLeave * match ExtraWhiteSpace /\s\+$/
-endfunc
-
-func! UnhilightTrailingWS()
-    highlight ExtraWhitespace ctermbg=black guibg=black
-    au ColorScheme * highlight ExtraWhitespace guibg=black
-    au BufEnter * match ExtraWhitespace /\s\+$/
-    au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-    au InsertLeave * match ExtraWhiteSpace /\s\+$/
-endfunc
-
-func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
-endfunc
-
-" highlight over 80 carecter length
-func! HilightOverLength()
-    highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-    match OverLength /\%80v.\+/
-endfunc
-
-" highlight over 80 carecter length
-func! UnhilightOverLength()
-    highlight OverLength ctermbg=black ctermfg=white guibg=black
-endfunc
-
-" load hilighting
-autocmd BufWritePre * :call DeleteTrailingWS()
-
-func! ToggleHilighting()
-    if !exists('w:highlighting')
-        call HilightTrailingWS()
-        call HilightOverLength()
-        let w:highlighting='true'
-        echo "Hilighting on"
-    else
-        call UnhilightTrailingWS()
-        call UnhilightOverLength()
-        unlet w:highlighting
-        echo "Hilighting off"
-    endif
-endfunc
-
-nnoremap <Leader>h :call ToggleHilighting()<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Cope
