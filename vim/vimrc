@@ -106,6 +106,7 @@ filetype plugin indent on " Enable filetype based plugins and indentation rules
 syntax on               " Enable syntax highlighing
 set background=dark     " background color brightness
 let &colorcolumn=default_text_width+1
+colorscheme desert
 
 "-- 6 multiple windows
 set hidden      " allow opening new buffers without writing the current buffer
@@ -241,12 +242,6 @@ augroup end
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has("gui_running")
-    colorscheme solarized
-else
-    colorscheme desert
-endif
-
 try
     lang en_US
 catch
