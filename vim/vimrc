@@ -604,44 +604,10 @@ map <leader>ss :setlocal spell!<cr>
 let Grep_Skip_Dirs = 'RCS CVS SCCS .svn .git'
 set grepprg=/bin/grep\ -nH
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" => MISC
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" Remove the Windows ^M - when the encodings gets messed up
-"noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-"
-""Quickly open a buffer for scribble
-"map <leader>q :e ~/buffer<cr>
-"au BufRead,BufNewFile ~/buffer iab <buffer> xh1 ===========================================
-"
-"map <leader>pp :setlocal paste!<cr>
-"
-"map <leader>bb :cd ..<cr>
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => markdown settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => netrw settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:netrw_liststyle = 3  " by default open in tree view (hit i to change the view)
 let g:netrw_list_hide = '.DS_Store, .localized'  " hide these files
 let g:netrw_preview = 1 " use 'p' to open file on the right
-
-" function to close netrw buffers without prompting
-function! QuitNetrw()
-  for i in range(1, bufnr($))
-    if buflisted(i)
-      if getbufvar(i, '&filetype') == "netrw"
-        silent exe 'bwipeout ' . i
-      endif
-    endif
-  endfor
-endfunction
-
-autocmd VimLeavePre *  call QuitNetrw()
 
