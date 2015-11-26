@@ -186,12 +186,18 @@ set shell=/bin/bash
 "-- 23 running make and jumping to errors
 "-- 24 language specific
 
-" git specific setting
+" git
 let g:git_text_width=72
 au FileType gitcommit let &textwidth=git_text_width
 au FileType gitcommit let &colorcolumn=git_text_width
 
-" ruby specific settings
+" python
+autocmd FileType python inoremap # X#
+autocmd FileType python setlocal completeopt-=preview
+iab xipdb import ipdb; ipdb.set_trace()
+iab xpdb import pdb; pdb.set_trace()
+
+" ruby
 let g:ruby_tabwidth=2
 let &shiftwidth=ruby_tabwidth
 let &softtabstop=ruby_tabwidth
@@ -586,15 +592,6 @@ map <leader>ss :setlocal spell!<cr>
 "map <leader>sp [s
 "map <leader>sa zg
 "map <leader>s? z=
-
-
-"""""""""""""""""""""""""""""""
-"" => Python section
-"""""""""""""""""""""""""""""""
-" don't be too smart with handling #
-autocmd FileType python inoremap # X#
-autocmd FileType python setlocal completeopt-=preview
-iab xpdb import ipdb; ipdb.set_trace()
 
 
 """"""""""""""""""""""""""""""
