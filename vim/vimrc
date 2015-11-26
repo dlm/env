@@ -224,8 +224,8 @@ nmap <leader>wq :wq!<cr>
 map <leader>e :e! ~/.vim/vimrc<cr>
 " When vimrc is edited, reload it
 augroup reload_vimrc
-    autocmd!
-    autocmd bufwritepost ~/.vim/vimrc nested source ~/.vim/vimrc
+  autocmd!
+  autocmd bufwritepost ~/.vim/vimrc nested source ~/.vim/vimrc
 augroup end
 
 
