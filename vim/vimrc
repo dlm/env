@@ -343,22 +343,13 @@ autocmd FileType tex set display+=lastline
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" => Moving around, tabs and buffers
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" Map space to / (search) and c-space to ? (backgwards search)
-"map <space> /
-"map <c-space> ?
-"map <silent> <leader><cr> :noh<cr>
-"
-" Smart way to move btw. windows
-noremap <C-j> <C-W>j
+" windows
+map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-" smart way to move between tabs
-map <left> :tabpreview<cr>
-map <right> :tabnext<cr>
-
-" smart way to move between buffers
+" buffers
 map <C-u> :bp<cr>
 map <C-i> :bn<cr>
 " rbgrouleff/bclose.vim provides ':Bclose' and 'map <leader>bd :Bclose<cr>'
@@ -366,13 +357,7 @@ map <C-i> :bn<cr>
 " Close all the buffers
 map <leader>ba :1,300 bd!<cr>
 
-" Tab configuration
-map <leader>tn :tabnew<cr>
-map <leader>te :tabedit
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
-
-"" When pressing <leader>cd switch to the directory of the open buffer
+" When pressing <leader>cd switch to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>
 
 """"""""""""""""""""""""""""""
