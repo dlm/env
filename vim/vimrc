@@ -401,41 +401,6 @@ iab xfn <c-r>=expand("%:t")
 iab xcl console.log
 iab xpep8ify pep8ify some code
 
-iab xsh #!/bin/shell<cr>
-    \#<cr>
-    \# Author: Dave Millman <dave@production.pro><cr>
-    \# Created: <c-r>=strftime("%d %b %Y")<cr><cr>
-    \# Copyright (C) <c-r>=strftime("%Y")<cr> ProductionPro LLC.  All rights reserved.<cr>
-    \# Purpose: <TODO><cr>
-    \#
-
-iab xpy #<cr>
-    \# Author: Dave Millman <dave@production.pro><cr>
-    \# Created: <c-r>=strftime("%d %b %Y")<cr><cr>
-    \# Copyright (C) <c-r>=strftime("%Y")<cr> ProductionPro LLC.  All rights reserved.<cr>
-    \# Purpose: <TODO><cr>
-    \#
-
-iab xmd <!-- <cr>
-    \# Author: Dave Millman <dave@production.pro> <cr>
-    \# Created: <c-r>=strftime("%d %b %Y")<cr><cr>
-    \# Copyright (C) <c-r>=strftime("%Y")<cr> ProductionPro LLC.  All rights reserved. <cr>
-    \# Purpose: <TODO> <cr>
-    \--><cr>
-
-iab xc /**<cr>
-    \Author: Dave Millman <dave@production.pro><cr>
-    \Created: <c-r>=strftime("%d %b %Y")<cr><cr>
-    \Copyright (C) <c-r>=strftime("%d %b %Y")<cr> ProductionPro LLC.  All rights reserved.<cr>
-    \/
-
-iab xobjc //<cr>
-    \// Author: Dave Millman <dave@production.pro><cr>
-    \// Created: <c-r>=strftime("%d %b %Y")<cr><cr>
-    \// Copyright (C) <c-r>=strftime("%d %b %Y")<cr> ProductionPro LLC.  All rights reserved.<cr>
-    \//
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Cope
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
