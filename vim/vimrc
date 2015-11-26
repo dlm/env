@@ -197,6 +197,7 @@ autocmd FileType python inoremap # X#
 autocmd FileType python setlocal completeopt-=preview
 iab xipdb import ipdb; ipdb.set_trace()
 iab xpdb import pdb; pdb.set_trace()
+iab xpep8ify Pep8ify
 
 " ruby
 let g:ruby_tabwidth=2
@@ -207,6 +208,9 @@ iab xrdb binding.pry
 
 " markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" javascript
+iab xcl console.log
 
 "-- 25 multi-byte characters
 set encoding=utf-8       " character encoding use in vim
@@ -398,8 +402,6 @@ vnoremap <leader>t <esc>`>a><esc>`<i<<esc>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 iab xdate <c-r>=strftime("%Y-%m-%d")
 iab xfn <c-r>=expand("%:t")
-iab xcl console.log
-iab xpep8ify pep8ify some code
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Cope
