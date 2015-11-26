@@ -23,12 +23,6 @@
 "    -> Editing mappings
 "
 "    -> Cope
-"    -> Minibuffer plugin
-"    -> Omni complete functions
-"    -> Python section
-"    -> JavaScript section
-"
-"    -> latex suite
 "--------------------------------------------------------------
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -151,7 +145,6 @@ set smartindent                     " use smart indenting (good for c-like langu
 "-- 16 folding
 set foldlevelstart=99   " don't fold when entering a file
 set foldmethod=syntax   " use syntax forlding by default
-" folding shortcuts
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
 "-- 17 diff mode
