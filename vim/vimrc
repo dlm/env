@@ -99,8 +99,9 @@ set linebreak           " wrap long lines at 'breakat' characters
 filetype plugin indent on " Enable filetype based plugins and indentation rules
 syntax on               " Enable syntax highlighing
 set background=dark     " background color brightness
-let &colorcolumn=default_text_width+1
 colorscheme desert
+highlight ColorColumn ctermbg=235 guibg=#2c2d27
+execute "set colorcolumn=" . join(range(default_text_width,335), ',')
 
 "-- 6 multiple windows
 set hidden      " allow opening new buffers without writing the current buffer
