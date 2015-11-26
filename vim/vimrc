@@ -202,6 +202,8 @@ let g:ruby_tabwidth=2
 let &shiftwidth=ruby_tabwidth
 let &softtabstop=ruby_tabwidth
 let &tabstop=ruby_tabwidth
+iab xrdb binding.pry
+
 " markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
