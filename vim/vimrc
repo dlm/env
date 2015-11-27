@@ -51,9 +51,6 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
 Plugin 'ngmy/vim-rubocop'
 
-filetype plugin indent on     " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
 autocmd BufWritePre * FixWhitespace
 
 "-- some nice global variables
