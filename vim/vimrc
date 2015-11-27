@@ -236,28 +236,21 @@ let mapleader = ";"
 imap ;; <Esc>
 nmap <leader>w :w!<cr>
 nmap <leader>wq :wq!<cr>
-map <leader>e :e! ~/.vim/vimrc<cr>
+nmap <leader>e :e! ~/.vim/vimrc<cr>
+map j gj
+map k gk
+
+" clean up the formatting of text
+map qq gwap
+
+" pressing <leader>ss will toggle and untoggle spell checking
+map <leader>ss :setlocal spell!<cr>
+
 " When vimrc is edited, reload it
 augroup reload_vimrc
   autocmd!
   autocmd bufwritepost ~/.vim/vimrc nested source ~/.vim/vimrc
 augroup end
-
-
-
-"TODO: fixing after here
-
-" key maps
-map j gj
-map k gk
-map <down> gj
-map <up> gk
-map qq gwap
-
-
-" pressing <leader>ss will toggle and untoggle spell checking
-map <leader>ss :setlocal spell!<cr>
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" => Moving around, tabs and buffers
