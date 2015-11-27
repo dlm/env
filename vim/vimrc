@@ -260,6 +260,8 @@ autocmd FileType md set spell
 autocmd FileType tex set linebreak
 autocmd FileType tex set display+=lastline
 
+" pressing <leader>ss will toggle and untoggle spell checking
+map <leader>ss :setlocal spell!<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -309,12 +311,6 @@ vnoremap <leader>t <esc>`>a><esc>`<i<<esc>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 iab xdate <c-r>=strftime("%Y-%m-%d")
 iab xfn <c-r>=expand("%:t")
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" => Spell checking
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Pressing ,ss will toggle and untoggle spell checking
-map <leader>ss :setlocal spell!<cr>
 
 """"""""""""""""""""""""""""""
 " => Vim grep
