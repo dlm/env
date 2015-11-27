@@ -166,13 +166,13 @@ set undodir=~/.vim_runtime/undodir " directory for undo files
 set undofile            " automatically save and restore undo history
 set history=700         " number of lines of history that vim remembers
 set wildmenu            " command-line completion shows a list of matches
+
 " Bash like keys for the command line
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
 cnoremap <C-K> <C-U>
 cnoremap <C-P> <Up>
 cnoremap <C-N> <Down>
-
 
 "-- 22 executing external commands
 set shell=/bin/bash
@@ -226,11 +226,8 @@ autocmd FileType tex set display+=lastline
 set encoding=utf-8
 
 "-- 26 various
-
 " jump to the last position when reopening a file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-
 
 "-------------------------------------------------------------------------------
 " Keybord Shortcuts
