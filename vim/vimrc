@@ -211,7 +211,7 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 iab xcl console.log
 
 "-- 25 multi-byte characters
-set encoding=utf-8       " character encoding use in vim
+set encoding=utf-8
 
 "-- 26 various
 
@@ -223,13 +223,10 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 "-------------------------------------------------------------------------------
 " Keybord Shortcuts
 "-------------------------------------------------------------------------------
-let mapleader = ";"             " use mapleader for extra quick key combinations
+let mapleader = ";"
 imap ;; <Esc>
-" fast save
 nmap <leader>w :w!<cr>
-" Fast save and quit
 nmap <leader>wq :wq!<cr>
-" Fast editing of the .vimrc
 map <leader>e :e! ~/.vim/vimrc<cr>
 " When vimrc is edited, reload it
 augroup reload_vimrc
