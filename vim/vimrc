@@ -177,7 +177,12 @@ cnoremap <C-N> <Down>
 "-- 22 executing external commands
 set shell=/bin/bash
 
-"-- 23 running make and jumping to errors
+"-- 23 running make and jumping to errors (cope)
+map <leader>cc :botright cope<cr>
+map <leader>n :cn<cr>
+map <leader>p :cp<cr>
+map <leader>make :make<cr>
+
 "-- 24 language specific
 
 " git
@@ -305,13 +310,6 @@ vnoremap <leader>t <esc>`>a><esc>`<i<<esc>
 iab xdate <c-r>=strftime("%Y-%m-%d")
 iab xfn <c-r>=expand("%:t")
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Cope
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>cc :botright cope<cr>
-map <leader>n :cn<cr>
-map <leader>p :cp<cr>
-map <leader>make :make<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" => Spell checking
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
