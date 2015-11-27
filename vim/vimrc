@@ -46,6 +46,10 @@ Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'marijnh/tern_for_vim'
+" ruby plugins
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-rails'
+Plugin 'ngmy/vim-rubocop'
 
 filetype plugin indent on     " required
 " To ignore plugin indent changes, instead use:
