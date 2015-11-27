@@ -206,9 +206,21 @@ iab xrdb binding.pry
 
 " markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd FileType markdown set spell
 
 " javascript
 iab xcl console.log
+
+" makefiles
+autocmd FileType make set noexpandtab
+
+" html
+autocmd FileType html set spell
+
+" latex
+autocmd FileType tex set spell
+autocmd FileType tex set linebreak
+autocmd FileType tex set display+=lastline
 
 "-- 25 multi-byte characters
 set encoding=utf-8
@@ -245,17 +257,6 @@ map <down> gj
 map <up> gk
 map qq gwap
 
-
-" Do not expand tabs in makefiles
-"autocmd FileType make set noexpandtab shiftwidth=8O
-
-" turn spell checking on for tex and html and markdown files
-autocmd FileType tex set spell
-autocmd FileType html set spell
-autocmd FileType md set spell
-" turn smart line breaking on for tex
-autocmd FileType tex set linebreak
-autocmd FileType tex set display+=lastline
 
 " pressing <leader>ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
