@@ -1,28 +1,5 @@
 "--------------------------------------------------------------
 " Maintainer: David Millman dave@cs.unc.edu
-"
-" Sections:
-"    -> Plugins managed by Vundle
-"    -> Options (ordered as in :options from gvim)
-"    -> Keybord Shortcuts
-
-
-
-"    -> General
-"    -> VIM user interface
-"   TODO:
-"    -> Colors and Fonts
-"    -> Files and backups
-"    -> Text, tab and indent related
-"    -> Visual mode related
-"    -> Command mode related
-"    -> Moving around, tabs and buffers
-"    -> Statusline
-"    -> Parenthesis/bracket expanding
-"    -> General Abbrevs
-"    -> Editing mappings
-"
-"    -> Cope
 "--------------------------------------------------------------
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
