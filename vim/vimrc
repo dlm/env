@@ -146,6 +146,7 @@ set noswapfile          " do not keep a swap file
 set undodir=~/.vim_runtime/undodir " directory for undo files
 set undofile            " automatically save and restore undo history
 set history=700         " number of lines of history that vim remembers
+set wildmode=longest,list,full " complete like bash
 set wildmenu            " command-line completion shows a list of matches
 
 " Bash like keys for the command line
