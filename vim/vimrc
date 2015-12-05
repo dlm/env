@@ -18,7 +18,7 @@ Plugin 'gmarik/vundle'
 " colorschemes
 Plugin 'fugalh/desert.vim'
 Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
-Plugin 'geoffharcourt/one-dark.vim'
+Plugin 'joshdick/onedark.vim'
 
 " navigation plugins
 Plugin 'kien/ctrlp.vim'
@@ -81,11 +81,10 @@ set linebreak           " wrap long lines at 'breakat' characters
 "-- 5 syntax, highlighting and spelling
 filetype plugin indent on " Enable filetype based plugins and indentation rules
 syntax on               " Enable syntax highlighing
-set background=dark     " background color brightness
-"colorscheme desert     " old trusty color scheme
-colorscheme onedark     "
+" colorscheme desert     " old trusty color scheme
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
 execute "set colorcolumn=" . join(range(default_text_width,335), ',')
+colorscheme onedark     " a new facny theme
 
 "-- 6 multiple windows
 set hidden      " allow opening new buffers without writing the current buffer
