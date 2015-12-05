@@ -165,8 +165,8 @@ map <leader>make :make<cr>
 
 " git
 let g:git_text_width=72
-au FileType gitcommit let &textwidth=git_text_width
-au FileType gitcommit let &colorcolumn=git_text_width
+autocmd FileType gitcommit let &textwidth=git_text_width
+autocmd FileType gitcommit let &colorcolumn=git_text_width
 
 " python
 autocmd FileType python inoremap # X#
@@ -205,7 +205,7 @@ set encoding=utf-8
 
 "-- 26 various
 " jump to the last position when reopening a file
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 "-------------------------------------------------------------------------------
 " Keybord Shortcuts
