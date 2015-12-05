@@ -223,6 +223,7 @@ nmap <leader>wq :wq!<cr>
 nmap <leader>e :e! ~/.vim/vimrc<cr>
 map j gj
 map k gk
+nmap <leader><leader>w <Plug>(easymotion-bd-w)
 
 " clean up the formatting of text
 map qq gwap
