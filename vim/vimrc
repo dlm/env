@@ -17,6 +17,8 @@ Plugin 'gmarik/vundle'
 
 " colorschemes
 Plugin 'fugalh/desert.vim'
+Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
+Plugin 'geoffharcourt/one-dark.vim'
 
 " navigation plugins
 Plugin 'kien/ctrlp.vim'
@@ -78,7 +80,8 @@ set linebreak           " wrap long lines at 'breakat' characters
 filetype plugin indent on " Enable filetype based plugins and indentation rules
 syntax on               " Enable syntax highlighing
 set background=dark     " background color brightness
-colorscheme desert
+"colorscheme desert     " old trusty color scheme
+colorscheme onedark     "
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
 execute "set colorcolumn=" . join(range(default_text_width,335), ',')
 
