@@ -62,6 +62,8 @@ let g:default_text_width=80
 let g:default_tabwidth=4
 
 "-- 1 important
+let mapleader = ";"
+
 "-- 2 moving around, searching and patterns
 set ignorecase          " ignore case when searching
 set smartcase           " override ignorecase when patter has upper case chars
@@ -215,7 +217,6 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 "-------------------------------------------------------------------------------
 " Keybord Shortcuts
 "-------------------------------------------------------------------------------
-let mapleader = ";"
 imap ;; <Esc>
 nmap <leader>w :w!<cr>
 nmap <leader>wq :wq!<cr>
