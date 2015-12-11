@@ -150,8 +150,6 @@ set autoindent                      " automatically set indent of a new line
 set smartindent                     " use smart indenting (good for c-like language)
 
 "-- 16 folding
-set foldlevelstart=99   " don't fold when entering a file
-set foldmethod=syntax   " use syntax forlding by default
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
 "-- 17 diff mode
