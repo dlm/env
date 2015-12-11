@@ -26,6 +26,7 @@ Plugin 'bling/vim-bufferline'
 Plugin 'rbgrouleff/bclose.vim'
 
 " other plugins
+Plugin 'tpope/vim-dispatch'
 Plugin 'scrooloose/syntastic'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'Valloric/YouCompleteMe'
@@ -54,6 +55,7 @@ Plugin 'marijnh/tern_for_vim'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
 Plugin 'ngmy/vim-rubocop'
+Plugin 'thoughtbot/vim-rspec'
 
 
 "-- plugin configuration
@@ -61,6 +63,15 @@ let g:syntastic_enable_signs=1
 let g:syntastic_auto_jump=0
 let g:syntastic_auto_loc_list=1
 let g:syntastic_python_checkers=['flake8', 'python']
+
+
+" ruby-rspec
+let g:rspec_runner = "os_x_iterm"
+let g:rspec_format_file = "~/.vim/config/vim_formatter.rb"
+let g:rspec_out_file = "/tmp/quickfix.out"
+let g:rspec_command = "compiler rspec | set makeprg=zeus | Make rspec --require="
+      \ . g:rspec_format_file . " --format VimFormatter {spec} --out "
+      \ . g:rspec_out_file . " --format progress"
 
 autocmd BufWritePre * FixWhitespace
 
@@ -174,6 +185,8 @@ map <leader>cc :botright cope<cr>
 map <leader>n :cn<cr>
 map <leader>p :cp<cr>
 map <leader>make :make<cr>
+map <leader>cg :execute "botright cope \| cgetfile "
+      \. g:rspec_out_file . " \| cwindow"<cr>
 
 "-- 24 language specific
 
