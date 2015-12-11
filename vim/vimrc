@@ -28,7 +28,7 @@ Plugin 'rbgrouleff/bclose.vim'
 " other plugins
 Plugin 'tpope/vim-dispatch'
 Plugin 'scrooloose/syntastic'
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'bling/vim-airline'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'Raimondi/delimitMate'
@@ -64,6 +64,9 @@ let g:syntastic_auto_jump=0
 let g:syntastic_auto_loc_list=1
 let g:syntastic_python_checkers=['flake8', 'python']
 
+" airline
+let g:airline_powerline_fonts = 1
+let g:bufferline_echo = 0
 
 " ruby-rspec
 let g:rspec_runner = "os_x_iterm"
