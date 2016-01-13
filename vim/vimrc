@@ -206,10 +206,15 @@ iab xpep8ify Pep8ify
 
 " ruby
 let g:ruby_tabwidth=2
-let &shiftwidth=ruby_tabwidth
-let &softtabstop=ruby_tabwidth
-let &tabstop=ruby_tabwidth
+autocmd FileType ruby let &shiftwidth=ruby_tabwidth
+autocmd FileType ruby let &softtabstop=ruby_tabwidth
+autocmd FileType ruby let &tabstop=ruby_tabwidth
+autocmd FileType ruby set norelativenumber
+autocmd FileType ruby set number
+autocmd FileType ruby set spell
+autocmd FileType ruby set regexpengine=1
 iab xrdb binding.pry
+let ruby_spellcheck_strings = 1
 
 " markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
@@ -243,6 +248,7 @@ imap ;; <Esc>
 nmap <leader>w :w!<cr>
 nmap <leader>wq :wq!<cr>
 nmap <leader>e :e! ~/.vim/vimrc<cr>
+
 map j gj
 map k gk
 nmap <leader><leader>w <Plug>(easymotion-bd-w)
@@ -258,6 +264,12 @@ augroup reload_vimrc
   autocmd!
   autocmd bufwritepost ~/.vim/vimrc nested source ~/.vim/vimrc
 augroup end
+
+" RSpec.vim mappings
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" => Moving around, tabs and buffers
