@@ -45,3 +45,9 @@ link_hidden_if_does_not_exist tmux.conf
 # disabled applications
 # synergy
 # ln -sf ${ENV}/i3            ${HOME}/.i3
+
+# bin
+mkdir ${HOME}/bin
+for i in $(ls bin); do
+    link_if_does_not_exist  bin/$i
+done
