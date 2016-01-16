@@ -6,7 +6,7 @@ on getCurrentlyPlayingSpotifyTrack()
 			set currentTrack to my trimString(name of current track as string, 8)
 			set output to (currentArtist & " ♪ " & currentTrack)
 		else
-			set output to ""
+			set output to "No ♪"
 		end if
 		return output
 	end tell
