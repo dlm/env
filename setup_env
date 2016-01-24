@@ -36,7 +36,6 @@ link_hidden_if_does_not_exist zsh
 
 # link to vim files
 link_hidden_if_does_not_exist vim
-link_hidden_if_does_not_exist gvimrc
 cp -n  ${ENV}/vimrc ${HOME}/.vimrc || echo "vimrc exists not overwriting"
 
 # application configurations
