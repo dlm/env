@@ -43,7 +43,7 @@ function copy_hidden() {
 function setup_topic() {
     local topic=$1
     link_hidden $topic
-    for rc in $(ls $topic/*$LOCAL_EXT)
+    for rc in $(ls $topic/*$LOCAL_EXT 2> /dev/null)
     do
         topicrc=`basename ${rc%$LOCAL_EXT}`
         copy_if_does_not_exist_src_dst $rc .${topicrc}
