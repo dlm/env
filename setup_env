@@ -51,10 +51,10 @@ function setup_topic() {
 }
 
 # setup topics
-setup_topic vim
-setup_topic zsh
 setup_topic bash
 setup_topic shell
+setup_topic vim
+setup_topic zsh
 
 
 
