@@ -1,52 +1,72 @@
 #!/bin/bash
 
-ENV=`pwd`
+ENV_DIR=`pwd`
+DST_DIR=${HOME}/tmp/env_test
 OS=`uname`
+LOCAL_EXT=".local"
 
-function link_if_does_not_exist_src_dst() {
-    local src="${ENV}/$1"
-    local dst="${HOME}/$2"
+function op_if_does_not_exist() {
+    local op=$1
+    local msg=$2
+    local src="${ENV_DIR}/$3"
+    local dst="${DST_DIR}/$4"
     if [ -e $dst ]
     then
-        echo "Not linking: $1"
+        local symbol="$(tput setaf 1)✗$(tput sgr0)"
     else
-        echo "Linking: $1"
-        ln -sf "${src}" "${dst}"
+        $op "${src}" "${dst}"
+        local symbol="$(tput setaf 2)✓$(tput sgr0)"
     fi
+    echo "${symbol} ${msg}: $3"
 }
 
-function link_hidden_if_does_not_exist() {
+function link_if_does_not_exist_src_dst() {
+    op_if_does_not_exist "ln -sf" "Link" $1 $2
+}
+
+function link_hidden() {
     link_if_does_not_exist_src_dst "$1" ".$1"
 }
 
-function link_if_does_not_exist() {
+function link() {
     link_if_does_not_exist_src_dst "$1" "$1"
 }
 
-# link to shell base
-link_hidden_if_does_not_exist shell
+function copy_if_does_not_exist_src_dst() {
+    op_if_does_not_exist "cp -n" "Copy" $1 $2
+}
 
-# link to bash config files
-link_hidden_if_does_not_exist bash
-link_hidden_if_does_not_exist bash_profile
-link_hidden_if_does_not_exist bashrc
+function copy_hidden() {
+    copy_if_does_not_exist_src_dst "$1" ".$1"
+}
 
-# link to zsh config files
-link_hidden_if_does_not_exist zsh
+function setup_topic() {
+    local topic=$1
+    link_hidden $topic
+    for rc in $(ls $topic/*$LOCAL_EXT)
+    do
+        topicrc=`basename ${rc%$LOCAL_EXT}`
+        copy_if_does_not_exist_src_dst $rc .${topicrc}
+    done
+}
 
-# link to vim files
-link_hidden_if_does_not_exist vim
-cp -n  ${ENV}/vimrc ${HOME}/.vimrc || echo "vimrc exists not overwriting"
+# setup topics
+setup_topic vim
+setup_topic zsh
+setup_topic bash
+setup_topic shell
 
-# application configurations
-link_hidden_if_does_not_exist tmux.conf
 
-# disabled applications
-# synergy
-# ln -sf ${ENV}/i3            ${HOME}/.i3
 
-# bin
-mkdir ${HOME}/bin
-for i in $(ls bin); do
-    link_if_does_not_exist  bin/$i
-done
+## application configurations
+#link_hidden tmux.conf
+#
+## disabled applications
+## synergy
+## ln -sf ${ENV}/i3            ${HOME}/.i3
+#
+## bin
+#mkdir ${DST_DIR}/bin
+#for i in $(ls bin); do
+#    link bin/$i
+#done
