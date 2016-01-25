@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ENV_DIR=`pwd`
+#DST_DIR=${HOME}
 DST_DIR=${HOME}/tmp/env_test
 OS=`uname`
 LOCAL_EXT=".local"
@@ -74,6 +75,14 @@ function setup_topic() {
     link_symlinks $topic
 }
 
+function setup_bin() {
+    mkdir ${DST_DIR}/bin 2> /dev/null
+    for i in $(ls bin)
+    do
+        link bin/$i
+    done
+}
+
 # setup topics
 setup_topic bash
 setup_topic shell
@@ -83,8 +92,4 @@ setup_topic vim
 setup_topic zsh
 [ $OS == "Linux" ] && setup_topic i3
 
-## bin
-#mkdir ${DST_DIR}/bin
-#for i in $(ls bin); do
-#    link bin/$i
-#done
+setup_bin
