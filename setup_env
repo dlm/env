@@ -21,24 +21,24 @@ function op_if_does_not_exist() {
     echo "${symbol} ${msg}: $3"
 }
 
-function link_if_does_not_exist_src_dst() {
+function link_if_does_not_exist() {
     op_if_does_not_exist "ln -sf" "Link" $1 $2
 }
 
 function link_hidden() {
-    link_if_does_not_exist_src_dst "$1" ".$1"
+    link_if_does_not_exist "$1" ".$1"
 }
 
 function link() {
-    link_if_does_not_exist_src_dst "$1" "$1"
+    link_if_does_not_exist "$1" "$1"
 }
 
-function copy_if_does_not_exist_src_dst() {
+function copy_if_does_not_exist() {
     op_if_does_not_exist "cp -n" "Copy" $1 $2
 }
 
 function copy_hidden() {
-    copy_if_does_not_exist_src_dst "$1" ".$1"
+    copy_if_does_not_exist "$1" ".$1"
 }
 
 function setup_topic() {
