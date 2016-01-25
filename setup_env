@@ -4,6 +4,7 @@ ENV_DIR=`pwd`
 DST_DIR=${HOME}/tmp/env_test
 OS=`uname`
 LOCAL_EXT=".local"
+SYMLINK_EXT=".symlink"
 
 function op_if_does_not_exist() {
     local op=$1
@@ -48,6 +49,12 @@ function setup_topic() {
         topicrc=`basename ${rc%$LOCAL_EXT}`
         copy_if_does_not_exist_src_dst $rc .${topicrc}
     done
+    for rc in $(ls $topic/*$SYMLINK_EXT 2> /dev/null)
+    do
+        topicrc=`basename ${rc%$SYMLINK_EXT}`
+        link_if_does_not_exist_src_dst $rc .${topicrc}
+    done
+
 }
 
 # setup topics
