@@ -41,6 +41,26 @@ function copy_hidden() {
     copy_if_does_not_exist "$1" ".$1"
 }
 
+function op_on_topic() {
+    local op=$1
+    local ext=$2
+    local topic=$3
+
+    for rc in $(ls $topic/*$ext 2> /dev/null)
+    do
+        topicrc=`basename ${rc%$ext}`
+        $op $rc .${topicrc}
+    done
+}
+
+function copy_locals() {
+    op_on_topic copy_if_does_not_exist $LOCAL_EXT $1
+}
+
+function link_symlinks() {
+    op_on_topic link_if_does_not_exist $SYMLINK_EXT $1
+}
+
 function setup_topic() {
     local topic=$1
 
@@ -48,19 +68,10 @@ function setup_topic() {
     link_hidden $topic
 
     # copy the local templates
-    for rc in $(ls $topic/*$LOCAL_EXT 2> /dev/null)
-    do
-        topicrc=`basename ${rc%$LOCAL_EXT}`
-        copy_if_does_not_exist_src_dst $rc .${topicrc}
-    done
+    copy_locals $topic
 
     # link the local symlinks
-    for rc in $(ls $topic/*$SYMLINK_EXT 2> /dev/null)
-    do
-        topicrc=`basename ${rc%$SYMLINK_EXT}`
-        link_if_does_not_exist_src_dst $rc .${topicrc}
-    done
-
+    link_symlinks $topic
 }
 
 # setup topics
