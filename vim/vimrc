@@ -109,6 +109,7 @@ syntax on               " Enable syntax highlighing
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
 execute "set colorcolumn=" . join(range(default_text_width,335), ',')
 colorscheme onedark     " a new facny theme
+hi SpellBad cterm=underline ctermbg=237
 
 "-- 6 multiple windows
 set hidden      " allow opening new buffers without writing the current buffer
