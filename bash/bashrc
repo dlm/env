@@ -10,12 +10,6 @@ if [ -f ~/.bash/colors ]; then
     . ~/.bash/colors
 fi
 
-# since we share this basic bashrc file accross multiple computers 
-# the ~/.bash_local file has the local attributes
-if [ -f ${HOME}/.bash_local ]; then
-    . ~/.bash_local
-fi
-
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
 export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
@@ -102,5 +96,5 @@ if [ -f /usr/local/etc/bash_completion ] && ! shopt -oq posix; then
     . /usr/local/etc/bash_completion
 fi
 
-# set the history format to include the time of the command 
+# set the history format to include the time of the command
 export HISTTIMEFORMAT=' %F %T '
