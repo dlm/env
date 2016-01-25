@@ -1,8 +1,7 @@
 #!/bin/bash
 
 ENV_DIR=`pwd`
-#DST_DIR=${HOME}
-DST_DIR=${HOME}/tmp/env_test
+DST_DIR=${HOME}
 OS=`uname`
 LOCAL_EXT=".local"
 SYMLINK_EXT=".symlink"
