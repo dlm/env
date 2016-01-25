@@ -83,15 +83,6 @@ setup_topic vim
 setup_topic zsh
 [ $OS == "Linux" ] && setup_topic i3
 
-
-
-## application configurations
-#link_hidden tmux.conf
-#
-## disabled applications
-## synergy
-## ln -sf ${ENV}/i3            ${HOME}/.i3
-#
 ## bin
 #mkdir ${DST_DIR}/bin
 #for i in $(ls bin); do
