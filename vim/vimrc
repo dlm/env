@@ -244,7 +244,7 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 "-------------------------------------------------------------------------------
 " Keybord Shortcuts
 "-------------------------------------------------------------------------------
-imap ;; <Esc>
+inoremap kj <esc>
 nmap <leader>w :w!<cr>
 nmap <leader>wq :wq!<cr>
 nmap <leader>e :e! ~/.vim/vimrc<cr>
