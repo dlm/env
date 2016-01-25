@@ -56,6 +56,7 @@ setup_topic shell
 setup_topic tmux
 setup_topic vim
 setup_topic zsh
+[ $OS == "Linux" ] && setup_topic i3
 
 
 
