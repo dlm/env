@@ -5,3 +5,4 @@ cleanup
 .dropbox
 vim/.netrwhist
 vim/colors/*
+tmux/plugins/*
