@@ -40,6 +40,3 @@ zstyle ':completion:*' special-dirs true
 
 # Add local bin path
 export PATH="$PATH:$HOME/bin"
-
-
-
