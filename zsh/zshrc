@@ -12,6 +12,9 @@ zplug "djui/alias-tips"
 zplug "dlm/zsh-colors", commit:23f95ba8d8da28007bb7f796875e5a10961c2a56
 zplug "caarlos0/zsh-pg"
 
+# do not update the title in every command
+export DISABLE_AUTO_TITLE="true";
+
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
