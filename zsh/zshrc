@@ -29,7 +29,7 @@ zplug load --verbose
 # setup vim bindkeys
 bindkey -v
 bindkey kj vi-cmd-mode
-bindkey '^y' kill-whole-line
+bindkey '^u' kill-whole-line
 
 # load zle
 source ${HOME}/.zsh/zle.zsh
