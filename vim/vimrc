@@ -50,16 +50,16 @@ Plugin 'tpope/vim-markdown'
 Plugin 'hynek/vim-python-pep8-indent'
 Plugin 'tmhedberg/SimpylFold'
 
-" javascript plugins
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'pangloss/vim-javascript'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'marijnh/tern_for_vim'
 " ruby plugins
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
 Plugin 'ngmy/vim-rubocop'
 
+" javascript plugins
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'pangloss/vim-javascript'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'marijnh/tern_for_vim'
 
 "-- plugin configuration
 " syntastic
