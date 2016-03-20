@@ -8,8 +8,7 @@ zplug "zsh-users/zsh-completions"
 zplug "plugins/virtualenvwrapper", from:oh-my-zsh
 zplug "plugins/vi-mode", from:oh-my-zsh
 zplug "djui/alias-tips"
-#zplug "Tarrasch/zsh-colors"
-zplug "dlm/zsh-colors", commit:23f95ba8d8da28007bb7f796875e5a10961c2a56
+zplug "Tarrasch/zsh-colors"
 zplug "caarlos0/zsh-pg"
 
 # do not update the title in every command
