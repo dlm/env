@@ -24,6 +24,7 @@ Plugin 'joshdick/onedark.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-bufferline'
 Plugin 'rbgrouleff/bclose.vim'
+Plugin 'christoomey/vim-tmux-navigator'
 
 " other plugins
 Plugin 'tpope/vim-dispatch'
