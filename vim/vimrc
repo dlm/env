@@ -104,7 +104,7 @@ let g:default_text_width=80
 let g:default_tabwidth=4
 
 "-- 1 important
-let mapleader = ";"
+let mapleader = " "
 
 "-- 2 moving around, searching and patterns
 set ignorecase          " ignore case when searching
