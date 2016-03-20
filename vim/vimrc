@@ -21,7 +21,8 @@ Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plugin 'joshdick/onedark.vim'
 
 " navigation plugins
-Plugin 'kien/ctrlp.vim'
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
 Plugin 'bling/vim-bufferline'
 Plugin 'rbgrouleff/bclose.vim'
 Plugin 'christoomey/vim-tmux-navigator'
@@ -66,8 +67,8 @@ let g:syntastic_auto_jump=0
 let g:syntastic_auto_loc_list=1
 let g:syntastic_python_checkers=['flake8', 'python']
 
-" ctrlp
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+" fzf
+nnoremap <C-p> :Files<cr>
 
 " airline
 let g:airline_powerline_fonts = 1
@@ -80,6 +81,9 @@ let g:rspec_out_file = "/tmp/quickfix.out"
 let g:rspec_command = "compiler rspec | set makeprg=zeus | Make rspec --require="
       \ . g:rspec_format_file . " --format VimFormatter {spec} --out "
       \ . g:rspec_out_file . " --format progress"
+
+" ctrlp (CANDIDATE FOR REMOVAL)
+"let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
 autocmd BufWritePre * FixWhitespace
 
@@ -288,6 +292,7 @@ map <C-l> <C-W>l
 " buffers
 noremap <left> :bp<cr>
 noremap <right> :bn<cr>
+noremap <leader>ls :Buffers<cr>
 " rbgrouleff/bclose.vim provides ':Bclose' and 'map <leader>bd :Bclose<cr>'
 
 " Close all the buffers
