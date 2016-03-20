@@ -25,6 +25,7 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'bling/vim-bufferline'
 Plugin 'rbgrouleff/bclose.vim'
+Plugin 'rhysd/clever-f.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 
 " other plugins
