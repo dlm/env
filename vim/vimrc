@@ -40,6 +40,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'bronson/vim-visual-star-search'
+Plugin 'janko-m/vim-test'
 
 " markdown plugins
 Plugin 'tpope/vim-markdown'
@@ -57,7 +58,6 @@ Plugin 'marijnh/tern_for_vim'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
 Plugin 'ngmy/vim-rubocop'
-Plugin 'thoughtbot/vim-rspec'
 
 
 "-- plugin configuration
@@ -74,16 +74,28 @@ nnoremap <C-p> :Files<cr>
 let g:airline_powerline_fonts = 1
 let g:bufferline_echo = 0
 
-" ruby-rspec
-let g:rspec_runner = "os_x_iterm"
+" dispatch
+let g:dispatch_compilers = {'zeus': ''}
+
+" vim-test
+let test#strategy = "dispatch"
 let g:rspec_format_file = "~/.vim/config/vim_formatter.rb"
 let g:rspec_out_file = "/tmp/quickfix.out"
-let g:rspec_command = "compiler rspec | set makeprg=zeus | Make rspec --require="
-      \ . g:rspec_format_file . " --format VimFormatter {spec} --out "
+let test#ruby#rspec#options = "--require="
+      \ . g:rspec_format_file . " --format VimFormatter --out "
       \ . g:rspec_out_file . " --format progress"
 
 " ctrlp (CANDIDATE FOR REMOVAL)
 "let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
+" ruby-rspec (CANDIDATE FOR REMOVAL)
+"let g:rspec_runner = "os_x_iterm"
+" let g:rspec_format_file = "~/.vim/config/vim_formatter.rb"
+" let g:rspec_out_file = "/tmp/quickfix.out"
+" let g:rspec_command = "compiler rspec | set makeprg=zeus | Make rspec --require="
+"       \ . g:rspec_format_file . " --format VimFormatter {spec} --out "
+"       \ . g:rspec_out_file . " --format progress"
+
 
 autocmd BufWritePre * FixWhitespace
 
@@ -274,11 +286,12 @@ augroup reload_vimrc
   autocmd bufwritepost ~/.vim/vimrc nested source ~/.vim/vimrc
 augroup end
 
-" RSpec.vim mappings
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
+" Testing mappings
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" => Moving around, tabs and buffers
