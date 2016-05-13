@@ -1,0 +1,10 @@
+set show-mode-in-prompt on
+C-u: kill-whole-line
+
+set keymap emacs
+"\ea": vi-editing-mode
+
+set keymap vi-insert
+"kj": vi-movement-mode
+
+set editing-mode vi
