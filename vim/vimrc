@@ -15,6 +15,9 @@ call vundle#rc()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/vundle'
 
+" totally random and sos somewhat pointless
+Plugin 'mhinz/vim-startify'
+
 " colorschemes
 Plugin 'fugalh/desert.vim'
 Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
@@ -62,6 +65,12 @@ Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'marijnh/tern_for_vim'
 
 "-- plugin configuration
+
+" startify
+let g:startify_custom_header =
+            \ map(split(system('fortune | cowsay'), '\n'),
+            \ '"   ". v:val') + ['','']
+
 " syntastic
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_jump=0
