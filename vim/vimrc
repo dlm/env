@@ -236,7 +236,7 @@ autocmd FileType ruby set norelativenumber
 autocmd FileType ruby set number
 autocmd FileType ruby set spell
 autocmd FileType ruby set regexpengine=1
-autocmd FileType ruby set xdbg binding.pry
+autocmd FileType ruby iab xdbg binding.pry
 let ruby_spellcheck_strings = 1
 
 " markdown
