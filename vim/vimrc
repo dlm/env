@@ -149,7 +149,7 @@ if has("gui_running")
 endif
 
 "-- 11 printing
-"-- 12 messages and info
+"-- 12 messags and info
 set showcmd	        " show (partial) command in status line.
 
 "-- 13 selecting text
