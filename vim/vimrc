@@ -26,6 +26,7 @@ Plugin 'joshdick/onedark.vim'
 " navigation plugins
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
+Plugin 'scrooloose/nerdtree'
 " Plugin 'bling/vim-bufferline'
 Plugin 'rbgrouleff/bclose.vim'
 Plugin 'rhysd/clever-f.vim'
@@ -70,6 +71,9 @@ Plugin 'marijnh/tern_for_vim'
 let g:startify_custom_header =
             \ map(split(system('fortune | cowsay'), '\n'),
             \ '"   ". v:val') + ['','']
+
+" nerd tree
+map <C-n> :NERDTreeToggle<CR>
 
 " syntastic
 let g:syntastic_enable_signs=1
