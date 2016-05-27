@@ -220,8 +220,7 @@ autocmd FileType gitcommit let &colorcolumn=git_text_width
 " python
 autocmd FileType python inoremap # X#
 autocmd FileType python setlocal completeopt-=preview
-iab xipdb import ipdb; ipdb.set_trace()
-iab xpdb import pdb; pdb.set_trace()
+autocmd FileType python iab xdbg import ipdb; ipdb.set_trace()
 iab xpep8ify Pep8ify
 
 " ruby
@@ -233,7 +232,7 @@ autocmd FileType ruby set norelativenumber
 autocmd FileType ruby set number
 autocmd FileType ruby set spell
 autocmd FileType ruby set regexpengine=1
-iab xrdb binding.pry
+autocmd FileType ruby set xdbg binding.pry
 let ruby_spellcheck_strings = 1
 
 " markdown
