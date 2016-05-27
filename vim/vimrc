@@ -95,15 +95,6 @@ let test#ruby#rspec#options = "--require="
       \ . g:rspec_format_file . " --format VimFormatter --out "
       \ . g:rspec_out_file . " --format progress"
 
-" ruby-rspec (CANDIDATE FOR REMOVAL)
-"let g:rspec_runner = "os_x_iterm"
-" let g:rspec_format_file = "~/.vim/config/vim_formatter.rb"
-" let g:rspec_out_file = "/tmp/quickfix.out"
-" let g:rspec_command = "compiler rspec | set makeprg=zeus | Make rspec --require="
-"       \ . g:rspec_format_file . " --format VimFormatter {spec} --out "
-"       \ . g:rspec_out_file . " --format progress"
-
-
 autocmd BufWritePre * FixWhitespace
 
 "-- some nice global variables
