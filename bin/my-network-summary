@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set -e
+
+function get_ssid_mac() {
+    airport_cmd=/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport
+    $airport_cmd -I | grep "\bSSID:" | sed -e 's/.*SSID: \(.*\)$/\1/'
+}
+
+function get_ssid_linux() {
+    echo "Not yet supported on Linux"
+}
+
+function get_ssid() {
+    if [[ `uname` = "Darwin" ]]; then
+        get_ssid_mac
+    else
+        get_ssid_linux
+    fi
+}
+
+function get_internal_ip() {
+    ifconfig en0 | grep "inet\b" | sed -e "s/.*inet \(.*\) netmask.*/\1/"
+}
+
+function get_external_ip() {
+    http http://ipinfo.io/json | jq '.ip' -r
+}
+
+echo "SSID: $(get_ssid)"
+echo "Internal IP: $(get_internal_ip)"
+echo "External IP: $(get_external_ip)"
