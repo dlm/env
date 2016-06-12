@@ -13,7 +13,10 @@ alias rm='rm -i'
 
 alias pyclean='find . -name "*.pyc" -exec rm -f {} \;'
 alias clean_build='rm -rf ../build/*'
+
 alias gitx='gitx -c'
+alias gbfzf='git branch --no-color | fzf'
+alias gcob='git checkout $(gbfzf)'
 
 alias ..='cd ..; ls'
 alias rr='cd ~/Documents/research'
