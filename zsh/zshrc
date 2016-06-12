@@ -6,7 +6,6 @@ zplug "mafredri/zsh-async"
 zplug "sindresorhus/pure", on:"mafredri/zsh-async"
 zplug "zsh-users/zsh-completions"
 zplug "plugins/virtualenvwrapper", from:oh-my-zsh
-zplug "plugins/vi-mode", from:oh-my-zsh
 zplug "djui/alias-tips"
 zplug "Tarrasch/zsh-colors"
 zplug "caarlos0/zsh-pg"
@@ -25,9 +24,7 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load --verbose
 
-# setup vim bindkeys
-bindkey -v
-bindkey kj vi-cmd-mode
+# setup key bindings
 bindkey '^u' kill-whole-line
 
 # load zle
