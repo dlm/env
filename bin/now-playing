@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+parent_path=$( cd "$(dirname "${BASH_SOURCE}")" ; pwd -P )
+$parent_path/_now_playing/now_playing.py
