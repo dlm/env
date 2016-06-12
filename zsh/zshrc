@@ -27,9 +27,6 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load --verbose
 
-# setup key bindings
-bindkey '^u' kill-whole-line
-
 # load zle
 source ${HOME}/.zsh/zle.zsh
 
