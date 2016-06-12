@@ -11,8 +11,8 @@ import argparse
 import pickle
 from datetime import datetime, timedelta
 
-# weather key
-weather_key = 'f012b19109cf94dbb797354f5ad66f8a'
+# weather key from open weather map
+weather_key = os.environ.get('OPEN_WEATHER_MAP_KEY')
 
 # the set of zip codes
 zip_codes = {
