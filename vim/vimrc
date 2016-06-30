@@ -29,16 +29,18 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'scrooloose/nerdtree'
 " Plugin 'bling/vim-bufferline'
 Plugin 'rbgrouleff/bclose.vim'
+" Plugin 'tpope/vim-surround'
 Plugin 'rhysd/clever-f.vim'
-Plugin 'christoomey/vim-tmux-navigator'
+"Plugin 'christoomey/vim-tmux-navigator'
 
 " other plugins
 Plugin 'tpope/vim-dispatch'
 Plugin 'scrooloose/syntastic'
-Plugin 'bling/vim-airline'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'tomtom/tcomment_vim'
-Plugin 'Raimondi/delimitMate'
+" Plugin 'Raimondi/delimitMate'
 Plugin 'jamessan/vim-gnupg'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
@@ -46,13 +48,15 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'bronson/vim-visual-star-search'
 Plugin 'janko-m/vim-test'
-
+Plugin 'gcmt/taboo.vim'
+"
 " markdown plugins
 Plugin 'tpope/vim-markdown'
 
-" python plugins
-Plugin 'hynek/vim-python-pep8-indent'
-Plugin 'tmhedberg/SimpylFold'
+" " " python plugins
+Plugin 'klen/python-mode'
+Plugin '5long/pytest-vim-compiler'
+Plugin 'heavenshell/vim-pydocstring'
 
 " ruby plugins
 Plugin 'vim-ruby/vim-ruby'
@@ -66,20 +70,38 @@ Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'marijnh/tern_for_vim'
 
 "-- plugin configuration
+runtime! macros/matchit.vim
 
 " startify
 let g:startify_custom_header =
             \ map(split(system('fortune | cowsay'), '\n'),
             \ '"   ". v:val') + ['','']
 
+" You complete me
+
 " nerd tree
 map <C-n> :NERDTreeToggle<CR>
+let NERDTreeIgnore = ['\.pyc$', '__pycache__']
+
+" " python mode
+let g:pymode_rope_goto_definition_bind = "<C-]>"
+let g:pymode_virtualenv = 1
+let g:pymode_rope = 1
+let g:pymode_breakpoint_cmd = 'import ipdb; ipdb.set_trace()'
+
+" pydocstring
+nmap <silent> <C-/> <Plug>(pydocstring)
 
 " syntastic
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_jump=0
 let g:syntastic_auto_loc_list=1
 let g:syntastic_python_checkers=['flake8', 'python']
+let g:syntastic_html_tidy_ignore_errors=['proprietary attribute "autocomplete']
 
 " fzf
 nnoremap <C-p> :Files<cr>
