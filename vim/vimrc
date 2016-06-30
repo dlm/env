@@ -281,6 +281,7 @@ map qq gwap
 
 " pressing <leader>ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
+setlocal spell " and enable spell checking by default
 
 " When vimrc is edited, reload it
 augroup reload_vimrc
