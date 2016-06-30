@@ -120,6 +120,7 @@ let g:rspec_out_file = "/tmp/quickfix.out"
 let test#ruby#rspec#options = "--require="
       \ . g:rspec_format_file . " --format VimFormatter --out "
       \ . g:rspec_out_file . " --format progress"
+" let test#python#runner = 'pytest --capture=no'
 
 autocmd BufWritePre * FixWhitespace
 
@@ -129,6 +130,7 @@ let g:default_tabwidth=4
 
 "-- 1 important
 let mapleader = " "
+set ttimeoutlen=0
 
 "-- 2 moving around, searching and patterns
 set ignorecase          " ignore case when searching
@@ -197,7 +199,8 @@ set autoindent                      " automatically set indent of a new line
 set smartindent                     " use smart indenting (good for c-like language)
 
 "-- 16 folding
-nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+"nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+set foldlevelstart=10
 
 "-- 17 diff mode
 "-- 18 mapping
@@ -247,7 +250,7 @@ autocmd FileType gitcommit let &colorcolumn=git_text_width
 autocmd FileType python inoremap # X#
 autocmd FileType python setlocal completeopt-=preview
 autocmd FileType python iab xdbg import ipdb; ipdb.set_trace()
-iab xpep8ify Pep8ify
+iab xpep8 Pep8ify
 
 " ruby
 let g:ruby_tabwidth=2
