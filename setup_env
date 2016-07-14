@@ -82,6 +82,39 @@ function setup_bin() {
     done
 }
 
+function install_app {
+    local app=$1
+    if ! command -v apt > /dev/null;  then
+        echo "install_app is only supported on system with apt"
+    elif command -v "$app" > /dev/null; then
+        echo "$app already installed"
+    else
+        sudo apt-get install "$app"
+    fi
+}
+
+function build_app {
+    local app=$1
+    local command=$2
+    if command -v "$app" > /dev/null; then
+        echo "$app already installed"
+    else
+        $command
+    fi
+}
+
+function git_pull_or_clone {
+    local repo=$1
+    local dst=$2
+    if [ -e $dst ]; then
+        echo "Pulling $repo"
+        $(cd $dst || git pull)
+    else
+        echo "Cloning $repo"
+        git clone $repo $dst
+    fi
+}
+
 # setup topics
 setup_topic bash
 setup_topic shell
@@ -93,3 +126,16 @@ setup_topic input
 [ $OS == "Linux" ] && setup_topic i3
 
 setup_bin
+
+# install applications with simple setup
+install_app git
+install_app tmux
+
+# setup vim application
+install_app vim
+git_pull_or_clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+vim +PluginInstall +qall
+
+# setup fzf application
+git_pull_or_clone https://github.com/junegunn/fzf.git ~/.fzf
+build_app fzf ~/.fzf/install
