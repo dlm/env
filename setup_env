@@ -123,6 +123,7 @@ setup_topic tmux
 setup_topic vim
 setup_topic zsh
 setup_topic input
+setup_topic tmuxinator
 [ $OS == "Linux" ] && setup_topic i3
 
 setup_bin

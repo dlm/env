@@ -1,0 +1,29 @@
+# ~/.tmuxinator/nowsta-integration.yml
+
+name: nowsta-integration
+root: /Users/dave/Documents/Jobs/Nowsta/dev/
+startup_window: shell
+attach: true
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands.
+# Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+# post: tmux -CC attach -t nowsta
+
+windows:
+  - server:
+      layout: d5c5,270x82,0,0[270x21,0,0,62,270x60,0,22{67x60,0,22,63,67x60,68,22,66,67x60,136,22,64,66x60,204,22,65}]
+      panes:
+        -
+        - pg-start
+        - cd polychain; workon polychain; ./build/run_dev --port=8001
+        - cd api; rails s -p 3001
+        - cd web; foreman start -f Procfile.dev
