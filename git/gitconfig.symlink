@@ -1,0 +1,42 @@
+[user]
+	name = David Millman
+	email = dave@cs.unc.edu
+[push]
+	default = upstream
+[core]
+	editor = vim
+	excludesfile = /Users/dave/.global_ignore
+[merge]
+	conflictstyle = diff3
+	tool = opendiff
+[alias]
+	co = checkout
+	ci = commit -v
+	hist = log --pretty=format:\"%C(auto)%C(yellow)%h %C(green)%ar %C(blue)%an %C(red)%d%n  %C(reset)%s%n \" --graph
+[pager]
+	diff = diff-so-fancy | less --tabs=1,5 -RFX
+	show = diff-so-fancy | less --tabs=1,5 -RFX
+
+# Setup highlighting
+[color]
+	ui = always
+[color "diff"]
+	meta = yellow bold
+	commit = green bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = "red bold 52"
+	newNormal = "green bold"
+	newHighlight = "green bold 22"
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
