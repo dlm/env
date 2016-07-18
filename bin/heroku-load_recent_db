@@ -1,0 +1,44 @@
+#!/bin/bash
+
+AGAIN="y"
+
+main() {
+    if [ $# -lt 2 ]; then
+        echo $#
+        echo "$0 app_name local_db [db_dump_file]"
+        exit 1
+    else
+        app=$1
+        db=$2
+        if [ $# = 3 ]; then
+            file_name=$3
+        else
+            file_name=`mktemp`
+            curl -o $file_name `heroku pg:backups public-url -a $app`
+        fi
+    fi
+
+    yn=$AGAIN
+    while [ "$yn" = "$AGAIN" ]; do
+        restore $db $file_name
+        read -p "Do you want to load again? ($AGAIN to run agin)" yn
+    done
+    echo "Downloaded databse file is located at $file_name"
+}
+
+restore() {
+    db=$1
+    file_name=$2
+    username=`whoami`
+    pg_restore \
+        --verbose \
+        --clean \
+        --no-acl \
+        --no-owner \
+        -h localhost \
+        -U $username \
+        -d $db \
+        $file_name
+}
+
+main $@
