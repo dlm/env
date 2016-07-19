@@ -152,9 +152,9 @@ set linebreak           " wrap long lines at 'breakat' characters
 filetype plugin indent on " Enable filetype based plugins and indentation rules
 syntax on               " Enable syntax highlighing
 " colorscheme desert     " old trusty color scheme
-highlight ColorColumn ctermbg=235 guibg=#2c2d27
-execute "set colorcolumn=" . join(range(default_text_width,335), ',')
-colorscheme onedark     " a new facny theme
+let &colorcolumn=default_text_width
+" colorscheme onedark     " a new facny theme
+colorscheme Tomorrow-Night
 hi SpellBad cterm=underline ctermbg=237
 hi TabLineSel ctermfg=Blue
 
