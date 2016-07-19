@@ -369,6 +369,8 @@ vnoremap <leader>t <esc>`>a><esc>`<i<<esc>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 iab xdate <c-r>=strftime("%Y-%m-%d")
 iab xfn <c-r>=expand("%:t")
+iab xtodo TODO:DLM:
+iab xnote NOTE:DLM:
 
 """"""""""""""""""""""""""""""
 " => Vim grep
