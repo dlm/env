@@ -298,6 +298,9 @@ nmap <leader>w :w!<cr>
 nmap <leader>wq :wq!<cr>
 nmap <leader>e :e! ~/.vim/vimrc<cr>
 
+" execute the current file
+noremap ,t :w\|!%<cr>
+
 map j gj
 map k gk
 nmap <leader><leader>w <Plug>(easymotion-bd-w)
