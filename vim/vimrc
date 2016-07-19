@@ -118,8 +118,8 @@ let test#strategy = "dispatch"
 let g:rspec_format_file = "~/.vim/config/vim_formatter.rb"
 let g:rspec_out_file = "/tmp/quickfix.out"
 let test#ruby#rspec#options = "--require="
-      \ . g:rspec_format_file . " --format VimFormatter --out "
-      \ . g:rspec_out_file . " --format progress"
+            \ . g:rspec_format_file . " --format VimFormatter --out "
+            \ . g:rspec_out_file . " --format progress"
 " let test#python#runner = 'pytest --capture=no'
 
 autocmd BufWritePre * FixWhitespace
