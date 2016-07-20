@@ -270,6 +270,10 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd FileType markdown set spell
 
 " javascript
+let g:javascript_tabwidth=2
+autocmd FileType javascript let &shiftwidth=javascript_tabwidth
+autocmd FileType javascript let &softtabstop=javascript_tabwidth
+autocmd FileType javascript let &tabstop=javascript_tabwidth
 iab xcl console.log
 
 " makefiles
