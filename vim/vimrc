@@ -164,6 +164,7 @@ let &colorcolumn=default_text_width
 colorscheme Tomorrow-Night
 hi SpellBad cterm=underline ctermbg=237
 hi TabLineSel ctermfg=Blue
+setlocal spell          " enable spell checking by default
 
 "-- 6 multiple windows
 set hidden      " allow opening new buffers without writing the current buffer
@@ -320,7 +321,6 @@ map qq gwap
 
 " pressing <leader>ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
-setlocal spell " and enable spell checking by default
 
 " Testing mappings
 nmap <silent> <leader>t :TestNearest<CR>
