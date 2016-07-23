@@ -129,6 +129,12 @@ autocmd BufWritePre * FixWhitespace
 let g:default_text_width=80
 let g:default_tabwidth=4
 
+" Reload vimrm while updating
+augroup reload_vimrc
+  autocmd!
+  autocmd bufwritepost ~/.vim/vimrc nested source ~/.vim/vimrc
+augroup end
+
 "-- 1 important
 let mapleader = " "
 set ttimeoutlen=0
@@ -315,12 +321,6 @@ map qq gwap
 " pressing <leader>ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
 setlocal spell " and enable spell checking by default
-
-" When vimrc is edited, reload it
-augroup reload_vimrc
-  autocmd!
-  autocmd bufwritepost ~/.vim/vimrc nested source ~/.vim/vimrc
-augroup end
 
 " Testing mappings
 nmap <silent> <leader>t :TestNearest<CR>
