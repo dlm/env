@@ -319,7 +319,7 @@ nmap <leader><leader>w <Plug>(easymotion-bd-w)
 " clean up the formatting of text
 map qq gwap
 
-" pressing <leader>ss will toggle and untoggle spell checking
+" toggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
 " Testing mappings
