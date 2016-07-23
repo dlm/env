@@ -54,7 +54,7 @@ Plugin 'gcmt/taboo.vim'
 " markdown plugins
 Plugin 'tpope/vim-markdown'
 
-" " " python plugins
+" python plugins
 Plugin 'klen/python-mode'
 Plugin '5long/pytest-vim-compiler'
 Plugin 'heavenshell/vim-pydocstring'
