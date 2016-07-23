@@ -205,6 +205,7 @@ let &tabstop=default_tabwidth       " number of spaces a <Tab> in the text stand
 set smarttab                        " On an indent, <Tab> inserts 'shiftwidth' num spaces
 set autoindent                      " automatically set indent of a new line
 set smartindent                     " use smart indenting (good for c-like language)
+set listchars=tab:▸\ ,eol:¬         " Use TextMate style tabstops and EOL symbols
 
 "-- 16 folding
 "nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
