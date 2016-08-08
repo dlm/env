@@ -24,13 +24,13 @@ alias class='cd ~/Dropbox/Classes'
 alias pc='pcui.py ~/Dropbox/var/pc.sqlite'
 alias be='bundle exec'
 calc(){ awk "BEGIN{ print $* }" ;}
-dl() { mv -f $* ~/tmp/trash/; }
+dl() { mv -f "$*" ~/tmp/trash/; }
 
 # database
 alias pg-start='postgres -D /usr/local/var/postgres'
 
 t() {
-    bname=`basename "${PWD/$HOME/~}"`
+    bname=$(basename "${PWD/$HOME/~}")
     if [[ $# -lt 1 ]]; then
         echo -ne "\033]0;${USER}@${HOSTNAME}: ${bname}\007"
     else
@@ -39,5 +39,5 @@ t() {
 }
 
 pdfunlock() {
-    gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=$2 -c .setpdfwrite -f $1
+    gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile="$2" -c .setpdfwrite -f "$1"
 }
