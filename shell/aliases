@@ -7,6 +7,9 @@ alias ll='ls -l'
 alias la='ls -lA'
 alias l='ls -CF'
 
+alias v='vim'
+alias g='git'
+
 alias cgrep='grep --color=always'
 alias grep='grep --color=auto'
 alias rm='rm -i'
