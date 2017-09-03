@@ -1,4 +1,4 @@
-source ~/.zplug/zplug
+source ~/.zplug/init.zsh
 
 # do not auto load virtual environments
 export DISABLE_VENV_CD=1
@@ -25,7 +25,7 @@ if ! zplug check --verbose; then
 fi
 
 # Then, source plugins and add commands to $PATH
-zplug load --verbose
+zplug load
 
 # load zle
 source ${HOME}/.zsh/zle.zsh
