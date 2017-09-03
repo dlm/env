@@ -123,6 +123,7 @@ setup_topic shell
 setup_topic synergy
 setup_topic tmux
 setup_topic vim
+setup_topic git
 setup_topic zsh
 setup_topic input
 setup_topic tmuxinator
