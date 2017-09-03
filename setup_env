@@ -134,6 +134,7 @@ setup_bin
 # install applications with simple setup
 install_app git
 install_app tmux
+install_app zsh
 
 # setup vim application
 install_app vim
