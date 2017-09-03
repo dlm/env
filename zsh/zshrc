@@ -32,6 +32,8 @@ source ${HOME}/.zsh/zle.zsh
 
 # shared between bash and zsh
 source ${HOME}/.shell/aliases
+source ${HOME}/.shell/nowsta_aliases
+source ${HOME}/.shell/msu
 source ${HOME}/.shell/env_vars
 
 # complete .. to ../
