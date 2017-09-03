@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+alias hyalite='mosh c54s194@hyalite.rci.montana.edu'
