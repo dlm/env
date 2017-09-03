@@ -84,12 +84,14 @@ function setup_bin() {
 
 function install_app {
     local app=$1
-    if ! command -v apt > /dev/null;  then
-        echo "install_app is only supported on system with apt"
-    elif command -v "$app" > /dev/null; then
+    if command -v "$app" > /dev/null; then
         echo "$app already installed"
+    elif command -v apt > /dev/null;  then
+	sudo apt-get install "$app"
+    elif command -v pacman > /dev/null; then
+	sudo pacman -S "$app"
     else
-        sudo apt-get install "$app"
+        echo "Cannot run install_app, unsupported package manager."
     fi
 }
 
