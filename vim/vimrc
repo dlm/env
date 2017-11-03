@@ -28,7 +28,6 @@ Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'scrooloose/nerdtree'
-" Plugin 'bling/vim-bufferline'
 Plugin 'rbgrouleff/bclose.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'rhysd/clever-f.vim'
