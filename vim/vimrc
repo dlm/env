@@ -50,7 +50,7 @@ Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'bronson/vim-visual-star-search'
 Plugin 'janko-m/vim-test'
 Plugin 'gcmt/taboo.vim'
-Plugin 'fatih/vim-go'
+
 
 " markdown plugins
 Plugin 'tpope/vim-markdown'
@@ -59,6 +59,10 @@ Plugin 'tpope/vim-markdown'
 Plugin 'klen/python-mode'
 Plugin '5long/pytest-vim-compiler'
 Plugin 'heavenshell/vim-pydocstring'
+
+" golang plugins
+Plugin 'fatih/vim-go'
+
 " haskell plugins
 Plugin 'neovimhaskell/haskell-vim'
 
