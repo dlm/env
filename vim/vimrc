@@ -70,6 +70,10 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'marijnh/tern_for_vim'
 
+" sql
+Plugin 'has2k1/sql.vim'
+Plugin 'shmup/vim-sql-syntax'
+
 "-- plugin configuration
 runtime! macros/matchit.vim
 
