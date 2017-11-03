@@ -144,7 +144,8 @@ def construct_url(args, cache=None):
         loc = zip_codes[args.location]
 
     # use 'imperial' for Fahrenheit
-    unit = 'metric'
+    # use 'metric' for Celcius
+    unit = 'imperial'
     weather_url = ('http://api.openweathermap.org/data/2.5/weather?' +
                    'zip={zip},us&appid={weather_key}&units={unit}')
     return weather_url.format(zip=loc, weather_key=weather_key, unit=unit)
