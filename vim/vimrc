@@ -50,7 +50,8 @@ Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'bronson/vim-visual-star-search'
 Plugin 'janko-m/vim-test'
 Plugin 'gcmt/taboo.vim'
-"
+Plugin 'fatih/vim-go'
+
 " markdown plugins
 Plugin 'tpope/vim-markdown'
 
