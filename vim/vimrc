@@ -309,6 +309,9 @@ autocmd FileType tex set spell
 autocmd FileType tex set linebreak
 autocmd FileType tex set display+=lastline
 
+" prolog
+autocmd BufReadPost *.pro set filetype=prolog
+
 "-- 25 multi-byte characters
 set encoding=utf-8
 
