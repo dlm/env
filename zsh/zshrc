@@ -9,9 +9,12 @@ zplug "mafredri/zsh-async"
 zplug "sindresorhus/pure", on:"mafredri/zsh-async"
 zplug "zsh-users/zsh-completions"
 zplug "plugins/virtualenvwrapper", from:oh-my-zsh
+zplug "plugins/vi-mode", from:oh-my-zsh
 zplug "djui/alias-tips"
 zplug "Tarrasch/zsh-colors"
 zplug "caarlos0/zsh-pg"
+zplug "robbyrussell/oh-my-zsh", use:"lib/history.zsh"
+zplug "robbyrussell/oh-my-zsh", use:"lib/directories.zsh"
 
 # do not update the title in every command
 export DISABLE_AUTO_TITLE="true";
