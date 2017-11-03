@@ -14,7 +14,7 @@ main() {
             file_name=$3
         else
             file_name=`mktemp`
-            curl -o $file_name `heroku pg:backups public-url -a $app`
+            curl -o $file_name `heroku pg:backups:url -a $app`
         fi
     fi
 
@@ -30,15 +30,18 @@ restore() {
     db=$1
     file_name=$2
     username=`whoami`
-    pg_restore \
-        --verbose \
-        --clean \
-        --no-acl \
-        --no-owner \
-        -h localhost \
-        -U $username \
-        -d $db \
-        $file_name
+    dropdb "$db"
+    createdb "$db"
+    pg_restore --verbose -O -d "$db" $file_name
+    # pg_restore \
+    #     --verbose \
+    #     --clean \
+    #     --no-acl \
+    #     --no-owner \
+    #     -h localhost \
+    #     -U $username \
+    #     -d $db \
+    #     $file_name
 }
 
 main $@
