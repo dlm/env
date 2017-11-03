@@ -58,6 +58,14 @@ Plugin 'tpope/vim-markdown'
 Plugin 'klen/python-mode'
 Plugin '5long/pytest-vim-compiler'
 Plugin 'heavenshell/vim-pydocstring'
+" haskell plugins
+Plugin 'neovimhaskell/haskell-vim'
+
+" prolog plugins
+Plugin 'adimit/prolog.vim'
+
+" scala plugins
+Plugin 'derekwyatt/vim-scala'
 
 " ruby plugins
 Plugin 'vim-ruby/vim-ruby'
