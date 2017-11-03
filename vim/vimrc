@@ -158,6 +158,8 @@ set incsearch           " show matches as search is typed
 set hlsearch            " highlight matches of last search pattern
 set magic               " make backshash in regex more predictable
 
+nnoremap <CR> :nohlsearch<cr>
+
 "-- 3 tags
 "-- 4 displaying text
 set relativenumber      " display line numbers relative to cursor
