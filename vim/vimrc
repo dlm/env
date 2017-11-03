@@ -32,7 +32,6 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'rbgrouleff/bclose.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'rhysd/clever-f.vim'
-"Plugin 'christoomey/vim-tmux-navigator'
 
 " other plugins
 Plugin 'tpope/vim-dispatch'
