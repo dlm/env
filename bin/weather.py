@@ -136,6 +136,9 @@ def construct_url(args, cache=None):
         ipinfo, success = fetch(ip_url, cache)
 
         # get the location
+        if args.verbose:
+            print "Getting weather for {}".format(ipinfo['city'])
+
         loc = ipinfo['postal']
     else:
         loc = zip_codes[args.location]
