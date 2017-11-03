@@ -346,6 +346,9 @@ nmap <silent> <leader>tg :TestVisit<CR>
 nmap <silent> <leader>td :let test#strategy="dispatch"<CR>
 nmap <silent> <leader>tb :let test#strategy="basic""<CR>
 
+" split and show alternate file
+" nmap <silent> <leader>a :vs\|:A<cr>
+"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" => Moving around, tabs and buffers
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
