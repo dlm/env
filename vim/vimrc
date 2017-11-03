@@ -298,6 +298,9 @@ autocmd FileType javascript let &softtabstop=javascript_tabwidth
 autocmd FileType javascript let &tabstop=javascript_tabwidth
 iab xcl console.log
 
+" golang
+autocmd FileType make set noexpandtab
+
 " makefiles
 autocmd FileType make set noexpandtab
 
