@@ -289,6 +289,8 @@ let ruby_spellcheck_strings = 1
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd FileType markdown set spell
 
+" haskell
+
 " javascript
 let g:javascript_tabwidth=2
 autocmd FileType javascript let &shiftwidth=javascript_tabwidth
