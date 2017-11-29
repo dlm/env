@@ -30,6 +30,9 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load
 
+# some of my favorite options
+setopt autocd
+
 # load zle
 source ${HOME}/.zsh/zle.zsh
 
