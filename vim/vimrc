@@ -30,11 +30,13 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'rbgrouleff/bclose.vim'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
 Plugin 'rhysd/clever-f.vim'
+Plugin 'tpope/vim-projectionist'
 
 " other plugins
 Plugin 'tpope/vim-dispatch'
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Valloric/YouCompleteMe'
@@ -49,14 +51,18 @@ Plugin 'bronson/vim-visual-star-search'
 Plugin 'janko-m/vim-test'
 Plugin 'gcmt/taboo.vim'
 
+" allow local vimrcs
+Plugin 'MarcWeber/vim-addon-local-vimrc'
+let g:local_vimrc = {'names':['.lvimrc'],'hash_fun':'LVRHashOfFile'}
 
 " markdown plugins
 Plugin 'tpope/vim-markdown'
 
 " python plugins
-Plugin 'klen/python-mode'
+" Plugin 'klen/python-mode'
 Plugin '5long/pytest-vim-compiler'
 Plugin 'heavenshell/vim-pydocstring'
+Plugin 'Vimjas/vim-python-pep8-indent'
 
 " golang plugins
 Plugin 'fatih/vim-go'
@@ -78,8 +84,10 @@ Plugin 'ngmy/vim-rubocop'
 " javascript plugins
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'marijnh/tern_for_vim'
+Plugin 'mxw/vim-jsx'
+
+" Plugin 'nathanaelkane/vim-indent-guides'
+" Plugin 'marijnh/tern_for_vim'
 
 " sql
 Plugin 'has2k1/sql.vim'
@@ -104,6 +112,7 @@ let g:pymode_rope_goto_definition_bind = "<C-]>"
 let g:pymode_virtualenv = 1
 let g:pymode_rope = 1
 let g:pymode_breakpoint_cmd = 'import ipdb; ipdb.set_trace()'
+let g:pymode_indent = 0
 
 " pydocstring
 nmap <silent> <C-/> <Plug>(pydocstring)
@@ -137,6 +146,7 @@ let test#ruby#rspec#options = "--require="
             \ . g:rspec_format_file . " --format VimFormatter --out "
             \ . g:rspec_out_file . " --format progress"
 " let test#python#runner = 'pytest --capture=no'
+let test#javascript#mocha#executable = "yarn test"
 
 autocmd BufWritePre * FixWhitespace
 
