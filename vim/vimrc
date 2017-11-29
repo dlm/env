@@ -177,8 +177,9 @@ filetype plugin indent on " Enable filetype based plugins and indentation rules
 syntax on               " Enable syntax highlighing
 " colorscheme desert     " old trusty color scheme
 let &colorcolumn=default_text_width
-" colorscheme onedark     " a new facny theme
-colorscheme Tomorrow-Night
+colorscheme onedark     " a new facny theme
+" colorscheme dracula     " teaching
+"colorscheme Tomorrow-Night
 hi SpellBad cterm=underline ctermbg=237
 hi TabLineSel ctermfg=Blue
 setlocal spell          " enable spell checking by default
