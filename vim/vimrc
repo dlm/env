@@ -435,3 +435,12 @@ let g:netrw_liststyle = 3  " by default open in tree view (hit i to change the v
 let g:netrw_list_hide = '.DS_Store, .localized'  " hide these files
 let g:netrw_preview = 1 " use 'p' to open file on the right
 autocmd FileType netrw setl bufhidden=wipe
+
+set previewheight=15
+au BufEnter ?* call PreviewHeightWorkAround()
+func! PreviewHeightWorkAround()
+  if &previewwindow
+    exec 'wincmd K'
+    exec 'setlocal winheight='.&previewheight
+  endif
+endfunc
