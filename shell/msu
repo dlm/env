@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
 alias hyalite='mosh c54s194@hyalite.rci.montana.edu'
+alias nyland='mosh dave@153.90.118.164'
