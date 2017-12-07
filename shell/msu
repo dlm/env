@@ -2,3 +2,5 @@
 
 alias hyalite='mosh c54s194@hyalite.rci.montana.edu'
 alias nyland='mosh dave@153.90.118.164'
+alias esus='ssh david.millman@esus.cs.montana.edu'
+alias skifahrer='mosh skifahrer.cs.montana.edu'
