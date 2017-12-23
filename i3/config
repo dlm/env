@@ -29,7 +29,8 @@ bindsym $mod4+Return exec xterm
 bindsym $mod+Shift+C kill
 
 # start dmenu (a program launcher)
-bindsym $mod+p exec dmenu_run
+#bindsym $mod+p exec dmenu_run
+bindsym $mod+p exec albert toggle
 
 # change focus
 bindsym $mod+h focus left
@@ -40,10 +41,10 @@ bindsym $mod+u focus left
 bindsym $mod+i focus right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+#bindsym $mod+Left focus left
+#bindsym $mod+Down focus down
+#bindsym $mod+Up focus up
+#bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod4+h move left
@@ -105,7 +106,7 @@ bindsym $mod+Shift+exclam move workspace 1.main
 bindsym $mod+Shift+at move workspace 2.write
 bindsym $mod+Shift+numbersign move workspace 3.code
 bindsym $mod+Shift+dollar move workspace 4.plot
-bindsym $mod+Shift+percent move workspace 5.misc
+
 bindsym $mod+Shift+asciicircum move workspace 6.chat
 bindsym $mod+Shift+ampersand move workspace 7.misc
 bindsym $mod+Shift+asterisk move workspace 8.code
@@ -120,7 +121,7 @@ bindsym $mod+Shift+R restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 
-# $mod+F12 locks the screen and 
+# $mod+F12 locks the screen and
 # $mod+Shift+F12 suspends the screen.
 # Note that pn-suspend needs to be run as root.
 # To have this run without needing a password I ran:
@@ -134,35 +135,35 @@ bind $mod+Shift+96 exec sudo /usr/sbin/pm-suspend
 # resize window (you can also use the mouse for that)
 mode "resize" {
     # These bindings trigger as soon as you enter the resize mode
-    
+
     # They resize the border in the direction you pressed, e.g.
     # when pressing left, the window is resized so that it has
     # more space on its left
     bindsym h resize shrink left 10 px or 10 ppt
     bindsym Shift+H resize grow   left 10 px or 10 ppt
-    
+
     bindsym j resize shrink down 10 px or 10 ppt
     bindsym Shift+J resize grow   down 10 px or 10 ppt
-    
+
     bindsym k resize shrink up 10 px or 10 ppt
     bindsym Shift+K resize grow   up 10 px or 10 ppt
-    
+
     bindsym l resize shrink right 10 px or 10 ppt
     bindsym Shift+L resize grow   right 10 px or 10 ppt
-    
+
     # same bindings, but for the arrow keys
     bindsym Left resize shrink left 10 px or 10 ppt
     bindsym Shift+Left resize grow   left 10 px or 10 ppt
-    
+
     bindsym Down resize shrink down 10 px or 10 ppt
     bindsym Shift+Down resize grow   down 10 px or 10 ppt
-    
+
     bindsym Up resize shrink up 10 px or 10 ppt
     bindsym Shift+Up resize grow   up 10 px or 10 ppt
-    
+
     bindsym Right resize shrink right 10 px or 10 ppt
     bindsym Shift+Right resize grow   right 10 px or 10 ppt
-    
+
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -185,22 +186,20 @@ client.focused            #CD6D37 #CD6D37 #000000
 client.focused_inactive   #848484 #848484 #000000
 client.unfocused          #848484 #FF9F6A #000000
 client.urgent             #FF0000 #8C5665 #999999
-font -b&h-lucidatypewriter-medium-r-*-*-15-100-*-*-*-*-*-*
-
+font pango: Dejavu Sans Mono 8
 
 #auto float
 for_window [title="Vertex Unfolder"] floating enable
 
+# commands to run at startup
+exec nm-applet
+exec dropbox
+exec albert
+exec sh ~/.shell/keyboard
+exec source ~/.xsession
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-
-#!!exec xrdb ~/.Xdefaults
-#!!exec /home/dave/Applications/linux_bin/app_login
-#!!exec i3bar -d --color-active-ws-fg=#DA6F00 --color-active-ws-bg=#000000 --color-bar-fg=#DA6F00 --color-bar-bg=000000 --color-focus-ws-fg=#000000 --color-focus-ws-bg=#DA6F00 --color-inactive-ws-fg=#DA6F00 --color-inactive-ws-bg=000000 --color-urgent-ws-bg=#FA0734 --color-urgent-ws-fg=#FFFCFD
-#exec /home/dave/Applications/linux_bin/run_status
-
-
 bar {
     status_command i3status --config ~/.i3/status
 }
@@ -218,5 +217,3 @@ bar {
 #workspace 9.write output DP-1
 #workspace 10.main output DP-1
 #
-
-
