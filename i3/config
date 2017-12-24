@@ -48,12 +48,6 @@ bindsym $mod4+l move right
 bindsym $mod4+u move left
 bindsym $mod4+i move right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod4+Left move left
-bindsym $mod4+Down move down
-bindsym $mod4+Up move up
-bindsym $mod4+Right move right
-
 # split in horizontal orientation
 bindsym $mod+n split h
 
