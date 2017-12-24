@@ -125,11 +125,6 @@ bind $mod+Shift+96 exec sudo /usr/sbin/pm-suspend
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-    # These bindings trigger as soon as you enter the resize mode
-
-    # They resize the border in the direction you pressed, e.g.
-    # when pressing left, the window is resized so that it has
-    # more space on its left
     bindsym h resize shrink left 10 px or 10 ppt
     bindsym Shift+H resize grow   left 10 px or 10 ppt
 
@@ -162,24 +157,15 @@ mode "resize" {
 
 bindsym $mod+q mode "resize"
 
-# colors
+# add some style
 # class                   border  backgr. text
-
-# orange theme 1
-#client.focused            #DA6F00 #DA6F00 #000000
-#client.focused_inactive   #333333 #333333 #999999
-#client.unfocused          #333333 #333333 #999999
-#client.urgent             #FF0000 #8C5665 #999999
-#font -*-*-*-*-*-*-18-*-*-*-*-*-*-*
-
-# orange theme 2
 client.focused            #CD6D37 #CD6D37 #000000
 client.focused_inactive   #848484 #848484 #000000
 client.unfocused          #848484 #FF9F6A #000000
 client.urgent             #FF0000 #8C5665 #999999
 font pango: Dejavu Sans Mono 8
 
-#auto float
+# auto float windows
 for_window [title="Vertex Unfolder"] floating enable
 
 # commands to run at startup
@@ -189,24 +175,9 @@ exec albert
 exec sh ~/.shell/keyboard
 exec source ~/.xsession
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+# Start start bar
 bar {
     #status_command i3status --config ~/.i3/status
     i3bar_command $HOME/.config/polybar/launch.sh
 
 }
-
-#workspace 10 output DVI-D-0
-#workspace 2.write output DVI-D-0
-#workspace 3.code output DVI-D-0
-#workspace 4.plot output DVI-D-0
-#
-#workspace 6.chat output DVI-D-0
-#
-#workspace 5.misc output DP-1
-#workspace 7.misc output DP-1
-#workspace 8.code output DP-1
-#workspace 9.write output DP-1
-#workspace 10.main output DP-1
-#
