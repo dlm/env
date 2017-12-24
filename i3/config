@@ -89,6 +89,9 @@ bindsym $mod+b focus parent
 # go back and forth between the last two workspaces
 bindsym $mod+Tab exec ~/.i3/i3_switch_screen.py
 
+bindsym XF86MonBrightnessDown exec ~/.i3/bin/update-screen-brightness -0.1
+bindsym XF86MonBrightnessUp exec ~/.i3/bin/update-screen-brightness 0.1
+
 # switch to workspace
 bindsym $mod+1 workspace 1.main
 bindsym $mod+2 workspace 2.write

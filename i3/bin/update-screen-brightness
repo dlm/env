@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+inc=${1:-0.1}
+currentBrightness=$(xrandr --verbose | awk '/Brightness/ { print $2; exit }')
+nextBrightness=$(python -c "x=$currentBrightness+$inc; print(max(min(x,1), 0))")
+echo $nextBrightness
+
+display=$(xrandr -q | grep ' connected' | cut -d' ' -f1)
+xrandr --output "$display" --brightness "$nextBrightness"
