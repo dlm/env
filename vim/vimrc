@@ -321,6 +321,10 @@ autocmd FileType make set noexpandtab
 autocmd FileType make set noexpandtab
 
 " html
+let g:html_tabwidth=2
+autocmd FileType html let &shiftwidth=html_tabwidth
+autocmd FileType html let &softtabstop=html_tabwidth
+autocmd FileType html let &tabstop=html_tabwidth
 autocmd FileType html set spell
 
 " latex
