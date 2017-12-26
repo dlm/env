@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+inc=${1:-10}
+
+dir=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
+activeSink=$($dir/active-sink)
+currentVolume=$(pactl list sinks | grep '^[[:space:]]Volume:' \
+    | head -n $(( $activeSink + 1 )) | tail -n 1 \
+    | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,' )
+
+echo $currentVolume
+
+nextVolume=$(python -c "x=$currentVolume+$inc; print(max(min(x,100), 0))")
+echo $nextVolume
+
+pactl set-sink-mute "$activeSink" false
+pactl set-sink-volume "$activeSink" "$nextVolume"%
