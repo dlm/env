@@ -270,7 +270,7 @@ set shell=/bin/bash
 
 "-- 23 running make and jumping to errors (cope)
 map <leader>make :make<cr>
-map <leader>cc :botright cope<cr>
+map <leader>cc :botright copen<cr>
 map <leader>cn :cn<cr>
 map <leader>cp :cp<cr>
 map <leader>cg :execute "botright cope \| cgetfile "
@@ -352,6 +352,9 @@ nmap <leader>e :e! ~/.vim/vimrc<cr>
 
 " execute the current file
 noremap ,t :w\|!./%<cr>
+autocmd FileType cpp map ,t :w\|:!make cpp && ./a.out<cr>
+autocmd FileType c map ,t :w\|:!make c && ./a.out<cr>
+
 
 map j gj
 map k gk
