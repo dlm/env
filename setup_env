@@ -82,6 +82,16 @@ function setup_bin() {
     done
 }
 
+function setup_qt_app() {
+    local app=$1
+
+    # make the qt configuration directory if it does not exist
+    qt_config_dir=".local/share"
+    mkdir ${DST_DIR}/$qt_dir 2> /dev/null
+
+    link_if_does_not_exist "$app" "$qt_config_dir/$app"
+}
+
 function install_app {
     local app=$1
     if command -v "$app" > /dev/null; then
@@ -128,6 +138,7 @@ setup_topic zsh
 setup_topic input
 setup_topic tmuxinator
 [ $OS == "Linux" ] && setup_topic i3
+[ $OS == "Linux" ] && setup_qt_app albert
 
 setup_bin
 
