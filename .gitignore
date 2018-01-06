@@ -4,3 +4,4 @@ cleanup
 vim/.netrwhist
 vim/colors/*
 tmux/plugins/*
+*__pycache__
