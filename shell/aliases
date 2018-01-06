@@ -3,7 +3,12 @@
 alias my-shell='ps -o command -p $$ | tail -n +2 | cut -d" " -f1 | sed "s/[^a-zA-Z]//"'
 alias reload='rc=~/.`my-shell`rc; echo Loading $rc; source $rc'
 
-alias ls='ls -G'
+# base ls command is OS dependent
+if [[ $(uname) == "Linux" ]]; then
+    alias ls='ls --color=auto'
+else
+    alias ls='ls -G'
+fi
 alias ll='ls -l'
 alias la='ls -lA'
 alias l='ls -CF'
