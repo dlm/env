@@ -51,6 +51,7 @@ Plugin 'bronson/vim-visual-star-search'
 Plugin 'janko-m/vim-test'
 Plugin 'gcmt/taboo.vim'
 
+
 " allow local vimrcs
 Plugin 'MarcWeber/vim-addon-local-vimrc'
 let g:local_vimrc = {'names':['.lvimrc'],'hash_fun':'LVRHashOfFile'}
@@ -92,6 +93,12 @@ Plugin 'mxw/vim-jsx'
 " sql
 Plugin 'has2k1/sql.vim'
 Plugin 'shmup/vim-sql-syntax'
+
+" cmake
+Plugin 'vhdirk/vim-cmake'
+
+" opengl
+Plugin 'tikhomirov/vim-glsl'
 
 "-- plugin configuration
 runtime! macros/matchit.vim
