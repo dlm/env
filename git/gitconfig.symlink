@@ -10,9 +10,11 @@
 	conflictstyle = diff3
 	tool = opendiff
 [alias]
+    ap = add -p
 	co = checkout
 	ci = commit -v
 	hist = log --pretty=format:\"%C(auto)%C(yellow)%h %C(green)%ar %C(blue)%an %C(red)%d%n  %C(reset)%s%n \" --graph
+    st = status
 [pager]
 	diff = diff-so-fancy | less --tabs=1,5 -RFX
 	show = diff-so-fancy | less --tabs=1,5 -RFX
