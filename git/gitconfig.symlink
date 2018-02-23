@@ -1,44 +1,48 @@
 [user]
-	name = David Millman
-	email = dave@cs.unc.edu
+    name = David Millman
+    email = dave@cs.unc.edu
 [push]
-	default = upstream
+    default = upstream
 [core]
-	editor = vim
-	excludesfile = /Users/dave/.global_ignore
+    editor = vim
+    excludesfile = ~/.gitignore_global
 [merge]
-	conflictstyle = diff3
-	tool = opendiff
+    conflictstyle = diff3
+    tool = opendiff
 [alias]
-	ap = add -p
-	co = checkout
-	ci = commit -v
-	hist = log --pretty=format:\"%C(auto)%C(yellow)%h %C(green)%ar %C(blue)%an %C(red)%d%n  %C(reset)%s%n \" --graph
-	st = status
+    ap = add -p
+    br = branch
+    ci = commit -v
+    co = checkout
+    cob="!git checkout $(git branch --no-color | fzf)"
+    hist = log --pretty=format:\"%C(auto)%C(yellow)%h %C(green)%ar %C(blue)%an %C(red)%d%n  %C(reset)%s%n \" --graph
+    la = "!git config -l | grep alias | cut -c 7-"
+    patch = "!git --no-pager diff --no-color"
+    publish = "!git push -u origin $(git rev-parse --abbrev-ref HEAD)"
+    st = status
 [pager]
-	diff = diff-so-fancy | less --tabs=1,5 -RFX
-	show = diff-so-fancy | less --tabs=1,5 -RFX
-
+    diff = diff-so-fancy | less --tabs=1,5 -RFX
+    show = diff-so-fancy | less --tabs=1,5 -RFX
 # Setup highlighting
 [color]
-	ui = always
+    ui = always
 [color "diff"]
-	meta = yellow bold
-	commit = green bold
-	frag = magenta bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
+    meta = yellow bold
+    commit = green bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
 [color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = "red bold 52"
-	newNormal = "green bold"
-	newHighlight = "green bold 22"
+    oldNormal = red bold
+    oldHighlight = "red bold 52"
+    newNormal = "green bold"
+    newHighlight = "green bold 22"
 [color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
+    current = yellow reverse
+    local = yellow
+    remote = green
 [color "status"]
-	added = yellow
-	changed = green
-	untracked = cyan
+    added = yellow
+    changed = green
+    untracked = cyan
