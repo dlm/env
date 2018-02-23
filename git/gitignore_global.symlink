@@ -1,0 +1,6 @@
+tags
+.ropeproject
+.DS_Store
+.dropbox
+dump.rdb
+build*
