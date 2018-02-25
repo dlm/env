@@ -175,7 +175,7 @@ font pango: Dejavu Sans Mono 8
 
 # auto float windows
 for_window [title="GLplay"] floating enable
-for_window [title="lab2"] floating enable
+for_window [title="lab4"] floating enable
 
 # commands to run at startup
 exec nm-applet
