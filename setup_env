@@ -138,6 +138,7 @@ setup_topic zsh
 setup_topic input
 setup_topic tmuxinator
 [ $OS == "Linux" ] && setup_topic i3
+[ $OS == "Linux" ] && setup_topic rofi
 [ $OS == "Linux" ] && setup_qt_app albert
 
 setup_bin
