@@ -21,7 +21,6 @@ force_xinerama yes
 floating_modifier $mod
 
 # start a terminal
-#!!bindsym $mod+Return exec gnome-terminal
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod4+Return exec xterm
 
@@ -185,7 +184,6 @@ exec source ~/.xsession
 
 # Start start bar
 bar {
-    #status_command i3status --config ~/.i3/status
     i3bar_command $HOME/.polybar/launch.sh
 
 }
