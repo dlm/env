@@ -29,8 +29,7 @@ bindsym $mod4+Return exec xterm
 bindsym $mod+Shift+C kill
 
 # start dmenu (a program launcher)
-#bindsym $mod+p exec dmenu_run
-bindsym $mod+p exec albert toggle
+bindsym $mod+p exec ./.rofi/my-rofi
 
 # change focus
 bindsym $mod+h focus left
