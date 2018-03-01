@@ -4,12 +4,22 @@ function process_git() {
     git -C "./$1" status --branch --porcelain=v1
 }
 
-for x in $(ls); do
-    echo --$x--
-    if [[ -e $x/.git ]]; then
-        process_git $x
-        echo
-    else
-        echo "not a git repo"
-    fi
-done
+function process_mercurial() {
+    hg -R "./$1" status
+}
+
+function main() {
+    for repo in $(ls); do
+        echo --$repo--
+        if [[ -e $repo/.git ]]; then
+            process_git $repo
+            echo
+        elif [[ -e $repo/.hg ]]; then
+            process_mercurial $repo
+       else
+            echo "unknown repo type"
+        fi
+    done
+}
+
+main
