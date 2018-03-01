@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+ROFI_HOME=${HOME}/Documents/repos/env/rofi
+WORKSPACE_MODE="workspace:${ROFI_HOME}/bin/i3_switch_workspace_script.sh"
+SNIPPET_MODE="snippets:${ROFI_HOME}/bin/snippets.py"
+
+rofi \
+    -modi combi,${SNIPPET_MODE},drun,window,${WORKSPACE_MODE},ssh,keys \
+    -combi-modei drun,${SNIPPET_MODE} \
+    -show drun \
+    -switchers Alt+Tab \
+    -theme ${ROFI_HOME}/themes/my-arthur.rasi
