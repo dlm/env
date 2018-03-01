@@ -140,6 +140,7 @@ configuration {
 #element selected.normal {
     background-color: @lightcyan;
     text-color: @black;
+    highlight: underline bold #000000;
 }
 
 #element normal active {
