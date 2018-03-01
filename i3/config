@@ -186,6 +186,6 @@ exec source ~/.xsession
 # Start start bar
 bar {
     #status_command i3status --config ~/.i3/status
-    i3bar_command $HOME/.config/polybar/launch.sh
+    i3bar_command $HOME/.polybar/launch.sh
 
 }
