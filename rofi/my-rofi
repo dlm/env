@@ -8,5 +8,5 @@ rofi \
     -modi combi,${SNIPPET_MODE},drun,window,${WORKSPACE_MODE},ssh,keys \
     -combi-modei drun,${SNIPPET_MODE} \
     -show drun \
-    -switchers Alt+Tab \
+    -width 1000 \
     -theme ${ROFI_HOME}/themes/my-arthur.rasi
