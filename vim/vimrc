@@ -363,6 +363,10 @@ noremap ,t :w\|!./%<cr>
 autocmd FileType cpp map ,t :w\|:!make cpp && ./a.out<cr>
 autocmd FileType c map ,t :w\|:!make c && ./a.out<cr>
 
+command! -nargs=1 CMakeRun call s:cmakemaprun(<f-args>)
+function! s:cmakemaprun(name)
+    execute "noremap ,t :!(cd build; " . a:name . ")<cr>"
+endfunction
 
 map j gj
 map k gk
