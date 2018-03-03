@@ -276,8 +276,8 @@ cnoremap <C-N> <Down>
 set shell=/bin/bash
 
 "-- 23 running make and jumping to errors (cope)
-map <leader>mm :make<cr>
-map <leader>mj :make -j<cr>
+map <leader>mm :w \| make<cr>
+map <leader>mj :w \| make -j<cr>
 map <leader>cc :botright copen<cr>
 map <leader>cn :cn<cr>
 map <leader>cp :cp<cr>
