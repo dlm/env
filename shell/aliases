@@ -22,6 +22,8 @@ alias rm='rm -i'
 
 alias pyclean='find . -name "*.pyc" -exec rm -f {} \;'
 alias clean_build='rm -rf ../build/*'
+alias my-scrot="scrot -s '%Y-%m-%dT%H:%M:%S.png' \
+    -e 'mkdir -p ~/tmp/shots \&\& mv \$f ~/tmp/shots/'"
 
 alias gitx='gitx -c'
 
