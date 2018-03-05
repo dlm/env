@@ -171,12 +171,10 @@ for_window [title="lab*"] floating enable
 # commands to run at startup
 exec nm-applet
 exec dropbox
-exec albert
 exec sh ~/.shell/keyboard
 exec source ~/.xsession
 
 # Start start bar
 bar {
     i3bar_command $HOME/.polybar/launch.sh
-
 }
