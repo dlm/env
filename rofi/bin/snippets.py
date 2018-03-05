@@ -13,6 +13,16 @@ snippets = {
     "date (YYYY-mm-dd)": (
         datetime.datetime.now().strftime("%Y-%m-%d")
     ),
+    "discussion-board-code-help": (
+        "I am happy to help.  You are welcome to come by office hours any time "
+        "or post on the discussion board.  (I prefer the board over direct "
+        "email because it may help a few others out that are having the same "
+        "problem).  If you go the route of posting, please add a few "
+        "additional pieces of information such as the error message that you "
+        "are getting, where you are getting the error, your OS, your "
+        "development environment and, if you can find it, the graphics driver "
+        "and graphics card information."
+    ),
 }
 
 
