@@ -4,3 +4,9 @@ tags
 .dropbox
 dump.rdb
 build*
+
+# latex
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
