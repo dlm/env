@@ -118,7 +118,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # > sudo visudo
 # and added the line
 # dave ALL=NOPASSWD:/usr/sbin/pm-suspen
-bind $mod+96 exec gnome-screensaver-command --lock
+bind $mod+96 exec ~/.i3/bin/lock
 bind $mod+Shift+96 exec sudo /usr/sbin/pm-suspend
 
 
