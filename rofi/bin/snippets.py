@@ -13,6 +13,9 @@ snippets = {
     "date (YYYY-mm-dd)": (
         datetime.datetime.now().strftime("%Y-%m-%d")
     ),
+    "date (MMMM dd, YYYY)": (
+        datetime.datetime.now().strftime("%B %e, %Y")
+    ),
     "discussion-board-code-help": (
         "I am happy to help.  You are welcome to come by office hours any time "
         "or post on the discussion board.  (I prefer the board over direct "
