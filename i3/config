@@ -36,8 +36,8 @@ bindsym $mod4+h move left
 bindsym $mod4+j move down
 bindsym $mod4+k move up
 bindsym $mod4+l move right
-bindsym $mod4+u move left
-bindsym $mod4+i move right
+bindsym $mod4+u move workspace to output left
+bindsym $mod4+i move workspace to output right
 
 # split in horizontal orientation
 bindsym $mod+n split h
