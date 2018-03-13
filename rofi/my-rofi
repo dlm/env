@@ -2,7 +2,7 @@
 
 ROFI_HOME=${HOME}/Documents/repos/env/rofi
 WORKSPACE_MODE="workspace:${ROFI_HOME}/bin/i3_switch_workspace_script.sh"
-SNIPPET_MODE="snippets:${ROFI_HOME}/bin/snippets.py"
+SNIPPET_MODE="snippets:${ROFI_HOME}/bin/snippets"
 
 rofi \
     -modi combi,${SNIPPET_MODE},drun,window,${WORKSPACE_MODE},ssh,keys \

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [ "$#" -ne 1 ]; then
+    snippets.py
+else
+    snippets.py $1 | xclip -selection c >/dev/null
+fi
