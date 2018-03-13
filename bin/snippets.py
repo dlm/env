@@ -26,6 +26,30 @@ snippets = {
         "development environment and, if you can find it, the graphics driver "
         "and graphics card information."
     ),
+    "dr-vs-mr": (
+        "A helpful tip when interacting with faculty:  When addressing someone "
+        "with a PhD in a formal correspondences it is more common to use Dr. X "
+        "not Mr. X.  Since most of the faculty at MSU have PhD’s, generally, Dr "
+        "is usually a good guess. Alternately, if you are not sure how to address "
+        "one of your professors, Prof X is almost always a safe option."
+    ),
+    "emailing-faculty": (
+        "A helpful tip when interacting with faculty:  Consider reading "
+        "http://bit.ly/emailing-faculty. It may be helpful in crafting emails "
+        "that get your correspondences started on the right foot."
+    ),
+    "prospective-students": (
+        "Thank you for your interest in working with me.  Due to large interest "
+        "in my research area, I receive an overwhelming number of e-mail messages "
+        "from prospective students. Unfortunately, there are too many messages "
+        "for me to give a detailed response to each one before they apply to MSU. "
+        "I encourage you to take a look at the CS website for our admissions "
+        "procedures:\n"
+        "\n"
+        "http://www.cs.montana.edu/future-students-phd.html\n"
+        "\n"
+        "Once you have applied, please let me know. "
+    ),
 }
 
 
