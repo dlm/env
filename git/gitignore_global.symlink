@@ -10,3 +10,5 @@ build*
 *.fdb_latexmk
 *.fls
 *.log
+*.blg
+*.bbl
