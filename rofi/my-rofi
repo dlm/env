@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ROFI_HOME=${HOME}/Documents/repos/env/rofi
+ROFI_HOME=${HOME}/.rofi
 WORKSPACE_MODE="workspace:${ROFI_HOME}/bin/i3_switch_workspace_script.sh"
 SNIPPET_MODE="snippets:${ROFI_HOME}/bin/snippets"
 
