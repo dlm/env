@@ -224,7 +224,7 @@ endif
 set showcmd	        " show (partial) command in status line.
 
 "-- 13 selecting text
-set clipboard=unnamedplus  " Setting allows vim to interact with system clipboard
+set clipboard=unnamed  " Setting allows vim to interact with system clipboard
 
 "-- 14 editing text
 set backspace=eol,start,indent   " Set backspace functionality in insert mode
