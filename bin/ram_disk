@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ $# -ne 2 ]; then
+    echo "usage: $0 <disk name> <size in MB>"
+    exit
+fi
+
+# Name for the ramdisk
+disk_name=$1
+
+# Set the size of the ramdisk in MB
+disk_size=$2
+
+# To create a ram disk, we need to get the number of blocks for the disk.
+# The number is computed as the number of MB for the ramdisk * 2048
+num_blocks=`echo ${disk_size}*2048 | bc`
+
+# now crate the ram disk
+diskutil erasevolume HFS+ "${disk_name}" `hdiutil attach -nomount ram://${num_blocks}`

@@ -1,0 +1,98 @@
+#!/bin/bash
+#
+# Purpose: decrypting and source a gpg encrypted file
+#   without storing an decrypted version on the hard drive.
+#
+#   To actually source an encrypted file that is given on input you must
+#   source this script.  E.g.
+#   > source decrypt_to_ramdisk -s <path to encrypted env variables>
+
+# defaults
+VOLUME_PREFIX='/Volumes'
+DEFAULT_VOLUME_NAME='KEYS'
+
+# set the volume name
+function usage {
+    echo "usage: $0 [-ehs] [-v <volume name>] <src>"
+    echo "  -e eject ramdisk after decryption"
+    echo "  -h help message"
+    echo "  -s source the decrypted file"
+}
+
+# error function
+function args_error {
+    echo "Error: $1"
+    usage
+}
+
+# return codes:
+#       1 - incorrect usage
+function main {
+
+    # get the name of the file to decrypt and source
+    src=""
+    eject=false
+    source_output=false
+    volume="${VOLUME_PREFIX}/${DEFAULT_VOLUME_NAME}"
+    while [ "$1" != "" ]; do
+        case $1 in
+            -e) eject=true;;
+            -h) usage; return 0;;
+            -s) source_output=true;;
+            -v)
+                shift;
+                if [ $# -eq 0 ]; then
+                    args_error "option -v requires an argument"
+                else
+                    volume=$1
+                fi
+                ;;
+            *) break;
+        esac
+        shift
+    done
+
+    # get the one positional argument
+    if [ $# -eq 0 ]; then
+        args_error "missing required positional argument <src>"
+        return 1
+    elif [ $# -gt 1 ]; then
+        args_error "garbage following required positional argument <src>."
+        return 1
+    else
+        src=$1
+    fi
+
+    # set positional arguments
+    out_file_name="${volume}/$(basename ${src}).out"
+
+    # check if volume already exists
+    if [ ! -e ${volume} ]; then
+        # create a ramdisk
+        echo "Creating ramdisk..."
+        ram_disk "$(basename ${volume})" 32
+        echo "...ramdisk created."
+    fi
+
+    # decrypt to the ramdisk
+    if [ ! -e ${out_file_name} ]; then
+        echo "Decrypting and sourcing $(basename ${src})..."
+        echo gpg --output "${out_file_name}" --decrypt ${src}
+        echo "done"
+    fi
+
+    # decrypt to the ramdisk
+    if [ $source_output = true ]; then
+        source ${out_file_name}
+    fi
+
+    # ejecting the disk
+    if [ $eject = true ]; then
+        echo "Ejecting the ramdisk..."
+        diskutil eject ${volume}
+        echo "...ejected"
+    fi
+}
+
+main "$@"
+
