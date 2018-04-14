@@ -37,10 +37,7 @@ setopt autocd
 source ${HOME}/.zsh/zle.zsh
 
 # shared between bash and zsh
-source ${HOME}/.shell/aliases
-source ${HOME}/.shell/nowsta
-source ${HOME}/.shell/msu
-source ${HOME}/.shell/env_vars
+source ${HOME}/.shell/shared
 
 # complete .. to ../
 zstyle ':completion:*' special-dirs true
