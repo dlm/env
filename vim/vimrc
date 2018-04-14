@@ -359,9 +359,7 @@ nmap <leader>wq :wq!<cr>
 nmap <leader>e :e! ~/.vim/vimrc<cr>
 
 " execute the current file
-noremap ,t :w\|!./%<cr>
-autocmd FileType cpp map ,t :w\|:!make cpp && ./a.out<cr>
-autocmd FileType c map ,t :w\|:!make c && ./a.out<cr>
+autocmd FileType python noremap ,t :w\|!./%<cr>
 
 command! -nargs=1 CMakeRun call s:cmakemaprun(<f-args>)
 function! s:cmakemaprun(name)
