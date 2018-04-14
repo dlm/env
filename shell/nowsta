@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-alias nowsta-api_integration='RAILS_ENV=integration foreman start'
-
