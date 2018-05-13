@@ -19,10 +19,8 @@ Plugin 'gmarik/vundle'
 Plugin 'mhinz/vim-startify'
 
 " colorschemes
-Plugin 'fugalh/desert.vim'
-Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plugin 'joshdick/onedark.vim'
-Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 
 " navigation plugins
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -30,75 +28,69 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'rbgrouleff/bclose.vim'
 Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
 Plugin 'rhysd/clever-f.vim'
 Plugin 'tpope/vim-projectionist'
 
 " other plugins
 Plugin 'tpope/vim-dispatch'
-" Plugin 'scrooloose/syntastic'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-" Plugin 'Valloric/YouCompleteMe'
-Plugin 'tomtom/tcomment_vim'
-" Plugin 'Raimondi/delimitMate'
 Plugin 'jamessan/vim-gnupg'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'bronson/vim-visual-star-search'
-Plugin 'janko-m/vim-test'
 Plugin 'gcmt/taboo.vim'
 
+" general programming plugins
+Plugin 'janko-m/vim-test'
+Plugin 'tomtom/tcomment_vim'
 
-" allow local vimrcs
-Plugin 'MarcWeber/vim-addon-local-vimrc'
-let g:local_vimrc = {'names':['.lvimrc'],'hash_fun':'LVRHashOfFile'}
+" git plugins
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
 
 " markdown plugins
 Plugin 'tpope/vim-markdown'
 
+" latex
+" Plugin 'lervag/vimtex'
+
+" " cmake
+" Plugin 'vhdirk/vim-cmake'
+
 " python plugins
-" Plugin 'klen/python-mode'
-Plugin '5long/pytest-vim-compiler'
-Plugin 'heavenshell/vim-pydocstring'
-Plugin 'Vimjas/vim-python-pep8-indent'
 
-" golang plugins
-Plugin 'fatih/vim-go'
+" " golang plugins
+" Plugin 'fatih/vim-go'
 
-" haskell plugins
-Plugin 'neovimhaskell/haskell-vim'
+" " haskell plugins
+" Plugin 'neovimhaskell/haskell-vim'
 
-" prolog plugins
-Plugin 'adimit/prolog.vim'
+" " prolog plugins
+" Plugin 'adimit/prolog.vim'
 
-" scala plugins
-Plugin 'derekwyatt/vim-scala'
+" " scala plugins
+" Plugin 'derekwyatt/vim-scala'
 
-" ruby plugins
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-rails'
-Plugin 'ngmy/vim-rubocop'
+" " ruby plugins
+" Plugin 'vim-ruby/vim-ruby'
+" Plugin 'tpope/vim-rails'
+" Plugin 'ngmy/vim-rubocop'
 
-" javascript plugins
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
+" " javascript plugins
+" Plugin 'jelera/vim-javascript-syntax'
+" Plugin 'pangloss/vim-javascript'
+" Plugin 'mxw/vim-jsx'
 
-" Plugin 'nathanaelkane/vim-indent-guides'
-" Plugin 'marijnh/tern_for_vim'
+" " sql
+" Plugin 'has2k1/sql.vim'
+" Plugin 'shmup/vim-sql-syntax'
 
-" sql
-Plugin 'has2k1/sql.vim'
-Plugin 'shmup/vim-sql-syntax'
+" " opengl
+" Plugin 'tikhomirov/vim-glsl'
 
-" cmake
-Plugin 'vhdirk/vim-cmake'
-
-" opengl
-Plugin 'tikhomirov/vim-glsl'
+" R
+" Plugin 'jalvesaq/Nvim-R'
 
 "-- plugin configuration
 runtime! macros/matchit.vim
@@ -108,32 +100,9 @@ let g:startify_custom_header =
             \ map(split(system('fortune | cowsay'), '\n'),
             \ '"   ". v:val') + ['','']
 
-" You complete me
-
 " nerd tree
 map <C-n> :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\.pyc$', '__pycache__']
-
-" " python mode
-let g:pymode_rope_goto_definition_bind = "<C-]>"
-let g:pymode_virtualenv = 1
-let g:pymode_rope = 1
-let g:pymode_breakpoint_cmd = 'import ipdb; ipdb.set_trace()'
-let g:pymode_indent = 0
-
-" pydocstring
-nmap <silent> <C-/> <Plug>(pydocstring)
-
-" syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_jump=0
-let g:syntastic_auto_loc_list=1
-let g:syntastic_python_checkers=['flake8', 'python']
-let g:syntastic_html_tidy_ignore_errors=['proprietary attribute "autocomplete']
 
 " fzf
 nnoremap <C-p> :Files<cr>
@@ -170,6 +139,7 @@ augroup end
 "-- 1 important
 let mapleader = " "
 set ttimeoutlen=0
+set updatetime=100
 
 "-- 2 moving around, searching and patterns
 set ignorecase          " ignore case when searching
@@ -192,11 +162,9 @@ set linebreak           " wrap long lines at 'breakat' characters
 "-- 5 syntax, highlighting and spelling
 filetype plugin indent on " Enable filetype based plugins and indentation rules
 syntax on               " Enable syntax highlighing
-" colorscheme desert     " old trusty color scheme
 let &colorcolumn=default_text_width
-colorscheme onedark     " a new facny theme
-" colorscheme dracula     " teaching
-"colorscheme Tomorrow-Night
+" colorscheme onedark     " alt theme for when I want a change
+colorscheme Tomorrow-Night
 hi SpellBad cterm=underline ctermbg=237
 hi TabLineSel ctermfg=Blue
 setlocal spell          " enable spell checking by default
@@ -212,16 +180,9 @@ set t_Co=256
 set mouse=a		" enable mouse usage (all modes)
 
 "-- 10 GUI
-"set guifont=Monaco:h12  " font used in gui
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
-set guioptions-=T       " remove the toolbar from the gui
-if has("gui_running")
-    set transparency=1  " transparancy of the background (as a precent)
-endif
-
 "-- 11 printing
-"-- 12 messags and info
-set showcmd	        " show (partial) command in status line.
+"-- 12 messages and info
+" set showcmd	        " show (partial) command in status line.
 
 "-- 13 selecting text
 set clipboard=unnamed  " Setting allows vim to interact with system clipboard
@@ -232,7 +193,7 @@ set showmatch                    " when inserting bracket, short jump to  match
 set matchtime=2                  " tenth of a second to show match for 'showmatch'
 let &textwidth=default_text_width " line length above with to wrap a line.
 
-"-- 15 tabs and indenting
+" "-- 15 tabs and indenting
 set expandtab                       " In insert mode, expand <Tab> to spaces
 let &shiftwidth=default_tabwidth    " number of spaces in each steop of (auto)indent
 let &softtabstop=default_tabwidth   " number of spaces to remove when deleting insert mode
@@ -243,9 +204,6 @@ set smartindent                     " use smart indenting (good for c-like langu
 set listchars=tab:▸\ ,eol:¬         " Use TextMate style tabstops and EOL symbols
 
 "-- 16 folding
-"nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
-set foldlevelstart=10
-
 "-- 17 diff mode
 "-- 18 mapping
 "-- 19 reading and writing files
@@ -258,14 +216,14 @@ set nowritebackup       " do not write backup after overwriting a file
 "-- 20 the swap file
 set noswapfile          " do not keep a swap file
 
-"-- 21 command line editing
+" "-- 21 command line editing
 set undodir=~/.vim_runtime/undodir " directory for undo files
 set undofile            " automatically save and restore undo history
 set history=700         " number of lines of history that vim remembers
 set wildmode=longest,list,full " complete like bash
 set wildmenu            " command-line completion shows a list of matches
 
-" Bash like keys for the command line
+" " Bash like keys for the command line
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
 cnoremap <C-K> <C-U>
@@ -309,11 +267,16 @@ autocmd FileType ruby set regexpengine=1
 autocmd FileType ruby iab xdbg binding.pry
 let ruby_spellcheck_strings = 1
 
+" R-lang
+let g:r_tabwidth=2
+autocmd FileType r let &shiftwidth=r_tabwidth
+autocmd FileType r let &softtabstop=r_tabwidth
+autocmd FileType r let &tabstop=r_tabwidth
+let r_indent_align_args = 0 " set vim-r-plugin to
+
 " markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd FileType markdown set spell
-
-" haskell
 
 " javascript
 let g:javascript_tabwidth=2
@@ -387,7 +350,7 @@ nmap <silent> <leader>tb :let test#strategy="basic""<CR>
 
 " split and show alternate file
 " nmap <silent> <leader>a :vs\|:A<cr>
-"
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" => Moving around, tabs and buffers
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -418,20 +381,6 @@ map <leader>cd :cd %:p:h<cr>
 set laststatus=2
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Parenthesis/bracket expanding
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" auto completion of (), [], and single and double quotes are provided by
-" delimitMate plugin.  Shortcuts below are for highlighting some text and then
-" wrapping the text in the delimiter
-vnoremap <leader>$ <esc>`>a$<esc>`<i$<esc>
-vnoremap <leader>( <esc>`>a)<esc>`<i(<esc>
-vnoremap <leader>[ <esc>`>a]<esc>`<i[<esc>
-vnoremap <leader>{ <esc>`>a}<esc>`<i{<esc>
-vnoremap <leader>" <esc>`>a"<esc>`<i"<esc>
-vnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
-vnoremap <leader>t <esc>`>a><esc>`<i<<esc>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General Abbrevs
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 iab xdate <c-r>=strftime("%Y-%m-%d")
@@ -442,7 +391,7 @@ iab xnote NOTE:DLM:
 """"""""""""""""""""""""""""""
 " => Vim grep
 """"""""""""""""""""""""""""""
-let Grep_Skip_Dirs = 'RCS CVS SCCS .svn .git'
+let Grep_Skip_Dirs = 'RCS CVS SCCS .svn .git .hg'
 set grepprg=/bin/grep\ -nH
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -456,8 +405,17 @@ autocmd FileType netrw setl bufhidden=wipe
 set previewheight=15
 au BufEnter ?* call PreviewHeightWorkAround()
 func! PreviewHeightWorkAround()
-  if &previewwindow
-    exec 'wincmd K'
-    exec 'setlocal winheight='.&previewheight
-  endif
+    if &previewwindow
+        exec 'wincmd K'
+        exec 'setlocal winheight='.&previewheight
+    endif
 endfunc
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Portable spelling
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+for d in glob('~/.vim/spell/*.add', 1, 1)
+    if filereadable(d) && (!filereadable(d . '.spl') || getftime(d) > getftime(d . '.spl'))
+        exec 'mkspell! ' . fnameescape(d)
+    endif
+endfor
