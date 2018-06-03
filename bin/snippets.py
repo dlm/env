@@ -35,7 +35,7 @@ snippets = {
     ),
     "emailing-faculty": (
         "A helpful tip when interacting with faculty:  Consider reading "
-        "http://bit.ly/emailing-faculty. It may be helpful in crafting emails "
+        "http://bit.ly/emailing-faculty2. It may be helpful in crafting emails "
         "that get your correspondences started on the right foot."
     ),
     "prospective-students": (
