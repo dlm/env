@@ -10,10 +10,10 @@ snippets = {
         "Mon 17:00-18:00\n"
         "Thurs 12:00-13:00"
     ),
-    "date (YYYY-mm-dd)": (
+    "date_(YYYY-mm-dd)": (
         datetime.datetime.now().strftime("%Y-%m-%d")
     ),
-    "date (MMMM dd, YYYY)": (
+    "date_(MMMM_dd,_YYYY)": (
         datetime.datetime.now().strftime("%B %e, %Y")
     ),
     "discussion-board-code-help": (
