@@ -7,8 +7,8 @@ import datetime
 
 snippets = {
     "office-hours": (
-        "Mon 17:00-18:00\n"
-        "Thurs 12:00-13:00"
+        "Mon 12:00-12:50\n"
+        "Thurs 14:00-14:50"
     ),
     "date_(YYYY-mm-dd)": (
         datetime.datetime.now().strftime("%Y-%m-%d")
@@ -29,7 +29,7 @@ snippets = {
     "dr-vs-mr": (
         "A helpful tip when interacting with faculty:  When addressing someone "
         "with a PhD in a formal correspondences it is more common to use Dr. X "
-        "not Mr. X.  Since most of the faculty at MSU have PhD’s, generally, Dr "
+        "not Mr. X.  Since most of the faculty at MSU have PhD's, generally, Dr "
         "is usually a good guess. Alternately, if you are not sure how to address "
         "one of your professors, Prof X is almost always a safe option."
     ),
