@@ -6,9 +6,6 @@
 [core]
     editor = vim
     excludesfile = ~/.gitignore_global
-[merge]
-    conflictstyle = diff3
-    tool = opendiff
 [alias]
     ap = add -p
     br = branch
@@ -20,10 +17,14 @@
     patch = "!git --no-pager diff --no-color"
     publish = "!git push -u origin $(git rev-parse --abbrev-ref HEAD)"
     st = status
+
+# Disable below here for carpentries
+[merge]
+    conflictstyle = diff3
+    tool = opendiff
 [pager]
     diff = diff-so-fancy | less --tabs=1,5 -RFX
     show = diff-so-fancy | less --tabs=1,5 -RFX
-# Setup highlighting
 [color]
     ui = always
 [color "diff"]
