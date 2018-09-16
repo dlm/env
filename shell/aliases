@@ -13,7 +13,7 @@ alias ll='ls -l'
 alias la='ls -lA'
 alias l='ls -CF'
 
-alias v='vim'
+alias v='nvim'
 alias g='git'
 
 alias cgrep='grep --color=always'
