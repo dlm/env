@@ -55,8 +55,8 @@ Plugin 'tpope/vim-markdown'
 " latex
 " Plugin 'lervag/vimtex'
 
-" " cmake
-" Plugin 'vhdirk/vim-cmake'
+" cmake
+Plugin 'vhdirk/vim-cmake'
 
 " python plugins
 
@@ -90,7 +90,7 @@ Plugin 'tpope/vim-markdown'
 " Plugin 'tikhomirov/vim-glsl'
 
 " R
-" Plugin 'jalvesaq/Nvim-R'
+Plugin 'jalvesaq/Nvim-R'
 
 "-- plugin configuration
 runtime! macros/matchit.vim
@@ -273,6 +273,7 @@ autocmd FileType r let &shiftwidth=r_tabwidth
 autocmd FileType r let &softtabstop=r_tabwidth
 autocmd FileType r let &tabstop=r_tabwidth
 let r_indent_align_args = 0 " set vim-r-plugin to
+let R_assign_map = "--" " convert -- to <-
 
 " markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
