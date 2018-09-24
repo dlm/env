@@ -40,7 +40,7 @@ snippets = {
     ),
     "prospective-students": (
         "Thank you for your interest in working with me. "
-        "The huge grown in Computational Geometry and Topology recently is "
+        "The huge growth in Computational Geometry and Topology recently is "
         "outstanding and I can image your excitement! "
         "I am happy to speak with you more about how your skills "
         "and interests align with the group. "
