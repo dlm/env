@@ -12,3 +12,4 @@ build*
 *.log
 *.blg
 *.bbl
+*.out
