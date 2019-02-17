@@ -53,3 +53,7 @@ t() {
 pdfunlock() {
     gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile="$2" -c .setpdfwrite -f "$1"
 }
+
+conda-env() {
+    source activate $(conda env list -v | tail +3 | awk '{ print $1 }' | fzf)
+}
