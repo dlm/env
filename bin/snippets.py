@@ -10,10 +10,10 @@ snippets = {
         "Mon 12:30-13:20\n"
         "Thurs 15:00-15:50"
     ),
-    "date_(YYYY-mm-dd)": (
+    "date1_(YYYY-mm-dd)": (
         datetime.datetime.now().strftime("%Y-%m-%d")
     ),
-    "date_(MMMM_dd,_YYYY)": (
+    "date2_(MMMM_dd,_YYYY)": (
         datetime.datetime.now().strftime("%B %e, %Y")
     ),
     "discussion-board-code-help": (
@@ -61,6 +61,9 @@ snippets = {
         "Also, I encourage you to take a look at the CS website for our "
         "admissions procedures: "
         "http://www.cs.montana.edu/future-students-phd.html\n"
+    ),
+    "gcal-school": (
+        "gk17e2542i6vvr21v26ejcj45o@group.calendar.google.com"
     ),
 }
 
