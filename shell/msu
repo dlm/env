@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-alias hyalite='mosh c54s194@hyalite.rci.montana.edu'
-alias nylund='mosh dave@153.90.118.164'
-alias esus='ssh david.millman@esus.cs.montana.edu'
-alias skifahrer='mosh skifahrer.cs.montana.edu'
+alias ssh-hyalite='mosh c54s194@hyalite.rci.montana.edu'
+alias ssh-nylund='mosh dave@153.90.118.164'
+alias ssh-esus='ssh david.millman@esus.cs.montana.edu'
+alias ssh-skifahrer='mosh skifahrer.cs.montana.edu'
+alias ssh-braid='ssh bz-cs-alg-braid.msu.montana.edu'
