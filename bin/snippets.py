@@ -65,6 +65,19 @@ snippets = {
     "gcal-school": (
         "gk17e2542i6vvr21v26ejcj45o@group.calendar.google.com"
     ),
+    "will-i-be-accepted": (
+        "Thank you for following up.  I am not on the admissions committee so "
+        "I don't have much insight to answer that question.  But, I can say "
+        "that your background does fit well.  And in general, a lot of gaining "
+        "admission to any program comes down to your statement of purpose. "
+        "The key is to explain what you want to study, how what you want to "
+        "study fits into the broader research of the team you want to join, "
+        "and how your background makes you uniquely qualified.  One key place "
+        "to start is to look at some of the recent papers that the team has "
+        "put out. Going through those papers usually demonstrates a high level "
+        "of motivation and impresses admissions committees."
+    )
+
 }
 
 
