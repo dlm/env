@@ -76,8 +76,16 @@ snippets = {
         "to start is to look at some of the recent papers that the team has "
         "put out. Going through those papers usually demonstrates a high level "
         "of motivation and impresses admissions committees."
-    )
-
+    ),
+    "letter-of-endorsement": (
+        "With respect to the Letter of Endorsement, the wording on the site is "
+        "confusing. The letter is NOT required. In general, I only provide a "
+        "letter of endorsement for students that have already done research "
+        "with me, e.g. MS students applying into the PhD or REU students. I "
+        "suggest not worrying about it. Almost none of the packets have a "
+        "Letter of Endorsement and it is NOT counted against you if you do not "
+        "have one."
+    ),
 }
 
 
