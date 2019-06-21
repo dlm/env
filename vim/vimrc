@@ -293,6 +293,8 @@ autocmd FileType go nmap <leader>b <Plug>(go-build)
 autocmd FileType go nmap <leader>r <Plug>(go-run)
 autocmd FileType go nmap ,t :GoRun<cr>
 autocmd FileType go nmap ,q <C-h> :q <CR>
+autocmd FileType go nmap <silent> <leader>a :vs\|:GoAlternate<cr>
+
 let g:go_fmt_command = "gofmt"
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:go_highlight_types = 1
