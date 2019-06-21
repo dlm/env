@@ -124,6 +124,7 @@ let test#ruby#rspec#options = "--require="
 " let test#python#runner = 'pytest --capture=no'
 let test#javascript#mocha#executable = "yarn test"
 
+" vim-trailing-whitespace
 autocmd BufWritePre * FixWhitespace
 
 "-- some nice global variables
