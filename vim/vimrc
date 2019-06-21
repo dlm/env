@@ -60,8 +60,8 @@ Plugin 'vhdirk/vim-cmake'
 
 " python plugins
 
-" " golang plugins
-" Plugin 'fatih/vim-go'
+" golang plugins
+Plugin 'fatih/vim-go'
 
 " " haskell plugins
 " Plugin 'neovimhaskell/haskell-vim'
@@ -115,7 +115,7 @@ autocmd VimEnter * AirlineTheme bubblegum
 let g:dispatch_compilers = {'zeus': ''}
 
 " vim-test
-let test#strategy = "dispatch"
+let test#strategy = "neovim"
 let g:rspec_format_file = "~/.vim/config/vim_formatter.rb"
 let g:rspec_out_file = "/tmp/quickfix.out"
 let test#ruby#rspec#options = "--require="
@@ -288,6 +288,21 @@ iab xcl console.log
 
 " golang
 autocmd FileType make set noexpandtab
+autocmd FileType go nmap <leader>b <Plug>(go-build)
+autocmd FileType go nmap <leader>r <Plug>(go-run)
+autocmd FileType go nmap ,t :GoRun<cr>
+autocmd FileType go nmap ,q <C-h> :q <CR>
+let g:go_fmt_command = "gofmt"
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_build_constraints = 1
+let g:go_list_type = "quickfix"
+let test#go#runner = 'gotest'
 
 " makefiles
 autocmd FileType make set noexpandtab
@@ -348,6 +363,7 @@ nmap <silent> <leader>tl :TestLast<CR>
 nmap <silent> <leader>tg :TestVisit<CR>
 nmap <silent> <leader>td :let test#strategy="dispatch"<CR>
 nmap <silent> <leader>tb :let test#strategy="basic""<CR>
+nmap <silent> <leader>tnv :let test#strategy="neovim""<CR>
 
 " split and show alternate file
 " nmap <silent> <leader>a :vs\|:A<cr>
