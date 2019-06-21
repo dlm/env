@@ -148,6 +148,7 @@ setup_bin
 install_app git
 install_app tmux
 install_app zsh
+install_app cmake
 
 # setup vim application
 install_app vim
@@ -157,3 +158,6 @@ vim +PluginInstall +qall
 # setup fzf application
 git_pull_or_clone https://github.com/junegunn/fzf.git ~/.fzf
 build_app fzf ~/.fzf/install
+
+# setup tmux application
+git_pull_or_clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tmp
