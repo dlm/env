@@ -6,91 +6,92 @@
 " Plugins managed by Vundle
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible              " be iMproved, required
-filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#rc()
+" auto setup plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/vundle'
-
+call plug#begin('~/.vim/plugged')
 " totally random and sos somewhat pointless
-Plugin 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify'
 
 " colorschemes
-Plugin 'joshdick/onedark.vim'
-Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+Plug 'joshdick/onedark.vim'
+Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 
 " navigation plugins
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plugin 'junegunn/fzf.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'rbgrouleff/bclose.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'rhysd/clever-f.vim'
-Plugin 'tpope/vim-projectionist'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'rbgrouleff/bclose.vim'
+Plug 'tpope/vim-surround'
+Plug 'rhysd/clever-f.vim'
+Plug 'tpope/vim-projectionist'
 
 " other plugins
-Plugin 'tpope/vim-dispatch'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'jamessan/vim-gnupg'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'bronson/vim-visual-star-search'
-Plugin 'gcmt/taboo.vim'
+Plug 'tpope/vim-dispatch'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'jamessan/vim-gnupg'
+Plug 'easymotion/vim-easymotion'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'bronson/vim-visual-star-search'
+Plug 'gcmt/taboo.vim'
 
 " general programming plugins
-Plugin 'janko-m/vim-test'
-Plugin 'tomtom/tcomment_vim'
+Plug 'janko-m/vim-test'
+Plug 'tomtom/tcomment_vim'
 
 " git plugins
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 " markdown plugins
-Plugin 'tpope/vim-markdown'
+Plug 'tpope/vim-markdown'
 
 " latex
-" Plugin 'lervag/vimtex'
+" Plug 'lervag/vimtex'
 
 " cmake
-Plugin 'vhdirk/vim-cmake'
+Plug 'vhdirk/vim-cmake'
 
 " python plugins
 
 " golang plugins
-Plugin 'fatih/vim-go'
+Plug 'fatih/vim-go'
 
 " " haskell plugins
-" Plugin 'neovimhaskell/haskell-vim'
+" Plug 'neovimhaskell/haskell-vim'
 
 " " prolog plugins
-" Plugin 'adimit/prolog.vim'
+" Plug 'adimit/prolog.vim'
 
 " " scala plugins
-" Plugin 'derekwyatt/vim-scala'
+" Plug 'derekwyatt/vim-scala'
 
 " " ruby plugins
-" Plugin 'vim-ruby/vim-ruby'
-" Plugin 'tpope/vim-rails'
-" Plugin 'ngmy/vim-rubocop'
+" Plug 'vim-ruby/vim-ruby'
+" Plug 'tpope/vim-rails'
+" Plug 'ngmy/vim-rubocop'
 
 " " javascript plugins
-" Plugin 'jelera/vim-javascript-syntax'
-" Plugin 'pangloss/vim-javascript'
-" Plugin 'mxw/vim-jsx'
+" Plug 'jelera/vim-javascript-syntax'
+" Plug 'pangloss/vim-javascript'
+" Plug 'mxw/vim-jsx'
 
 " " sql
-" Plugin 'has2k1/sql.vim'
-" Plugin 'shmup/vim-sql-syntax'
+" Plug 'has2k1/sql.vim'
+" Plug 'shmup/vim-sql-syntax'
 
 " " opengl
-" Plugin 'tikhomirov/vim-glsl'
+" Plug 'tikhomirov/vim-glsl'
 
 " R
-Plugin 'jalvesaq/Nvim-R'
+Plug 'jalvesaq/Nvim-R'
+call plug#end()
 
 "-- plugin configuration
 runtime! macros/matchit.vim
