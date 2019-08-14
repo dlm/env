@@ -13,3 +13,4 @@ build*
 *.blg
 *.bbl
 *.out
+*.vtc
