@@ -2,6 +2,7 @@ tags
 .ropeproject
 .DS_Store
 .dropbox
+.ipynb_checkpoints
 dump.rdb
 build*
 
