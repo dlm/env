@@ -7,8 +7,8 @@ import datetime
 
 snippets = {
     "office-hours": (
-        "Mon 12:30-13:20\n"
-        "Thurs 15:00-15:50"
+        "Mon 15:00-15:50\n"
+        "Thurs 13:00-13:50"
     ),
     "date1_(YYYY-mm-dd)": (
         datetime.datetime.now().strftime("%Y-%m-%d")
