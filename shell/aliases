@@ -24,7 +24,6 @@ alias pyclean='find . -name "*.pyc" -exec rm -f {} \;'
 alias clean_build='rm -rf ../build/*'
 alias my-scrot="scrot -s '%Y-%m-%dT%H:%M:%S.png' \
     -e 'mkdir -p ~/tmp/shots \&\& mv \$f ~/tmp/shots/'"
-
 alias gitx='gitx -c'
 
 alias ..='cd ..; ls'
@@ -56,4 +55,8 @@ pdfunlock() {
 
 conda-env() {
     source activate $(conda env list -v | tail +3 | awk '{ print $1 }' | fzf)
+}
+
+conda-export() {
+    conda env export | grep -v "^prefix: "
 }
