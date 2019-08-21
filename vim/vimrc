@@ -59,6 +59,9 @@ Plug 'tpope/vim-markdown'
 " cmake
 Plug 'vhdirk/vim-cmake'
 
+" dapp development
+" Plugin 'tomlion/vim-solidity'
+"
 " python plugins
 
 " golang plugins
@@ -91,7 +94,8 @@ Plug 'fatih/vim-go'
 " Plug 'tikhomirov/vim-glsl'
 
 " R
-Plug 'jalvesaq/Nvim-R'
+" Plug 'jalvesaq/Nvim-R'
+
 call plug#end()
 
 "-- plugin configuration
