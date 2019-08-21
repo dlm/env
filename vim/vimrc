@@ -21,6 +21,7 @@ Plug 'mhinz/vim-startify'
 " colorschemes
 Plug 'joshdick/onedark.vim'
 Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+Plug 'dracula/vim'
 
 " navigation plugins
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -165,8 +166,9 @@ set linebreak           " wrap long lines at 'breakat' characters
 filetype plugin indent on " Enable filetype based plugins and indentation rules
 syntax on               " Enable syntax highlighing
 let &colorcolumn=default_text_width
-" colorscheme onedark     " alt theme for when I want a change
-colorscheme Tomorrow-Night
+colorscheme onedark     " alt theme for when I want a change
+" colorscheme Tomorrow-Night
+" colorscheme dracula
 hi SpellBad cterm=underline ctermbg=237
 hi TabLineSel ctermfg=Blue
 setlocal spell          " enable spell checking by default
