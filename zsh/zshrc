@@ -1,14 +1,14 @@
 source ~/.zplug/init.zsh
 
 # do not auto load virtual environments
-export DISABLE_VENV_CD=1
+# export DISABLE_VENV_CD=1
 
 zplug "b4b4r07/zplug"
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "mafredri/zsh-async"
 zplug "sindresorhus/pure", on:"mafredri/zsh-async"
 zplug "zsh-users/zsh-completions"
-zplug "plugins/virtualenvwrapper", from:oh-my-zsh
+# zplug "plugins/virtualenvwrapper", from:oh-my-zsh
 zplug "djui/alias-tips"
 zplug "Tarrasch/zsh-colors"
 zplug "caarlos0/zsh-pg"
