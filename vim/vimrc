@@ -22,6 +22,7 @@ Plug 'mhinz/vim-startify'
 Plug 'joshdick/onedark.vim'
 Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 Plug 'dracula/vim'
+Plug 'altercation/vim-colors-solarized'
 
 " navigation plugins
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -173,6 +174,10 @@ let &colorcolumn=default_text_width
 colorscheme onedark     " alt theme for when I want a change
 " colorscheme Tomorrow-Night
 " colorscheme dracula
+if $ITERM_PROFILE == "Projector"
+    set background=light
+    colorscheme solarized
+endif
 hi SpellBad cterm=underline ctermbg=237
 hi TabLineSel ctermfg=Blue
 setlocal spell          " enable spell checking by default
