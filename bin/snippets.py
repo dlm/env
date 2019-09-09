@@ -64,6 +64,16 @@ snippets = {
     "gcal-school": (
         "gk17e2542i6vvr21v26ejcj45o@group.calendar.google.com"
     ),
+    "seminar-tempalte": (
+        "Hi all,\n"
+        "\n"
+        "We have GSoC seminar today ({}).\n"
+        "Attendance is required of all graduate students and please make sure "
+        "to swipe your CatCard.\n"
+        "\n"
+        "Following are the details:\n"
+        "{{ Go to https://www.cs.montana.edu/seminars/index.html  copy and paste }}"
+    ).format(datetime.datetime.now().strftime("%m/%y")),
     "will-i-be-accepted": (
         "Thank you for following up.  I am not on the admissions committee so "
         "I don't have much insight to answer that question.  But, I can say "
