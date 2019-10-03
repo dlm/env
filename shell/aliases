@@ -33,6 +33,7 @@ alias pc='pcui.py ~/Dropbox/var/pc.sqlite'
 alias be='bundle exec'
 alias now='date -u +"%Y-%m-%dT%H:%M:%SZ"'
 alias now-epoch='date -u +%s'
+alias now-xdate='date +"%Y-%m-%d"'
 
 calc(){ awk "BEGIN{ print $* }" ;}
 dl() { mv -f "$*" ~/tmp/trash/; }
