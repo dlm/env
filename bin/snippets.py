@@ -5,6 +5,12 @@ import sys
 import subprocess
 import datetime
 
+def next_monday():
+    now = datetime.datetime.now()
+    time_d = datetime.timedelta(7-now.weekday())
+    monday = (now + time_d)
+    return monday
+
 snippets = {
     "office-hours": (
         "Mon 15:00-15:50\n"
@@ -73,7 +79,15 @@ snippets = {
         "\n"
         "Following are the details:\n"
         "{{ Go to https://www.cs.montana.edu/seminars/index.html  copy and paste }}"
-    ).format(datetime.datetime.now().strftime("%m/%y")),
+    ).format(next_monday().strftime("%m/%d")),
+    "seminar-speaker-template": (
+        "Thank you for agreeing to speak at the CS seminar!  You are bookded "
+        "for <TODO: INSERT DATE> 4:10-5:00.  The seminar is in Barnard 108. "
+        "A few weeks out I will need to get a title, abstract and bio. "
+        "For example, please see https://www.cs.montana.edu/seminars/index.html. "
+        "Please, let me know if you have questions and thank you again for "
+        "speaking at the seminar!!"
+    ),
     "will-i-be-accepted": (
         "Thank you for following up.  I am not on the admissions committee so "
         "I don't have much insight to answer that question.  But, I can say "
