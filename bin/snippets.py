@@ -16,10 +16,10 @@ snippets = {
         "Mon 15:00-15:50\n"
         "Thurs 13:00-13:50"
     ),
-    "date1_(YYYY-mm-dd)": (
+    "date-xdate-(YYYY-mm-dd)": (
         datetime.datetime.now().strftime("%Y-%m-%d")
     ),
-    "date2_(MMMM_dd,_YYYY)": (
+    "date-journal(MMMM_dd,_YYYY)": (
         datetime.datetime.now().strftime("%B %e, %Y")
     ),
     "discussion-board-code-help": (
