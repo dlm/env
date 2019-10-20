@@ -88,6 +88,17 @@ snippets = {
         "Please, let me know if you have questions and thank you again for "
         "speaking at the seminar!!"
     ),
+    "seminar-speaker-abstract-request": (
+        "Thank you again for agreeing to speak at the CS Seminar.\n"
+        "\n"
+        "I have you on the schedule for the CS Seminar on <TODO: INSERT DATE> "
+        "4:10-5pm.  When you get a chance, can you please send a title, "
+        "abstract, and short bio so that I can advertise your talk? "
+        "See https://www.cs.montana.edu/seminars/index.html for some examples.\n"
+        "\n"
+        "Please let me know if you have any questions. Thank you and I look "
+        "forward to your talk!!"
+    ),
     "will-i-be-accepted": (
         "Thank you for following up.  I am not on the admissions committee so "
         "I don't have much insight to answer that question.  But, I can say "
