@@ -13,8 +13,8 @@ def next_monday():
 
 snippets = {
     "office-hours": (
-        "Mon 15:00-15:50\n"
-        "Thurs 13:00-13:50"
+        "Tue 12:00-12:50\n"
+        "Thurs 17:45-18:35"
     ),
     "date-xdate-(YYYY-mm-dd)": (
         datetime.datetime.now().strftime("%Y-%m-%d")
