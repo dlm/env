@@ -20,7 +20,7 @@ snippets = {
         datetime.datetime.now().strftime("%Y-%m-%d")
     ),
     "date-journal(MMMM_dd,_YYYY)": (
-        datetime.datetime.now().strftime("%B %e, %Y")
+        datetime.datetime.now().strftime("%B %0e, %Y")
     ),
     "discussion-board-code-help": (
         "I am happy to help.  You are welcome to come by office hours any time "
