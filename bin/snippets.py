@@ -13,8 +13,13 @@ def next_monday():
 
 snippets = {
     "office-hours": (
-        "Tue 12:00-12:50\n"
-        "Thurs 17:45-18:35"
+        "Tue 15:00-16:00 on webex (https://bit.ly/webex-with-dave)"
+    ),
+    "webex-url": (
+        "https://bit.ly/webex-with-dave"
+    ),
+    "hangout-url": (
+        "https://bit.ly/hangout-with-dave"
     ),
     "date-xdate-(YYYY-mm-dd)": (
         datetime.datetime.now().strftime("%Y-%m-%d")
