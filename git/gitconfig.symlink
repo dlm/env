@@ -8,6 +8,7 @@
     excludesfile = ~/.gitignore_global
 [alias]
     ap = add -p
+    aa = add --all
     br = branch
     ci = commit -v
     co = checkout
