@@ -46,7 +46,7 @@ Plug 'gcmt/taboo.vim'
 " general programming plugins
 Plug 'janko-m/vim-test'
 Plug 'tomtom/tcomment_vim'
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " git plugins
 Plug 'tpope/vim-fugitive'
