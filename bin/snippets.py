@@ -13,7 +13,7 @@ def next_monday():
 
 snippets = {
     "office-hours": (
-        "Mon 14:00-14:50 of Fri 12:00-12:50 on webex (https://bit.ly/webex-with-dave)"
+        "Mon 14:00-14:50 or Fri 12:00-12:50 on webex (https://bit.ly/webex-with-dave)"
     ),
     "webex-url": (
         "https://bit.ly/webex-with-dave"
