@@ -127,6 +127,14 @@ function git_pull_or_clone {
     fi
 }
 
+function announce {
+    local announcement=$1
+    echo "*******************************************************************"
+    echo "$announcement"
+    echo "*******************************************************************"
+}
+
+
 # setup topics
 setup_topic bash
 setup_topic shell
@@ -161,3 +169,4 @@ build_app fzf ~/.fzf/install
 
 # setup tmux application
 git_pull_or_clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tmp
+announce "Remember to start tmux and install plugins \"prefix+I\""
