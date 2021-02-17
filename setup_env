@@ -157,6 +157,9 @@ install_app git
 install_app tmux
 install_app zsh
 install_app cmake
+install_app nodejs
+install_app curl
+
 
 # setup vim application
 install_app vim
