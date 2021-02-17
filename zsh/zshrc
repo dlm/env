@@ -1,5 +1,4 @@
 source ~/.zplug/init.zsh
-
 # do not auto load virtual environments
 # export DISABLE_VENV_CD=1
 
@@ -12,8 +11,8 @@ zplug "zsh-users/zsh-completions"
 zplug "djui/alias-tips"
 zplug "Tarrasch/zsh-colors"
 zplug "caarlos0/zsh-pg"
-zplug "robbyrussell/oh-my-zsh", use:"lib/history.zsh"
-zplug "robbyrussell/oh-my-zsh", use:"lib/directories.zsh"
+zplug "ohmyzsh/oh-my-zsh", use:"lib/history.zsh"
+zplug "ohmyzsh/oh-my-zsh", use:"lib/directories.zsh"
 
 # use default readline keybindings
 bindkey -e
