@@ -164,7 +164,7 @@ install_app curl
 # setup vim application
 install_app vim
 git_pull_or_clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim +PluginInstall +qall
+vim +PlugInstall +qall
 
 # setup fzf application
 git_pull_or_clone https://github.com/junegunn/fzf.git ~/.fzf
