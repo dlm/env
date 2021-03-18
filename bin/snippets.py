@@ -21,6 +21,9 @@ snippets = {
     "hangout-url": (
         "https://bit.ly/hangout-with-dave"
     ),
+    "calendly-url": (
+        "https://calendly.com/dmillman"
+    ),
     "date-xdate-(YYYY-mm-dd)": (
         datetime.datetime.now().strftime("%Y-%m-%d")
     ),
@@ -74,35 +77,6 @@ snippets = {
     ),
     "gcal-school": (
         "gk17e2542i6vvr21v26ejcj45o@group.calendar.google.com"
-    ),
-    "seminar-tempalte": (
-        "Hi all,\n"
-        "\n"
-        "We have GSoC seminar today ({}).\n"
-        "Attendance is required of all graduate students and please make sure "
-        "to swipe your CatCard.\n"
-        "\n"
-        "Following are the details:\n"
-        "{{ Go to https://www.cs.montana.edu/seminars/index.html  copy and paste }}"
-    ).format(next_monday().strftime("%m/%d")),
-    "seminar-speaker-template": (
-        "Thank you for agreeing to speak at the CS seminar!  You are bookded "
-        "for <TODO: INSERT DATE> 4:10-5:00.  The seminar is in Barnard 108. "
-        "A few weeks out I will need to get a title, abstract and bio. "
-        "For example, please see https://www.cs.montana.edu/seminars/index.html. "
-        "Please, let me know if you have questions and thank you again for "
-        "speaking at the seminar!!"
-    ),
-    "seminar-speaker-abstract-request": (
-        "Thank you again for agreeing to speak at the CS Seminar.\n"
-        "\n"
-        "I have you on the schedule for the CS Seminar on <TODO: INSERT DATE> "
-        "4:10-5pm.  When you get a chance, can you please send a title, "
-        "abstract, and short bio so that I can advertise your talk? "
-        "See https://www.cs.montana.edu/seminars/index.html for some examples.\n"
-        "\n"
-        "Please let me know if you have any questions. Thank you and I look "
-        "forward to your talk!!"
     ),
     "will-i-be-accepted": (
         "Thank you for following up.  I am not on the admissions committee so "
