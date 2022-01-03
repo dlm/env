@@ -18,7 +18,7 @@ call plug#begin('~/.vim/plugged')
 " totally random and sos somewhat pointless
 Plug 'mhinz/vim-startify'
 
-" colorschemes
+" colorschemes and other UI
 Plug 'joshdick/onedark.vim'
 Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 Plug 'dracula/vim'
