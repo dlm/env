@@ -1,0 +1,36 @@
+#/usr/bin/env bash
+
+NOTES_DIR="$HOME/Dropbox/var/notes/journal"
+PROG_NAME=$(basename $0)
+EDITOR=nvim
+
+sub_help(){
+    echo "Usage: $PROG_NAME <subcommand> [options]\n"
+    echo "Subcommands:"
+    echo "    edit  Edit the most recent journal entry"
+    echo ""
+    echo "For help with each subcommand run:"
+    echo "$PROG_NAME <subcommand> -h|--help"
+    echo ""
+}
+
+sub_edit(){
+    most_recent_file="$(find $NOTES_DIR -name "*.md" | sort | tail -1)"
+    $EDITOR $most_recent_file
+}
+
+subcommand=$1
+case $subcommand in
+    "" | "-h" | "--help")
+        sub_help
+        ;;
+    *)
+        shift
+        sub_${subcommand} $@
+        if [ $? = 127 ]; then
+            echo "Error: '$subcommand' is not a known subcommand." >&2
+            echo "       Run '$PROG_NAME --help' for a list of known subcommands." >&2
+            exit 1
+        fi
+        ;;
+esac
