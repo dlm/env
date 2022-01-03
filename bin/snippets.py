@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 from __future__ import print_function
 
 import sys
@@ -55,7 +55,7 @@ snippets = {
     "prospective-students": (
         "Thank you for your interest in working with me. "
         "The huge growth in Computational Geometry and Topology recently is "
-        "outstanding and I can image your excitement! "
+        "outstanding and I can imagine your excitement! "
         "Here are a few resources:\n"
         "\n"
         "My website: millman.us\n"
@@ -68,7 +68,7 @@ snippets = {
         "\n"
         "Once you have some ideas about how your interests align with the "
         "group, please don't hesitate to send over a paragraph or two "
-        "description and I would be happy hop on a call with you to talk "
+        "description and I would be happy to hop on a call with you to talk "
         "further.\n"
         "\n"
         "Also, I encourage you to take a look at the CS website for our "
