@@ -8,3 +8,4 @@ vim/colors/*
 vim/spell/en.utf-8.add.spl
 tmux/plugins/*
 *__pycache__
+synergy/SSL
