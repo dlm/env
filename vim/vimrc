@@ -439,10 +439,12 @@ set laststatus=2
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General Abbreviations
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-iab xdate <c-r>=strftime("%Y-%m-%d")
-iab xfn <c-r>=expand("%:t")
+iab xdate <c-r>=strftime("%Y-%m-%d")<cr>
+iab xjournaldate <c-r>=strftime("%Y-%m-%d")<cr>
+iab xfn <c-r>=expand("%:t")<cr>
 iab xtodo TODO:DLM:
 iab xnote NOTE:DLM:
+iab xrtw Remove trailing white space
 
 """"""""""""""""""""""""""""""
 " => Vim grep
