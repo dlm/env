@@ -47,6 +47,8 @@ Plug 'gcmt/taboo.vim'
 Plug 'janko-m/vim-test'
 Plug 'tomtom/tcomment_vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'FooSoft/vim-argwrap'
+Plug 'jpalardy/vim-slime'
 
 " git plugins
 Plug 'tpope/vim-fugitive'
@@ -63,11 +65,14 @@ Plug 'vhdirk/vim-cmake'
 
 " dapp development
 " Plugin 'tomlion/vim-solidity'
-"
+
 " python plugins
+
 
 " golang plugins
 Plug 'fatih/vim-go'
+Plug 'sebdah/vim-delve'
+
 
 " " haskell plugins
 " Plug 'neovimhaskell/haskell-vim'
@@ -121,6 +126,10 @@ autocmd VimEnter * AirlineTheme bubblegum
 
 " dispatch
 let g:dispatch_compilers = {'zeus': ''}
+
+" slime
+let g:slime_target = "tmux"
+let g:slime_default_config = {"socket_name": get(split($TMUX, ","), 0), "target_pane": ":.2"}
 
 " vim-test
 let test#strategy = "basic"
@@ -310,6 +319,9 @@ autocmd FileType go nmap <leader>r <Plug>(go-run)
 autocmd FileType go nmap ,q <C-h> :q <CR>
 autocmd FileType go nmap <silent> <leader>a :vs\|:GoAlternate<cr>
 
+autocmd FileType go nmap <silent> <leader>dd :DlvToggleBreakpoint<cr>
+autocmd FileType go nmap <silent> <leader>dt :DlvTest<cr>
+
 let g:go_term_mode = "split"
 let g:go_fmt_command = "goimports"
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
@@ -324,6 +336,8 @@ let g:go_list_type = 'quickfix'
 let g:go_def_mapping_enabled = 0
 let test#go#runner = 'richgo'
 let g:test#go#gotest#options = '-v'
+
+let g:argwrap_tail_comma = 1
 
 " makefiles
 autocmd FileType make set noexpandtab
@@ -373,11 +387,15 @@ nmap <leader><leader>w <Plug>(easymotion-bd-w)
 " clean up the formatting of text
 map qq gwap
 
+" wrap arguments
+map qa :ArgWrap<CR>
+" nnoremap <silent> <leader>qa :ArgWrap<CR>
+
 " toggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
 " Testing mappings
-nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>tt :TestNearest<CR>
 nmap <silent> <leader>tf :TestFile<CR>
 nmap <silent> <leader>ta :TestSuite<CR>
 nmap <silent> <leader>tl :TestLast<CR>
