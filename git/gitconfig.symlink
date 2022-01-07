@@ -48,3 +48,5 @@
     added = yellow
     changed = green
     untracked = cyan
+[hub]
+	protocol = ssh
