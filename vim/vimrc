@@ -164,7 +164,7 @@ set ignorecase          " ignore case when searching
 set smartcase           " override ignorecase when patter has upper case chars
 set incsearch           " show matches as search is typed
 set hlsearch            " highlight matches of last search pattern
-set magic               " make backshash in regex more predictable
+set magic               " make backslash in regex more predictable
 
 nnoremap <CR> :nohlsearch<cr>
 
@@ -173,13 +173,13 @@ nnoremap <CR> :nohlsearch<cr>
 set relativenumber      " display line numbers relative to cursor
 set number              " display line numbers
 set scrolloff=7         " number of padding lines when vertical scrolling
-set cmdheight=2         " number of lines in the commandbar
+set cmdheight=2         " number of lines in the command bar
 set wrap                " wrap long lines
 set linebreak           " wrap long lines at 'breakat' characters
 
 "-- 5 syntax, highlighting and spelling
-filetype plugin indent off " Enable filetype based plugins and indentation rules
-syntax on               " Enable syntax highlighing
+filetype plugin indent off " Enable file type based plugins and indentation rules
+syntax on               " Enable syntax highlighting
 let &colorcolumn=default_text_width
 colorscheme onedark     " alt theme for when I want a change
 " colorscheme Tomorrow-Night
@@ -188,7 +188,7 @@ if $ITERM_PROFILE == "Projector"
     set background=light
     colorscheme solarized
 endif
-hi SpellBad cterm=underline ctermbg=237
+hi SpellBad cterm=underline ctermfg=Cyan ctermbg=237
 hi TabLineSel ctermfg=Blue
 setlocal spell          " enable spell checking by default
 
@@ -219,7 +219,7 @@ let &textwidth=default_text_width " line length above with to wrap a line.
 
 " "-- 15 tabs and indenting
 set expandtab                       " In insert mode, expand <Tab> to spaces
-let &shiftwidth=default_tabwidth    " number of spaces in each steop of (auto)indent
+let &shiftwidth=default_tabwidth    " number of spaces in each step of (auto)indent
 let &softtabstop=default_tabwidth   " number of spaces to remove when deleting insert mode
 let &tabstop=default_tabwidth       " number of spaces a <Tab> in the text stands for
 set smarttab                        " On an indent, <Tab> inserts 'shiftwidth' num spaces
@@ -429,15 +429,15 @@ map <leader>ba :1,300 bd!<cr>
 map <leader>cd :cd %:p:h<cr>
 
 """"""""""""""""""""""""""""""
-" => Statusline
+" => Status line
 """"""""""""""""""""""""""""""
 " most status line is provided by powerline.
 " All we have to do here is set some variables
-" Always hide the statusline
+" Always hide the status line
 set laststatus=2
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General Abbrevs
+" => General Abbreviations
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 iab xdate <c-r>=strftime("%Y-%m-%d")
 iab xfn <c-r>=expand("%:t")
