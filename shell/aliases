@@ -15,6 +15,7 @@ alias l='ls -CF'
 
 alias v='nvim -u ~/.vimrc'
 alias g='git'
+alias j='journal edit'
 
 alias cgrep='grep --color=always'
 alias grep='grep --color=auto'
