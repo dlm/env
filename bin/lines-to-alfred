@@ -1,4 +1,4 @@
 #/usr/bin/env bash
 
-/usr/local/bin/jq --raw-input --slurp \
+/opt/homebrew/bin/jq --raw-input --slurp \
     'split("\n") | map(select(. != "")) | map({ title: ., uid: ., arg: ., autocomplete: . }) | { items: . }'
