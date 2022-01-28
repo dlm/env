@@ -56,7 +56,7 @@ pdfunlock() {
 }
 
 conda-env() {
-    source activate $(conda env list -v | tail +3 | awk '{ print $1 }' | fzf)
+    conda activate $(conda env list -v | tail +3 | awk '{ print $1 }' | fzf)
 }
 
 conda-export() {
