@@ -11,6 +11,7 @@ zplug "zsh-users/zsh-completions"
 zplug "djui/alias-tips"
 zplug "Tarrasch/zsh-colors"
 zplug "caarlos0/zsh-pg"
+zplug "agkozak/zsh-z"
 zplug "ohmyzsh/oh-my-zsh", use:"lib/history.zsh"
 zplug "ohmyzsh/oh-my-zsh", use:"lib/directories.zsh"
 
