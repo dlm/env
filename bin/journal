@@ -7,7 +7,9 @@ EDITOR=nvim
 sub_help(){
     echo "Usage: $PROG_NAME <subcommand> [options]\n"
     echo "Subcommands:"
+    echo "    dir   Go to the notes data directory, run as '\$(journal dir)'"
     echo "    edit  Edit the most recent journal entry"
+    echo "    next  Create the next page of the journal"
     echo ""
     echo "For help with each subcommand run:"
     echo "$PROG_NAME <subcommand> -h|--help"
@@ -17,6 +19,32 @@ sub_help(){
 sub_edit(){
     most_recent_file="$(find $NOTES_DIR -name "*.md" | sort | tail -1)"
     $EDITOR $most_recent_file
+}
+
+sub_dir(){
+    echo "cd $NOTES_DIR"
+}
+
+sub_next(){
+    title=$(date +%Y-%m)
+    new_file_name=$NOTES_DIR/$title.md
+    if [ -e $new_file_name ]; then
+        echo "Error: aborting page creation!"
+        echo ""
+        echo "File $new_file_name exists with contents:"
+        echo "****************************************************************"
+        cat $new_file_name
+        echo "****************************************************************"
+        echo ""
+        echo "To recreate the page, manulally remove the old file with command"
+        echo ""
+        echo "    rm $new_file_name"
+        exit 1
+    fi
+    touch $new_file_name
+    echo "# $title" >> $new_file_name
+    echo "" >> $new_file_name
+    echo "## Week 1 - partial" >> $new_file_name
 }
 
 subcommand=$1
