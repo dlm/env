@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import os
@@ -6,7 +6,7 @@ from collections import namedtuple
 import pprint
 import json
 import sys
-import urllib
+import urllib.request
 import argparse
 import pickle
 from datetime import datetime, timedelta
@@ -43,7 +43,7 @@ class Cache:
         self.default_lifetime = lifetime
         self.elts = {}
         try:
-            with open(self.file_name, 'r') as pkl_in:
+            with open(self.file_name, 'rb') as pkl_in:
                 self.elts = pickle.load(pkl_in)
 
             for key, item in self.elts.iteritems():
@@ -56,7 +56,7 @@ class Cache:
         cache_dir = os.path.dirname(cache_file)
         if not os.path.exists(cache_dir):
             os.makedirs(cache_dir)
-        with open(self.file_name, 'w') as pkl_out:
+        with open(self.file_name, 'wb') as pkl_out:
             pickle.dump(self.elts, pkl_out)
 
     def get(self, key):
@@ -115,7 +115,7 @@ def fetch(url, cache=None):
     if not success:
 
         # request and fetch the site
-        response = urllib.urlopen(url)
+        response = urllib.request.urlopen(url)
 
         # parse the weather data
         data = json.load(response)
@@ -137,7 +137,7 @@ def construct_url(args, cache=None):
 
         # get the location
         if args.verbose:
-            print "Getting weather for {}".format(ipinfo['city'])
+            print("Getting weather for {}".format(ipinfo['city']))
 
         loc = ipinfo['postal']
     else:
@@ -197,7 +197,7 @@ def main():
     # we have all our data print the output
     if args.verbose:
         pprint.pprint(weather_data)
-    print '{prefix}{desc}, {temp}°, [{sunrise}, {sunset}]'.format(**fmt_data)
+    print('{prefix}{desc}, {temp}°, [{sunrise}, {sunset}]'.format(**fmt_data))
     cache.dump()
 
 
