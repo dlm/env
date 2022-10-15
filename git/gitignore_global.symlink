@@ -2,7 +2,6 @@ tags
 .DS_Store
 .dropbox
 dump.rdb
-build*
 
 # latex
 *.aux
