@@ -50,3 +50,10 @@
     untracked = cyan
 [hub]
 	protocol = ssh
+[init]
+	defaultBranch = main
+[credential]
+	helper = store
+[url "git@github.com:"]
+	insteadOf = https://github.com
+	insteadOf = https://github.com
