@@ -13,7 +13,7 @@ alias ll='ls -l'
 alias la='ls -lA'
 alias l='ls -CF'
 
-alias v='nvim -u ~/.vimrc'
+alias v='nvim'
 alias g='git'
 alias j='journal edit'
 
