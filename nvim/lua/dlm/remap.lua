@@ -1,4 +1,6 @@
+vim.keymap.set("i", "kj", "<esc>")
 vim.keymap.set("n", "<leader>w", ":w!<cr>")
+vim.keymap.set("n", "<leader>e", ":e! ~/.nvim/.<cr>")
 
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
