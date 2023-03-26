@@ -62,3 +62,13 @@ conda-env() {
 conda-export() {
     conda env export | grep -v "^prefix: "
 }
+
+project() {
+    local awkScript="{ print \$$1"
+    for var in "${@:2}"; do
+        awkScript="${awkScript}, \$$var"
+    done
+    awkScript="${awkScript} }"
+    awk $awkScript
+}
+
