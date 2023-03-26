@@ -42,7 +42,7 @@ dl() { mv -f "$*" ~/tmp/trash/; }
 # database
 alias pg-start='postgres -D /usr/local/var/postgres'
 
-t() {
+term-name() {
     bname=$(basename "${PWD/$HOME/~}")
     if [[ $# -lt 1 ]]; then
         echo -ne "\033]0;${USER}@${HOSTNAME}: ${bname}\007"
