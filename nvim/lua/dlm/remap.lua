@@ -1,17 +1,16 @@
 vim.keymap.set("i", "kj", "<esc>")
 vim.keymap.set("n", "<leader>w", ":w!<cr>")
-vim.keymap.set("n", "<leader>e", ":e! ~/.nvim/.<cr>")
 
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>pe", ":e! ~/.nvim/.<cr>")
+vim.keymap.set("n", "<leader>pv", ":NERDTreeToggle<cr>")
 
 vim.keymap.set("n", "<C-j>", "<C-W>j")
 vim.keymap.set("n", "<C-k>", "<C-W>k")
 vim.keymap.set("n", "<C-h>", "<C-W>h")
 vim.keymap.set("n", "<C-l>", "<C-W>l")
 
--- testing
-vim.keymap.set("n", "<leader>tt", ":TestNearest<CR>", { silent = true })
-vim.keymap.set("n", "<leader>tf", ":TestFile<CR>", { silent = true })
+-- clean up highlight after searching
+vim.keymap.set("n", "<cr>", ":nohlsearch<cr>")
 
 -- golang
 local dlmGoGroup = vim.api.nvim_create_augroup('dlmGo', { clear = true })
@@ -23,22 +22,21 @@ vim.api.nvim_create_autocmd('Filetype', { group = dlmGoGroup, pattern = "go", ca
         vim.cmd("vsplit")
         vim.cmd("GoAlternate")
     end, { silent = true })
+
+	vim.keymap.set('n', '<leader>cu', ":GoRename<CR>", { silent = true })
 end })
 
--- vim.test#go#runner = 'richgo'
-vim.g.go_term_mode = "split"
-vim.g.go_fmt_command = "goimports"
-vim.g.syntastic_go_checkers = {'golint', 'govet', 'errcheck'}
+-- testing
+vim.keymap.set("n", "<leader>tt", ":TestNearest<CR>", { silent = true })
+vim.keymap.set("n", "<leader>tf", ":TestFile<CR>", { silent = true })
 
-vim.g.go_highlight_types = 1
-vim.g.go_highlight_fields = 1
-vim.g.go_highlight_functions = 1
-vim.g.go_highlight_function_calls = 1
-vim.g.go_highlight_operators = 1
-vim.g.go_highlight_extra_types = 1
-vim.g.go_highlight_build_constraints = 1
+-- use the leap default mappings
+-- require('leap').add_default_mappings()
+--
+--
 
-vim.g.go_list_type = 'quickfix'
-vim.g.go_def_mapping_enabled = 0
-vim.g.go_def_mode = 'gopls'
-vim.g.go_info_mode = ('gopls')
+-- code
+vim.keymap.set('n', '<leader>cr', function()
+	require('telescope.builtin').lsp_references()
+end)
+

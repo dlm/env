@@ -8,7 +8,6 @@ lsp.nvim_workspace()
 
 lsp.ensure_installed({
 	'gopls',
-	'sumneko_lua',
 })
 
 local cmp = require('cmp')
@@ -23,5 +22,10 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 lsp.setup_nvim_cmp({
 	mapping = cmp_mappings
 })
+
+
+lsp.on_attach(function(client, bufnr)
+	require "lsp_signature".on_attach({}, bufnr)
+end)
 
 lsp.setup()

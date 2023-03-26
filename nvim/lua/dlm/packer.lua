@@ -37,6 +37,7 @@ return require('packer').startup(function(use)
   -- tree sitter
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
   use('nvim-treesitter/playground')
+  use('nvim-treesitter/nvim-treesitter-textobjects')
 
   -- lsp
   use {
@@ -63,13 +64,18 @@ return require('packer').startup(function(use)
 
   }
 
+  use "ray-x/lsp_signature.nvim"
+
   -- navagation
   use 'tpope/vim-surround'
+  use 'scrooloose/nerdtree'
+  -- use 'ggandor/leap.nvim'
 
   -- general programming plugins
   use 'janko-m/vim-test'
   use 'tomtom/tcomment_vim'
   use 'FooSoft/vim-argwrap'
+  use 'tpope/vim-dispatch'
 
   -- git plugins
   use 'tpope/vim-fugitive'
