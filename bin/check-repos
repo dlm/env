@@ -10,15 +10,15 @@ function process_mercurial() {
 
 function main() {
     for repo in $(ls); do
-        echo --$repo--
+        echo \# $repo
         if [[ -e $repo/.git ]]; then
             process_git $repo
-            echo
         elif [[ -e $repo/.hg ]]; then
             process_mercurial $repo
        else
             echo "unknown repo type"
         fi
+        echo
     done
 }
 
