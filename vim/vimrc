@@ -20,6 +20,7 @@ Plug 'mhinz/vim-startify'
 
 " colorschemes and other UI
 Plug 'joshdick/onedark.vim'
+" Plug 'navarasu/onedark.nvim'
 Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 Plug 'dracula/vim'
 Plug 'altercation/vim-colors-solarized'
@@ -68,7 +69,6 @@ Plug 'vhdirk/vim-cmake'
 
 " python plugins
 
-
 " golang plugins
 Plug 'fatih/vim-go'
 Plug 'sebdah/vim-delve'
@@ -93,9 +93,9 @@ Plug 'sebdah/vim-delve'
 " Plug 'pangloss/vim-javascript'
 " Plug 'mxw/vim-jsx'
 
-" " sql
-" Plug 'has2k1/sql.vim'
-" Plug 'shmup/vim-sql-syntax'
+" sql
+Plug 'has2k1/sql.vim'
+Plug 'shmup/vim-sql-syntax'
 
 " " opengl
 " Plug 'tikhomirov/vim-glsl'
@@ -138,7 +138,8 @@ let g:rspec_out_file = "/tmp/quickfix.out"
 let test#ruby#rspec#options = "--require="
             \ . g:rspec_format_file . " --format VimFormatter --out "
             \ . g:rspec_out_file . " --format progress"
-" let test#python#runner = 'pytest --capture=no'
+let test#python#runner = 'pytest'
+let test#python#pytest#options = '-s'
 let test#javascript#mocha#executable = "yarn test"
 
 " vim-trailing-whitespace
@@ -183,7 +184,9 @@ syntax on               " Enable syntax highlighting
 let &colorcolumn=default_text_width
 colorscheme onedark     " alt theme for when I want a change
 " colorscheme Tomorrow-Night
+" and fix pmenus so that I can see it
 " colorscheme dracula
+hi Pmenu ctermfg=white
 if $ITERM_PROFILE == "Projector"
     set background=light
     colorscheme solarized
@@ -334,6 +337,8 @@ let g:go_highlight_extra_types = 1
 let g:go_highlight_build_constraints = 1
 let g:go_list_type = 'quickfix'
 let g:go_def_mapping_enabled = 0
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
 let test#go#runner = 'richgo'
 let g:test#go#gotest#options = '-v'
 
@@ -472,25 +477,15 @@ endfunc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => completions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" Use <c-space> to trigger completion:
+if has('nvim')
+    inoremap <silent><expr> <c-space> coc#refresh()
+else
+    inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"Use <CR> to confirm completion:
+inoremap <expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
 
 " Use `[c` and `]c` to navigate diagnostics
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
