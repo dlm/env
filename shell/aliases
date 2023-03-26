@@ -17,6 +17,8 @@ alias v='nvim'
 alias g='git'
 alias j='journal edit'
 
+alias tms='tmux-sessionizer'
+
 alias cgrep='grep --color=always'
 alias grep='grep --color=auto'
 alias rm='rm -i'
