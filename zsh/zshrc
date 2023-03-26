@@ -3,17 +3,18 @@ source ~/.zplug/init.zsh
 # export DISABLE_VENV_CD=1
 
 zplug "b4b4r07/zplug"
-zplug "zsh-users/zsh-syntax-highlighting"
 zplug "mafredri/zsh-async"
 zplug "sindresorhus/pure", on:"mafredri/zsh-async"
+zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
-# zplug "plugins/virtualenvwrapper", from:oh-my-zsh
+zplug "zdharma/fast-syntax-highlighting", defer:2
 zplug "djui/alias-tips"
 zplug "Tarrasch/zsh-colors"
 zplug "caarlos0/zsh-pg"
 zplug "agkozak/zsh-z"
 zplug "ohmyzsh/oh-my-zsh", use:"lib/history.zsh"
 zplug "ohmyzsh/oh-my-zsh", use:"lib/directories.zsh"
+
 
 # use default readline keybindings
 bindkey -e
@@ -45,4 +46,9 @@ source ${HOME}/.shell/shared
 zstyle ':completion:*' special-dirs true
 
 # Add local bin path
-export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/bin/scripts/:$HOME/bin"
+
+# set the word characters, the stuff in the [] is removed from the
+# word char definition.  Specifically, deleting / allows for
+# removing parts of paths with C-w
+export WORDCHARS=${WORDCHARS//[\/]}
