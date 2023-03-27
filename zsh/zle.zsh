@@ -1,13 +1,13 @@
 # Additional bindings
 
 ### FZF awesomeness
-# fo [FUZZY PATTERN] - Open the selected file with the default editor
+# fzf-open [FUZZY PATTERN] - Open the selected file with the default editor
 #   - Exit if there's no match (--exit-0)
 #   - CTRL-O to open with `open` command,
 #   - CTRL-E or Enter key to open with the $EDITOR
-function fo() {
+function fzf-open() {
   local out file key
-  out=$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)
+  out=$(fzf-tmux -p --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)
   key=$(head -1 <<< "$out")
   file=$(head -2 <<< "$out" | tail -1)
   if [ -n "$file" ]; then
@@ -15,13 +15,14 @@ function fo() {
   fi
 }
 
-function _fzf-fo-widget() {
+function _fzf-open-widget() {
     zle kill-whole-line
-    BUFFER="fo"
+    BUFFER="fzf-open"
     zle accept-line
 }
-zle -N _fzf-fo-widget
-bindkey '\eo' _fzf-fo-widget
+zle -N _fzf-open-widget
+# bindkey '\eo' _fzf-fo-widget
+bindkey '^o' _fzf-open-widget
 
 ## History awesomeness
 # cursor and the ctrl+N and ctrl+P moves through local history
