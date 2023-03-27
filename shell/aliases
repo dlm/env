@@ -19,7 +19,7 @@ alias ll='ls -l'
 
 alias j='journal edit'
 alias t='tmux-sessionizer'
-alias v=$EDITOR
+alias v='nvim'
 
 alias fd='fdfind'
 
