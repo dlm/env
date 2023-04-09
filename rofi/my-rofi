@@ -7,6 +7,6 @@ SNIPPET_MODE="snippets:${ROFI_HOME}/bin/snippets"
 rofi \
     -modi combi,${SNIPPET_MODE},drun,window,${WORKSPACE_MODE},ssh,keys \
     -combi-modei drun,${SNIPPET_MODE} \
-    -show ${SNIPPET_MODE} \
+    -show drun \
     -width 1000 \
     -theme ${ROFI_HOME}/themes/my-arthur.rasi
