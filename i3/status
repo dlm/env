@@ -6,16 +6,13 @@ general {
 	interval = 5
 }
 
-order = "disk /"
-order += "run_watch VPN"
-order += "wireless wlan0"
+order = "wireless wlp0s20f3"
 order += "battery 0"
-order += "load"
 order += "time"
 
-wireless wlan0 {
-    format_up = "W: (%quality at %essid) %ip"
-    format_down = "W: down"
+wireless wlp0s20f3 {
+    format_up = "(%quality at %essid) %ip"
+    format_down = "no wifi"
 }
 
 ethernet eth1 {

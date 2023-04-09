@@ -50,7 +50,7 @@ bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, default)
 bindsym $mod+s layout stacking
-bindsym $mod+a layout tabbed
+bindsym $mod+t layout tabbed
 bindsym $mod+d layout default
 
 # toggle tiling / floating
@@ -60,7 +60,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+b focus parent
+bindsym $mod+a focus parent
 
 # focus the child container
 #bindcode $mod+d focus child
@@ -80,28 +80,28 @@ bindsym XF86MonBrightnessDown exec ~/.i3/bin/update-screen-brightness -0.1
 bindsym XF86MonBrightnessUp exec ~/.i3/bin/update-screen-brightness 0.1
 
 # switch to workspace
-bindsym $mod+1 workspace 1.main
-bindsym $mod+2 workspace 2.write
-bindsym $mod+3 workspace 3.code
-bindsym $mod+4 workspace 4.plot
-bindsym $mod+5 workspace 5.misc
-bindsym $mod+6 workspace 6.chat
-bindsym $mod+7 workspace 7.misc
-bindsym $mod+8 workspace 8.code
-bindsym $mod+9 workspace 9.write
-bindsym $mod+0 workspace 10.main
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+exclam move workspace 1.main
-bindsym $mod+Shift+at move workspace 2.write
-bindsym $mod+Shift+numbersign move workspace 3.code
-bindsym $mod+Shift+dollar move workspace 4.plot
+bindsym $mod+Shift+exclam move workspace 1
+bindsym $mod+Shift+at move workspace 2
+bindsym $mod+Shift+numbersign move workspace 3
+bindsym $mod+Shift+dollar move workspace 4
 
-bindsym $mod+Shift+asciicircum move workspace 6.chat
-bindsym $mod+Shift+ampersand move workspace 7.misc
-bindsym $mod+Shift+asterisk move workspace 8.code
-bindsym $mod+Shift+parenleft move workspace 9.write
-bindsym $mod+Shift+parenright move workspace 10.main
+bindsym $mod+Shift+asciicircum move workspace 6
+bindsym $mod+Shift+ampersand move workspace 7
+bindsym $mod+Shift+asterisk move workspace 8
+bindsym $mod+Shift+parenleft move workspace 9
+bindsym $mod+Shift+parenright move workspace 10
 
 # reload the configuration file
 bindsym $mod+r reload
@@ -156,26 +156,23 @@ mode "resize" {
 
 bindsym $mod+q mode "resize"
 
-# add some style
+# add some style t
+# nice orange coloring
 # class                   border  backgr. text
-client.focused            #CD6D37 #CD6D37 #000000
-client.focused_inactive   #848484 #848484 #000000
-client.unfocused          #848484 #FF9F6A #000000
-client.urgent             #FF0000 #8C5665 #999999
+# client.focused            #CD6D37 #CD6D37 #000000
+# client.focused_inactive   #848484 #848484 #000000
+# client.unfocused          #848484 #FF9F6A #000000
+# client.urgent             #FF0000 #8C5665 #999999
 font pango: Dejavu Sans Mono 8
-
-# auto float windows
-for_window [title="GLplay"] floating enable
-for_window [title="CSCI441-project"] floating enable
-for_window [title="CSCI441-lab"] floating enable
 
 # commands to run at startup
 exec nm-applet
-exec dropbox
-exec sh ~/.shell/keyboard
+exec dropbox start
+exec_always sh ~/.shell/keyboard
 exec source ~/.xsession
 
 # Start start bar
 bar {
-    i3bar_command $HOME/.polybar/launch.sh
+    status_command i3status --config $HOME/.i3/status
+    # i3bar_command $HOME/.polybar/launch.sh
 }
