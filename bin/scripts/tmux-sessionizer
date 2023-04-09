@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #
-# Personal adaptation of the primagen's tmux-sessionizer script:
+# Personal adaptation (and a few bug fixes to
+# the primagen's tmux-sessionizer script:
 # Downloaded:
 #   - Date: 2023-03-26
 #   - location: https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer-
@@ -8,7 +9,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/repos -mindepth 1 -maxdepth 2 -type d | fzf-tmux -p)
+    selected=$(find ~/repos -mindepth 2 -maxdepth 2 -type d | fzf-tmux -p)
 fi
 
 if [[ -z $selected ]]; then
@@ -16,15 +17,22 @@ if [[ -z $selected ]]; then
 fi
 
 selected_name=$(basename "$selected" | tr . _)
-tmux_running=$(pgrep tmux)
 
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+# if we are not running tmux, we need to start it up
+tmux_running=$(pgrep tmux)
+if [[ -z $tmux_running ]]; then
     tmux new-session -s $selected_name -c $selected
     exit 0
 fi
 
+# create the tmux session if it doesn't yet exist
 if ! tmux has-session -t=$selected_name 2> /dev/null; then
     tmux new-session -ds $selected_name -c $selected
 fi
 
-tmux switch-client -t $selected_name
+# attach (or switch) to it
+if [[ -z $TMUX ]]; then
+    tmux attach -t $selected_name
+else
+    tmux switch-client -t $selected_name
+fi
