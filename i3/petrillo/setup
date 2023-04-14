@@ -1,0 +1,122 @@
+#!/usr/bin/env bash
+
+
+function updateI3Socket() {
+    export I3SOCK=$(i3 --get-socketpath)
+}
+
+function activateWorkspace() {
+    number=$1
+
+    i3-msg workspace number $number
+}
+
+function moveActiveWorkspaceToOuput() {
+    output=$1
+
+    i3-msg move workspace to output $output
+}
+
+function restartI3() {
+    i3-msg restart
+    updateI3Socket
+}
+
+function moveWorkspaceToOutput() {
+    number=$1
+    output=$2
+
+    activateWorkspace $number
+    moveActiveWorkspaceToOuput $output
+}
+
+function setOutputsForHomeOffice() {
+    xrandr \
+        --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal \
+        --output DP-1 --mode 2560x1440 --pos 1920x0 --rotate normal \
+        --output HDMI-1 --off \
+        --output DP-2 --mode 2560x1440 --pos 4480x0 --rotate normal
+}
+
+function setWorkspacesForHomeOffice() {
+    left="xinerama-0"
+    center="xinerama-1"
+    right="xinerama-2"
+
+    moveWorkspaceToOutput 1 $left
+    moveWorkspaceToOutput 2 $left
+    moveWorkspaceToOutput 3 $center
+    moveWorkspaceToOutput 4 $center
+    moveWorkspaceToOutput 5 $center
+    moveWorkspaceToOutput 6 $right
+    moveWorkspaceToOutput 7 $right
+    moveWorkspaceToOutput 8 $right
+    moveWorkspaceToOutput 9 $right
+    moveWorkspaceToOutput 0 $right
+
+    activateWorkspace 1
+    activateWorkspace 3
+    activateWorkspace 7
+
+    activateWorkspace 3
+}
+
+function setOutputsForCoffeeShop() {
+    xrandr \
+        --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal \
+        --output DP-1 --off \
+        --output HDMI-1 --off \
+        --output DP-2 --off
+}
+
+function setWorkspacesForCoffeeShop() {
+    center="xinerama-0"
+
+    moveWorkspaceToOutput 1 $center
+    moveWorkspaceToOutput 2 $center
+    moveWorkspaceToOutput 3 $center
+    moveWorkspaceToOutput 4 $center
+    moveWorkspaceToOutput 5 $center
+    moveWorkspaceToOutput 6 $center
+    moveWorkspaceToOutput 7 $center
+    moveWorkspaceToOutput 8 $center
+    moveWorkspaceToOutput 9 $center
+    moveWorkspaceToOutput 0 $center
+
+    activateWorkspace 1
+}
+
+function setupForCoffeeShop() {
+    updateI3Socket
+    setOutputsForCoffeeShop
+    restartI3
+    setWorkspacesForCoffeeShop
+}
+
+function setupForHomeOffice() {
+    updateI3Socket
+    setOutputsForHomeOffice
+    restartI3
+    setWorkspacesForHomeOffice
+}
+
+
+config=$1
+case $config in
+    coffee)
+        echo setupForCoffeeShop
+        ;;
+    home)
+        echo setupForHomeOffice
+        ;;
+    *)
+        {
+            echo "Useage: $0 <config>"
+            echo ""
+            echo "valid config values are:"
+            echo "  - coffee"
+            echo "  - home"
+        } >&2
+        exit 1
+        ;;
+esac
