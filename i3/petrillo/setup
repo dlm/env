@@ -88,15 +88,15 @@ function setWorkspacesForCoffeeShop() {
 
 function setupForCoffeeShop() {
     updateI3Socket
-    setOutputsForCoffeeShop
-    restartI3
+    # setOutputsForCoffeeShop
+    # restartI3
     setWorkspacesForCoffeeShop
 }
 
 function setupForHomeOffice() {
     updateI3Socket
-    setOutputsForHomeOffice
-    restartI3
+    # setOutputsForHomeOffice
+    # restartI3
     setWorkspacesForHomeOffice
 }
 
@@ -104,10 +104,10 @@ function setupForHomeOffice() {
 config=$1
 case $config in
     coffee)
-        echo setupForCoffeeShop
+        setupForCoffeeShop
         ;;
     home)
-        echo setupForHomeOffice
+        setupForHomeOffice
         ;;
     *)
         {

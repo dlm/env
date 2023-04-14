@@ -28,8 +28,8 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-bindsym $mod+u focus left
-bindsym $mod+i focus right
+# bindsym $mod+u focus left
+# bindsym $mod+i focus right
 
 # move focused window
 bindsym $mod4+h move left
@@ -49,8 +49,8 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, default)
+bindsym $mod+a layout tabbed
 bindsym $mod+s layout stacking
-bindsym $mod+t layout tabbed
 bindsym $mod+d layout default
 
 # toggle tiling / floating
@@ -60,7 +60,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+# bindsym $mod+a focus parent
 
 # focus the child container
 #bindcode $mod+d focus child
@@ -79,29 +79,41 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86MonBrightnessDown exec ~/.i3/bin/update-screen-brightness -0.1
 bindsym XF86MonBrightnessUp exec ~/.i3/bin/update-screen-brightness 0.1
 
+# set workspace names
+set $ws1 "1.admin"
+set $ws2 2
+set $ws3 "3.dev"
+set $ws4 4
+set $ws5 5
+set $ws6 6
+set $ws7 "7.ref"
+set $ws8 "8.msg"
+set $ws9 "9.todo"
+set $ws10 10
+
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
-bindsym $mod+Shift+exclam move workspace 1
-bindsym $mod+Shift+at move workspace 2
-bindsym $mod+Shift+numbersign move workspace 3
-bindsym $mod+Shift+dollar move workspace 4
-
-bindsym $mod+Shift+asciicircum move workspace 6
-bindsym $mod+Shift+ampersand move workspace 7
-bindsym $mod+Shift+asterisk move workspace 8
-bindsym $mod+Shift+parenleft move workspace 9
-bindsym $mod+Shift+parenright move workspace 10
+bindsym $mod+Shift+1 move workspace $ws1
+bindsym $mod+Shift+2 move workspace $ws2
+bindsym $mod+Shift+3 move workspace $ws3
+bindsym $mod+Shift+4 move workspace $ws4
+bindsym $mod+Shift+5 move workspace $ws5
+bindsym $mod+Shift+6 move workspace $ws6
+bindsym $mod+Shift+7 move workspace $ws7
+bindsym $mod+Shift+8 move workspace $ws8
+bindsym $mod+Shift+9 move workspace $ws9
+bindsym $mod+Shift+0 move workspace $ws10
 
 # reload the configuration file
 bindsym $mod+r reload
