@@ -30,9 +30,6 @@ vim.api.nvim_create_autocmd('Filetype', { group = dlmGoGroup, pattern = "go", ca
 	vim.keymap.set('n', '<leader>cu', ":GoRename<CR>", { silent = true })
 end })
 
--- testing
-vim.keymap.set("n", "<leader>tt", ":TestNearest<CR>", { silent = true })
-vim.keymap.set("n", "<leader>tf", ":TestFile<CR>", { silent = true })
 
 -- use the leap default mappings
 -- require('leap').add_default_mappings()
