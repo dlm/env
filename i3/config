@@ -155,17 +155,53 @@ mode "resize" {
 
 bindsym $mod+q mode "resize"
 
-# add some style t
+# add some style
+font pango: Dejavu Sans Mono 8
 # nice orange coloring
 # class                   border  backgr. text
 # client.focused            #CD6D37 #CD6D37 #000000
 # client.focused_inactive   #848484 #848484 #000000
 # client.unfocused          #848484 #FF9F6A #000000
 # client.urgent             #FF0000 #8C5665 #999999
-font pango: Dejavu Sans Mono 8
+
+# catpuccin
+set $rosewater #f2d5cf
+set $flamingo  #eebebe
+set $pink      #f4b8e4
+set $mauve     #ca9ee6
+set $red       #e78284
+set $maroon    #ea999c
+set $peach     #ef9f76
+set $yellow    #e5c890
+set $green     #a6d189
+set $teal      #81c8be
+set $sky       #99d1db
+set $sapphire  #85c1dc
+set $blue      #8caaee
+set $lavender  #babbf1
+set $text      #c6d0f5
+set $subtext1  #b5bfe2
+set $subtext0  #a5adce
+set $overlay2  #949cbb
+set $overlay1  #838ba7
+set $overlay0  #737994
+set $surface2  #626880
+set $surface1  #51576d
+set $surface0  #414559
+set $base      #303446
+set $mantle    #292c3c
+set $crust     #232634
+
+
+# target                 title     bg    text   indicator  border
+client.focused           $lavender $base $text  $rosewater $lavender
+client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
+client.unfocused         $overlay0 $base $text  $rosewater $overlay0
+client.urgent            $peach    $base $peach $overlay0  $peach
+client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
+client.background        $base
 
 # commands to run at startup
-exec nm-applet
 exec dropbox start
 exec_always sh ~/.shell/keyboard
 exec source ~/.xsession
@@ -174,4 +210,18 @@ exec source ~/.xsession
 bar {
     status_command i3status --config $HOME/.i3/status
     # i3bar_command $HOME/.polybar/launch.sh
+    colors {
+
+        # catpuccin
+        background         $base
+        statusline         $text
+        focused_statusline $text
+        active_workspace   $base $text $blue
+        focused_separator  $base
+        focused_workspace  $base $base $green
+        active_workspace   $base $base $blue
+        inactive_workspace $base $base $surface1
+        urgent_workspace   $base $base $red
+        binding_mode       $base $base $surface1
+    }
 }
