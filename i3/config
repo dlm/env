@@ -115,6 +115,12 @@ bindsym $mod+Shift+8 move workspace $ws8
 bindsym $mod+Shift+9 move workspace $ws9
 bindsym $mod+Shift+0 move workspace $ws10
 
+# bind applications to workspaces
+assign [class="wavebox"] → workspace $ws1
+assign [class="qutebrowser"] → workspace $ws7
+assign [class="Slack"] → workspace $ws8
+assign [class="Remember The Milk"] → workspace $ws9
+
 # reload the configuration file
 bindsym $mod+r reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
