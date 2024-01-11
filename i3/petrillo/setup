@@ -1,25 +1,28 @@
 #!/usr/bin/env bash
 
-
-function updateI3Socket() {
-    export I3SOCK=$(i3 --get-socketpath)
-}
+# by default, the i3-msg command makes requests to the i3 socket at $I3SOCK.
+# Sometimes, this variable is not updated with i3 restarts (e.g. when using
+# tmux) and so it can become stale. In this script, when we invoking i3-msg, we
+# use the -s flag to specify the socket to use so that we can be sure we are
+# talking to the socket for the current i3 instance
+# This function is just a wrapper around i3-msg that will always use the current
+# socket
+function i3msg() { i3-msg -s $(i3 --get-socket) $@ }
 
 function activateWorkspace() {
     number=$1
 
-    i3-msg workspace number $number
+    i3msg workspace number $number
 }
 
 function moveActiveWorkspaceToOuput() {
     output=$1
 
-    i3-msg move workspace to output $output
+    i3msg move workspace to output $output
 }
 
 function restartI3() {
-    i3-msg restart
-    updateI3Socket
+    i3msg restart -s $(i3 --get-socket)
 }
 
 function moveWorkspaceToOutput() {
@@ -87,36 +90,45 @@ function setWorkspacesForCoffeeShop() {
 }
 
 function setupForCoffeeShop() {
-    updateI3Socket
-    # setOutputsForCoffeeShop
-    # restartI3
+    setOutputsForCoffeeShop
+    restartI3
     setWorkspacesForCoffeeShop
 }
 
 function setupForHomeOffice() {
-    updateI3Socket
-    # setOutputsForHomeOffice
-    # restartI3
+    setOutputsForHomeOffice
+    restartI3
     setWorkspacesForHomeOffice
 }
 
 
 config=$1
 case $config in
-    coffee)
-        setupForCoffeeShop
+    coffee-outputs)
+        setOutputsForCoffeeShop
         ;;
-    home)
-        setupForHomeOffice
+    coffee-workspaces)
+        setWorkspacesForCoffeeShop
         ;;
-    *)
+    home-outputs)
+        setOutputsForHomeOffice
+        ;;
+    home-workspaces)
+        setWorkspacesForHomeOffice
+        ;;
+    help)
         {
             echo "Useage: $0 <config>"
             echo ""
             echo "valid config values are:"
-            echo "  - coffee"
-            echo "  - home"
+            echo "  - coffee-outputs"
+            echo "  - coffee-workspaces"
+            echo "  - home-outputs"
+            echo "  - home-workspaces"
         } >&2
         exit 1
+        ;;
+    *)
+        $0 $($0 help 2>&1 | tail +4 | fzf | sed -e 's/-//')
         ;;
 esac
