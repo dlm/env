@@ -3,11 +3,12 @@ local ls = require("luasnip")
 local s = ls.snippet
 local t = ls.text_node
 local i = ls.insert_node
+local f = ls.function_node
+
 -- local f = ls.function_node
 -- local fmt = require("luasnip.extras.fmt").fmt
 local rep = require("luasnip.extras").rep
 local ps = ls.parser.parse_snippet
-
 
 -- args is a table, where 1 is the text in Placeholder 1, 2 the text in
 -- placeholder 2,...
@@ -47,5 +48,14 @@ ls.add_snippets("all", {
         rep(1),
         t(")"),
     }),
+
+    s({
+        trig = "date-journal",
+        namr = "Date Journal",
+        dscr = "create the date for a journal entry",
+    }, {
+        i(1, os.date("%B %0e, %Y")),
+    }
+    ),
 })
 
