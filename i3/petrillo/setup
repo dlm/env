@@ -7,7 +7,9 @@
 # talking to the socket for the current i3 instance
 # This function is just a wrapper around i3-msg that will always use the current
 # socket
-function i3msg() { i3-msg -s $(i3 --get-socket) $@ }
+function i3msg() {
+    i3-msg -s $(i3 --get-socket) $@
+}
 
 function activateWorkspace() {
     number=$1
