@@ -1,5 +1,8 @@
 vim.g.go_term_mode = "split"
 vim.g.go_fmt_command = "goimports"
+vim.g.go_fmt_options = {
+    goimports = '-local=bky.sh -local=github.com/blocky',
+}
 vim.g.syntastic_go_checkers = {
     'errcheck',
     'gosimple',

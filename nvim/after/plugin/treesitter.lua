@@ -20,6 +20,16 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 
+  incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = 'gnn',
+        -- scope_incremental = 'grn',
+        node_incremental = '<TAB>',
+        node_decremental = '<S-TAB>',
+      },
+  },
+
   textobjects = {
     select = {
       enable = true,

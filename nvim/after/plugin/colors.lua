@@ -1,10 +1,13 @@
-function ColorMyPencils(color)
-	color = color or "onedark"
-	vim.cmd.colorscheme(color)
+function ColorMyPencilsWithOneDark()
+	vim.cmd.colorscheme("onedark")
 
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
+function ColorMyPencilsWithCats()
+	vim.cmd.colorscheme( "catppuccin-mocha")
+end
 
-ColorMyPencils()
+ColorMyPencilsWithOneDark()
+-- ColorMyPencilsWithCats()

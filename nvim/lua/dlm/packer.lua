@@ -16,14 +16,12 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use {
-	  'nvim-telescope/telescope.nvim', tag = '0.1.1',
+	  'nvim-telescope/telescope.nvim', tag = '0.1.5',
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
 
-  use({
-      'navarasu/onedark.nvim',
-      as = 'onedark',
-  })
+  use({ 'navarasu/onedark.nvim', as = 'onedark', })
+  use({ "catppuccin/nvim", as = "catppuccin" })
 
   -- tree sitter
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
@@ -58,14 +56,29 @@ return require('packer').startup(function(use)
   use "ray-x/lsp_signature.nvim"
 
   -- navagation
+  use 'tpope/vim-repeat'
   use 'tpope/vim-surround'
+  use 'tpope/vim-unimpaired'
   use 'scrooloose/nerdtree'
-  -- use 'ggandor/leap.nvim'
+  use 'ggandor/leap.nvim'
+  use {
+    'ThePrimeagen/harpoon',
+	requires = { { 'nvim-lua/plenary.nvim' } }
+  }
+
+  -- ui
+  use 'gcmt/taboo.vim'  -- trying this out... not sure if it works with neovim
 
   -- general programming plugins
   use 'janko-m/vim-test'
   use 'tomtom/tcomment_vim'
   use 'FooSoft/vim-argwrap'
+  use 'github/copilot.vim'
+  use {
+	'sourcegraph/sg.nvim',
+    run = 'nvim -l build/init.lua',
+	requires = { { 'nvim-lua/plenary.nvim' } }
+  }
 
   -- git plugins
   use 'tpope/vim-fugitive'

@@ -28,7 +28,7 @@ lsp.setup_nvim_cmp({
 })
 
 
-lsp.on_attach(function(client, bufnr)
+lsp.on_attach(function(_, bufnr)
 	require "lsp_signature".on_attach({}, bufnr)
 end)
 
