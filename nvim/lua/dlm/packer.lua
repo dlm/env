@@ -65,20 +65,25 @@ return require('packer').startup(function(use)
     'ThePrimeagen/harpoon',
 	requires = { { 'nvim-lua/plenary.nvim' } }
   }
+  use {
+      "stevearc/oil.nvim",
+      config = function() require("oil").setup() end,
+  }
 
   -- ui
   use 'gcmt/taboo.vim'  -- trying this out... not sure if it works with neovim
+  use 'mbbill/undotree'
 
   -- general programming plugins
   use 'janko-m/vim-test'
   use 'tomtom/tcomment_vim'
   use 'FooSoft/vim-argwrap'
   use 'github/copilot.vim'
-  use {
-	'sourcegraph/sg.nvim',
-    run = 'nvim -l build/init.lua',
-	requires = { { 'nvim-lua/plenary.nvim' } }
-  }
+  -- use {
+	-- 'sourcegraph/sg.nvim',
+  --   run = 'nvim -l build/init.lua',
+	-- requires = { { 'nvim-lua/plenary.nvim' } }
+  -- }
 
   -- git plugins
   use 'tpope/vim-fugitive'
@@ -87,6 +92,9 @@ return require('packer').startup(function(use)
   -- go
   use 'fatih/vim-go'
   use 'sebdah/vim-delve'
+
+  -- bash
+  use 'aliou/bats.vim'
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- This must be after all plugins
