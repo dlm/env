@@ -66,6 +66,36 @@ function setWorkspacesForHomeOffice() {
     activateWorkspace 3
 }
 
+
+function setOutputsForMobileOffice() {
+    xrandr \
+        --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal \
+        --output DP-1 --off \
+        --output HDMI-1 --off \
+        --output DP-2 --mode 1920x1080 --pos 1920x0 --rotate normal
+}
+
+function setWorkspacesForMobileOffice() {
+    center="xinerama-0"
+    right="xinerama-1"
+
+    moveWorkspaceToOutput 1 $center
+    moveWorkspaceToOutput 2 $center
+    moveWorkspaceToOutput 3 $center
+    moveWorkspaceToOutput 4 $center
+    moveWorkspaceToOutput 5 $center
+    moveWorkspaceToOutput 6 $right
+    moveWorkspaceToOutput 7 $right
+    moveWorkspaceToOutput 8 $right
+    moveWorkspaceToOutput 9 $right
+    moveWorkspaceToOutput 0 $right
+
+    activateWorkspace 3
+    activateWorkspace 7
+
+    activateWorkspace 3
+}
+
 function setOutputsForCoffeeShop() {
     xrandr \
         --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal \
@@ -112,6 +142,12 @@ case $config in
     coffee-workspaces)
         setWorkspacesForCoffeeShop
         ;;
+    mobile-outputs)
+        setOutputsForMobileOffice
+        ;;
+    mobile-workspaces)
+        setWorkspacesForMobileOffice
+        ;;
     home-outputs)
         setOutputsForHomeOffice
         ;;
@@ -125,6 +161,8 @@ case $config in
             echo "valid config values are:"
             echo "  - coffee-outputs"
             echo "  - coffee-workspaces"
+            echo "  - mobile-outputs"
+            echo "  - mobile-workspaces"
             echo "  - home-outputs"
             echo "  - home-workspaces"
         } >&2
