@@ -8,13 +8,10 @@ zplug "b4b4r07/zplug"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "zdharma/fast-syntax-highlighting", defer:2
-zplug "djui/alias-tips"
 zplug "Tarrasch/zsh-colors"
-zplug "caarlos0/zsh-pg"
-zplug "agkozak/zsh-z"
 zplug "ohmyzsh/oh-my-zsh", use:"lib/history.zsh"
 zplug "ohmyzsh/oh-my-zsh", use:"lib/directories.zsh"
-
+zplug "jeffreytse/zsh-vi-mode"
 
 # use default readline keybindings
 bindkey -e
@@ -36,9 +33,6 @@ zplug load
 # some of my favorite options
 setopt autocd
 
-# load zle
-source ${HOME}/.zsh/zle.zsh
-
 # shared between bash and zsh
 source ${HOME}/.shell/shared
 
@@ -46,7 +40,7 @@ source ${HOME}/.shell/shared
 zstyle ':completion:*' special-dirs true
 
 # Add local bin path
-export PATH="$PATH:$HOME/bin/scripts/:$HOME/bin/scripts-bky/:$HOME/bin"
+export PATH="$HOME/bin/scripts/:$HOME/bin/scripts-bky/:$HOME/bin:$HOME/.local/bin:$PATH"
 
 # set the word characters, the stuff in the [] is removed from the
 # word char definition.  Specifically, deleting / allows for
