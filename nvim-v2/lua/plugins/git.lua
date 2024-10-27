@@ -1,60 +1,59 @@
 return {
-    {
-        'tpope/vim-fugitive',
-        lazy = false,
-        keys = {
-            { "g7", ":diffget //2<cr>", desc = "Get from left", silent = true,},
-            { "g8", ":diffget //3<cr>", desc = "Get from right", silent = true,},
-        },
-    }, {
-        "lewis6991/gitsigns.nvim",
-        opts = {
-             on_attach = function(bufnr)
-                 local gitsigns = require('gitsigns')
+	{
+		"tpope/vim-fugitive",
+		lazy = false,
+		keys = {
+			{ "g7", ":diffget //2<cr>", desc = "Get from left", silent = true },
+			{ "g8", ":diffget //3<cr>", desc = "Get from right", silent = true },
+		},
+	},
+	{
+		"lewis6991/gitsigns.nvim",
+		opts = {
+			on_attach = function(bufnr)
+				local gitsigns = require("gitsigns")
 
-                 local function map(mode, l, r, opts)
-                     opts = opts or {}
-                     opts.buffer = bufnr
-                     vim.keymap.set(mode, l, r, opts)
-                 end
+				local map = function(keys, desc, func)
+					vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
+				end
 
-                 -- Navigation
-                 map('n', ']c', function()
-                     if vim.wo.diff then
-                         vim.cmd.normal({']c', bang = true})
-                     else
-                         gitsigns.nav_hunk('next')
-                     end
-                 end)
+				-- Actions
+				map("<leader>hs", "[h]g..it [s]tage hunk", gitsigns.stage_hunk)
+				map("<leader>hr", "[h]g..it [r]eset hunk", gitsigns.reset_hunk)
+				map("<leader>hS", "[h]g..it [s]tage buffer", gitsigns.stage_buffer)
+				map("<leader>hR", "[h]g..it [r]eset buffer", gitsigns.reset_buffer)
+				map("<leader>hp", "[h]g..it [p]review hunk", gitsigns.preview_hunk)
+				map("<leader>hd", "[h]g..it [d]iff index", gitsigns.diffthis)
+				map("<leader>hD", "[h]g..it [D]iff last commit", function()
+					gitsigns.diffthis("~")
+				end)
 
-                 map('n', '[c', function()
-                     if vim.wo.diff then
-                         vim.cmd.normal({'[c', bang = true})
-                     else
-                         gitsigns.nav_hunk('prev')
-                     end
-                 end)
+				-- Undoing the last staged hunk is not very useful
+				-- unless you are playing with the git signs plugin.
+				-- But, since it is useful for that, I will leave it in.
+				map("<leader>hu", "[h]g..it [u]ndo stage hunk", gitsigns.undo_stage_hunk)
+				--
+				map("<leader>hb", "[h]g..it [b]lame", function()
+					gitsigns.blame_line({ full = true })
+				end)
 
-                 -- Actions
-                 map('n', '<leader>hs', gitsigns.stage_hunk)
-                 map('n', '<leader>hr', gitsigns.reset_hunk)
-                 map('v', '<leader>hs', function() gitsigns.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
-                 map('v', '<leader>hr', function() gitsigns.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
-                 map('n', '<leader>hS', gitsigns.stage_buffer)
-                 map('n', '<leader>hu', gitsigns.undo_stage_hunk)
-                 map('n', '<leader>hR', gitsigns.reset_buffer)
-                 map('n', '<leader>hp', gitsigns.preview_hunk)
-                 map('n', '<leader>hb', function() gitsigns.blame_line{full=true} end)
-                 map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
-                 map('n', '<leader>hd', gitsigns.diffthis)
-                 map('n', '<leader>hD', function() gitsigns.diffthis('~') end)
-                 map('n', '<leader>td', gitsigns.toggle_deleted)
+				-- Mode toggles
+				map("<leader>htb", "[h]g..it [t]oggle cur line [b]lame", gitsigns.toggle_current_line_blame)
+				map("<leader>htd", "[h]g..it [t]oggle show [d]elted", gitsigns.toggle_deleted)
 
-                 -- Text object
-                 map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
-             end
-
-
-        }
-    },
+				-- Navigation
+				local mapNav = function(keys, direction, desc)
+					map(keys, desc, function()
+						if vim.wo.diff then
+							vim.cmd.normal({ keys, bang = true })
+						else
+							gitsigns.nav_hunk(direction)
+						end
+					end)
+				end
+				mapNav("]c", "next", "jump to next [c]hange")
+				mapNav("[c", "prev", "jump to prev [c]hange")
+			end,
+		},
+	},
 }
