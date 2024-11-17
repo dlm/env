@@ -6,6 +6,9 @@ vim.keymap.set("n", "<C-k>", "<C-W>k")
 vim.keymap.set("n", "<C-h>", "<C-W>h")
 vim.keymap.set("n", "<C-l>", "<C-W>l")
 
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+
 -- clear the search highlighting
 vim.keymap.set("n", "??", ":nohlsearch<cr>")
 
