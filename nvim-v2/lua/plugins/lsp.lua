@@ -257,6 +257,11 @@ return {
 				go = { "gofmt", "goimports" },
 				nix = { "nixfmt" },
 			},
+			formatters = {
+				goimports = {
+					prepend_args = { "-local", "github.com/blocky" },
+				},
+			},
 		},
 	},
 
