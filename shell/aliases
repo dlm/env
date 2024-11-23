@@ -19,8 +19,7 @@ alias ll='ls -l'
 
 alias j='journal edit'
 alias t='tmux-sessionizer'
-alias v='NVIM_APPNAME=nvim-v2 /home/dave/dev/nvim/nvim-0.10.1/bin/nvim'
-alias vv='nvim'
+alias v='nvim'
 
 alias fd='fdfind'
 alias tf='terraform'

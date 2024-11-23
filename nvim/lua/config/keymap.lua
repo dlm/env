@@ -17,4 +17,4 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 -- "special projects"
-vim.keymap.set("n", "<leader>pe", ":e! ~/.config/nvim-v2/.<cr>")
+vim.keymap.set("n", "<leader>pe", ":e! ~/.config/nvim/.<cr>")
