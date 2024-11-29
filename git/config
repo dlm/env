@@ -5,7 +5,6 @@
     default = upstream
 [core]
     editor = nvim
-    excludesfile = ~/.gitignore_global
 [alias]
     ap = add -p
     aa = add --all

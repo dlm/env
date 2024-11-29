@@ -3,6 +3,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+set $i3 ~/.config/i3
 
 # font for window titles. ISO 10646 = Unicode
 #font -misc-fixed-medium-r-normal-*-13-120-75-75-C-70-iso10646-1
@@ -20,7 +21,7 @@ bindsym $mod+Shift+Return exec kitty
 bindsym $mod+Shift+C kill
 
 # start (a program launcher)
-bindsym $mod+p exec ~/.rofi/my-rofi
+bindsym $mod+p exec ~/.config/rofi/my-rofi
 
 # change focus
 bindsym $mod+h focus left
@@ -64,19 +65,16 @@ bindsym $mod+a focus parent
 # focus the child container
 bindcode $mod+d focus child
 
-# go back and forth between the last two workspaces
-bindsym $mod+Tab exec ~/.i3/i3_switch_screen.py
-
-bindsym XF86AudioMute exec ~/.i3/bin/toggle-volume
-bindsym XF86AudioLowerVolume exec ~/.i3/bin/update-volume -10
-bindsym XF86AudioRaiseVolume exec ~/.i3/bin/update-volume +10
+bindsym XF86AudioMute exec $i3/bin/toggle-volume
+bindsym XF86AudioLowerVolume exec $i3/bin/update-volume -10
+bindsym XF86AudioRaiseVolume exec $i3/bin/update-volume +10
 
 bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 
-bindsym XF86MonBrightnessDown exec ~/.i3/bin/update-screen-brightness -0.1
-bindsym XF86MonBrightnessUp exec ~/.i3/bin/update-screen-brightness 0.1
+bindsym XF86MonBrightnessDown exec $i3/bin/update-screen-brightness -0.1
+bindsym XF86MonBrightnessUp exec $i3/bin/update-screen-brightness 0.1
 
 # set workspace names
 set $ws1 "1.admin"
@@ -139,7 +137,7 @@ bindsym Print --release exec "scrot -s -e 'mv $f ~/Pictures/Screenshots && xclip
 # > sudo visudo
 # and added the line
 # dave ALL=NOPASSWD:/usr/sbin/pm-suspen
-bind $mod+96 exec ~/.i3/bin/lock
+bind $mod+96 exec $i3/bin/lock
 bind $mod+Shift+96 exec sudo /usr/sbin/pm-suspend
 
 
@@ -212,14 +210,13 @@ client.background        $base
 
 # commands to run at startup
 exec dropbox start
-exec_always sh ~/.shell/keyboard
+exec_always sh $i3/bin/keyboard
 exec source ~/.xsession
 exec nm-applet
 
 # Start start bar
 bar {
-    status_command i3status --config $HOME/.i3/status
-    # i3bar_command $HOME/.polybar/launch.sh
+    status_command i3status --config $i3/status
     colors {
 
         # catpuccin
