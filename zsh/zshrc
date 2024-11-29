@@ -1,17 +1,12 @@
 source ~/.zplug/init.zsh
-# do not auto load virtual environments
-# export DISABLE_VENV_CD=1
 
 zplug "b4b4r07/zplug"
-# zplug "mafredri/zsh-async"
-# zplug "sindresorhus/pure", on:"mafredri/zsh-async"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "zdharma/fast-syntax-highlighting", defer:2
 zplug "Tarrasch/zsh-colors"
 zplug "ohmyzsh/oh-my-zsh", use:"lib/history.zsh"
 zplug "ohmyzsh/oh-my-zsh", use:"lib/directories.zsh"
-# zplug "jeffreytse/zsh-vi-mode"
 
 # use default readline keybindings
 bindkey -e
@@ -33,8 +28,9 @@ zplug load
 # some of my favorite options
 setopt autocd
 
-# shared between bash and zsh
-source ${HOME}/.shell/shared
+# source additional files
+source $HOME/.config/zsh/aliases
+source $HOME/.config/zsh/env_vars
 
 # complete .. to ../
 zstyle ':completion:*' special-dirs true
@@ -46,3 +42,15 @@ export PATH="$HOME/bin/scripts/:$HOME/bin/scripts-bky/:$HOME/bin:$HOME/.local/bi
 # word char definition.  Specifically, deleting / allows for
 # removing parts of paths with C-w
 export WORDCHARS=${WORDCHARS//[\/]}
+
+eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# atuin
+. "$HOME/.atuin/bin/env"
+eval "$(atuin init zsh --disable-up-arrow)"
+
+# use ripgrep FZF
+export FZF_DEFAULT_COMMAND='rg --files --ignore-vcs --hidden'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
