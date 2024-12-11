@@ -43,6 +43,7 @@ export PATH="$HOME/bin/scripts/:$HOME/bin/scripts-bky/:$HOME/bin:$HOME/.local/bi
 # removing parts of paths with C-w
 export WORDCHARS=${WORDCHARS//[\/]}
 
+eval "$(direnv hook zsh)"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
