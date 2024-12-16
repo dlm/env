@@ -22,3 +22,6 @@ dump.rdb
 .ropeproject
 .ipynb_checkpoints
 
+# nix based env stuff
+.direnv
+.envrc
