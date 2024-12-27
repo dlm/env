@@ -62,11 +62,6 @@ return {
 					-- Find references for the word under your cursor.
 					map("gr", require("telescope.builtin").lsp_references, "[g]oto [r]eferences")
 
-					-- Jump to the type of the word under your cursor.
-					--  Useful when you're not sure what type a variable is and you want to see
-					--  the definition of its *type*, not where it was *defined*.
-					map("gt", require("telescope.builtin").lsp_type_definitions, "[g]oto [t]ype definition")
-
 					-- Jump to the implementation of the word under your cursor.
 					--  Useful when your language has ways of declaring types without an actual implementation.
 					map("gI", require("telescope.builtin").lsp_implementations, "[g]oto [I]mplementation")
@@ -74,6 +69,11 @@ return {
 					-- Fuzzy find all the symbols in your current document.
 					--  Symbols are things like variables, functions, types, etc.
 					map("<leader>lds", require("telescope.builtin").lsp_document_symbols, "[l]sp [d]ocument [s]ymbols")
+
+					-- Jump to the type of the word under your cursor.
+					--  Useful when you're not sure what type a variable is and you want to see
+					--  the definition of its *type*, not where it was *defined*.
+					map("<leader>ltd", require("telescope.builtin").lsp_type_definitions, "[l]sp [t]ype [d]efinition")
 
 					-- Fuzzy find all the symbols in your current workspace.
 					--  Similar to document symbols, except searches over your entire project.
