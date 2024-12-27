@@ -8,13 +8,26 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs =
+    {
+      nixpkgs,
+      home-manager,
+      ghostty,
+      ...
+    }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-    in {
+      otherPkgs = {
+        ghostty = ghostty.packages.${system}.default;
+      };
+    in
+    {
       homeConfigurations."dave" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
@@ -24,6 +37,10 @@
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
+        extraSpecialArgs = {
+          # Add your custom arguments here
+          inherit otherPkgs;
+        };
       };
     };
 }

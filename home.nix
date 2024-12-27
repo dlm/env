@@ -1,5 +1,9 @@
-{ config, pkgs, ... }:
-
+{
+  config,
+  pkgs,
+  otherPkgs,
+  ...
+}:
 {
   home.username = "dave";
   home.homeDirectory = "/home/dave";
@@ -19,6 +23,10 @@
 
     pkgs.neovim
     pkgs.tmux
+
+    # currently, this doesn't work on my system.
+    # I suspect because there are some graphics bugs at play
+    # otherPkgs.ghostty
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
