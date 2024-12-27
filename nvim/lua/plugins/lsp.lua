@@ -26,17 +26,17 @@ return {
 			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
 			{ "j-hui/fidget.nvim", opts = {} },
 
-            -- configure how the signature help looks and feels
-            {
-                "ray-x/lsp_signature.nvim",
-                event = "InsertEnter",
-                opts = {
-                    bind = true,
-                    hander_opts = {
-                        border = "rounded",
-                    },
-                },
-            },
+			-- configure how the signature help looks and feels
+			{
+				"ray-x/lsp_signature.nvim",
+				event = "InsertEnter",
+				opts = {
+					bind = true,
+					hander_opts = {
+						border = "rounded",
+					},
+				},
+			},
 
 			-- Allows extra capabilities provided by nvim-cmp
 			"hrsh7th/cmp-nvim-lsp",
