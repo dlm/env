@@ -45,13 +45,13 @@ export PATH="$HOME/bin:$PATH"
 # removing parts of paths with C-w
 export WORDCHARS=${WORDCHARS//[\/]}
 
+# setup shell tools
+# make sure to run atin after fzf so that ctrl-r
+# is handled by atuin
 eval "$(direnv hook zsh)"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# atuin
-. "$HOME/.atuin/bin/env"
+eval "$(fzf --zsh)"
 eval "$(atuin init zsh --disable-up-arrow)"
 
 # use ripgrep FZF
