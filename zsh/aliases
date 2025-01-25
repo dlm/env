@@ -21,6 +21,7 @@ alias rm='rm -i'
 
 alias ..='cd ..; ls'
 alias now='date -u +"%Y-%m-%dT%H:%M:%SZ"'
+alias today='date -u +"%Y-%m-%d"'
 
 alias reload='echo $SHELL | xargs basename | xargs -I {} echo source ~/.{}rc'
 
