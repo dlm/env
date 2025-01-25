@@ -14,8 +14,8 @@ force_xinerama yes
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Shift+Return exec kitty
+bindsym $mod+Return exec ghostty
+bindsym $mod+Shift+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+C kill
@@ -209,10 +209,12 @@ client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
 client.background        $base
 
 # commands to run at startup
+exec_always --no-startup-id feh --bg-fill $i3/assets/wallpaper.png
+exec_always --no-startup-id nm-applet
 exec dropbox start
-exec_always sh $i3/bin/keyboard
-exec source ~/.xsession
-exec nm-applet
+exec --no-startup-id udiskie
+#TODO make stuff below here work
+# exec_always --no-startup-id sh $i3/bin/keyboard
 
 # Start start bar
 bar {
