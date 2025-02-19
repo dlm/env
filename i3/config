@@ -100,17 +100,17 @@ bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
 
-# move focused container to workspace
-bindsym $mod+Shift+1 move workspace $ws1
-bindsym $mod+Shift+2 move workspace $ws2
-bindsym $mod+Shift+3 move workspace $ws3
-bindsym $mod+Shift+4 move workspace $ws4
-bindsym $mod+Shift+5 move workspace $ws5
-bindsym $mod+Shift+6 move workspace $ws6
-bindsym $mod+Shift+7 move workspace $ws7
-bindsym $mod+Shift+8 move workspace $ws8
-bindsym $mod+Shift+9 move workspace $ws9
-bindsym $mod+Shift+0 move workspace $ws10
+# move focused container to workspace and keep focus
+bindsym $mod+Shift+1 move workspace $ws1, workspace $ws1
+bindsym $mod+Shift+2 move workspace $ws2, workspace $ws2
+bindsym $mod+Shift+3 move workspace $ws3, workspace $ws3
+bindsym $mod+Shift+4 move workspace $ws4, workspace $ws4
+bindsym $mod+Shift+5 move workspace $ws5, workspace $ws5
+bindsym $mod+Shift+6 move workspace $ws6, workspace $ws6
+bindsym $mod+Shift+7 move workspace $ws7, workspace $ws7
+bindsym $mod+Shift+8 move workspace $ws8, workspace $ws8
+bindsym $mod+Shift+9 move workspace $ws9, workspace $ws9
+bindsym $mod+Shift+0 move workspace $ws10, workspace $ws10
 
 # bind applications to workspaces
 assign [class="wavebox"] → workspace $ws1
