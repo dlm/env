@@ -1,7 +1,22 @@
-tags
+# nix based env stuff
+.direnv
+.envrc
+
+# mac stuff
 .DS_Store
+
+# dbs
 .dropbox
 dump.rdb
+
+# general programming
+tags
+.env
+
+# python
+*.pyc
+.ropeproject
+.ipynb_checkpoints
 
 # latex
 *.aux
@@ -15,13 +30,3 @@ dump.rdb
 *.nav
 *.snm
 *.toc
-
-
-# python
-*.pyc
-.ropeproject
-.ipynb_checkpoints
-
-# nix based env stuff
-.direnv
-.envrc
