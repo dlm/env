@@ -37,32 +37,28 @@ function moveWorkspaceToOutput() {
 
 function setOutputsForHomeOffice() {
     xrandr \
-        --output eDP-1 --primary --mode 1920x1080 --pos 0x360 --rotate normal \
-        --output DP-1 --mode 2560x1440 --pos 1920x0 --rotate normal \
+        --output eDP-1 --primary --mode 1920x1080 --pos 0x934 --rotate normal \
+        --output DP-1 --off \
         --output HDMI-1 --off \
-        --output DP-2 --mode 2560x1440 --pos 4480x0 --rotate normal
+        --output DP-2 --mode 5120x2160 --pos 1920x0 --rotate normal
 }
 
 function setWorkspacesForHomeOffice() {
     left="xinerama-0"
     center="xinerama-1"
-    right="xinerama-2"
 
-    moveWorkspaceToOutput 1 $left
-    moveWorkspaceToOutput 2 $left
+    moveWorkspaceToOutput 1 $center
+    moveWorkspaceToOutput 2 $center
     moveWorkspaceToOutput 3 $center
     moveWorkspaceToOutput 4 $center
     moveWorkspaceToOutput 5 $center
-    moveWorkspaceToOutput 6 $right
-    moveWorkspaceToOutput 7 $right
-    moveWorkspaceToOutput 8 $right
-    moveWorkspaceToOutput 9 $right
-    moveWorkspaceToOutput 0 $right
+    moveWorkspaceToOutput 6 $cetner
+    moveWorkspaceToOutput 7 $cetner
+    moveWorkspaceToOutput 8 $cetner
+    moveWorkspaceToOutput 9 $cetner
+    moveWorkspaceToOutput 0 $left
 
-    activateWorkspace 1
-    activateWorkspace 3
-    activateWorkspace 7
-
+    activateWorkspace 0
     activateWorkspace 3
 }
 
