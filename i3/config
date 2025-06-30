@@ -86,7 +86,7 @@ set $ws6 6
 set $ws7 "7.ref"
 set $ws8 "8.msg"
 set $ws9 "9.todo"
-set $ws10 10
+set $ws10 "10.share"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
