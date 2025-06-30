@@ -163,7 +163,7 @@ mode "resize" {
 bindsym $mod+q mode "resize"
 
 # add some style
-font pango: Dejavu Sans Mono 8
+font pango: Dejavu Sans Mono 9
 # nice orange coloring
 # class                   border  backgr. text
 # client.focused            #CD6D37 #CD6D37 #000000
