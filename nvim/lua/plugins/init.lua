@@ -1,19 +1,34 @@
 return {
 	-- colors, main one last
-	"catppuccin/nvim",
 	"folke/tokyonight.nvim",
 	"ellisonleao/gruvbox.nvim",
+	"navarasu/onedark.nvim",
 	{
-		"navarasu/onedark.nvim",
+		"catppuccin/nvim",
 		lazy = false, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
-			vim.cmd.colorscheme("onedark")
+			require("catppuccin").setup({
+				flavour = "frappe",
+				transparent_background = true,
+				-- integrations = {
+				-- 	cmp = true,
+				-- 	gitsigns = true,
+				-- 	telescope = true,
+				-- 	nvimtree = true,
+				-- 	notify = true,
+				-- 	mini = true,
+				-- 	-- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+				-- },
+			})
+
+			vim.cmd.colorscheme("catppuccin")
 		end,
 	},
 
+	"tpope/vim-surround",
 	{ "stevearc/oil.nvim", opts = {} },
-
+	{ "echasnovski/mini.trailspace", opts = {} },
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v3.x",
