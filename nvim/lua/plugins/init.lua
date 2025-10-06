@@ -24,4 +24,21 @@ return {
 			-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 		},
 	},
+
+	--   {
+	--       "github/copilot.vim",
+	-- -- config = function()
+	-- --           -- vim.g.copilot_no_tab_map = true
+	-- --           -- vim.api.nvim_set_keymap("i", "<C-y>", 'copilot#Accept("<CR>")', { expr = true, silent = true })
+	-- -- end,
+	--   },
+	--
+	{
+		"supermaven-inc/supermaven-nvim",
+		opts = {
+			keymaps = {
+				accept_suggestion = "<C-y>",
+			},
+		},
+	},
 }
