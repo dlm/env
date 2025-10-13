@@ -51,8 +51,8 @@ return {
 						end
 					end)
 				end
-				mapNav("]c", "next", "jump to next [c]hange")
-				mapNav("[c", "prev", "jump to prev [c]hange")
+				mapNav("]h", "next", "jump to next [h]unk change")
+				mapNav("[h", "prev", "jump to prev [h]unk change")
 			end,
 		},
 	},
