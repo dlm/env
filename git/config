@@ -9,6 +9,7 @@
     ap = add -p
     aa = add --all
     br = branch
+    brd = "!git branch -d $(git branch --no-color | fzf)"
     ci = commit -v
     co = checkout
     cob="!git checkout $(git branch --no-color | fzf)"

@@ -30,3 +30,6 @@ tags
 *.nav
 *.snm
 *.toc
+
+# jj
+.jj
