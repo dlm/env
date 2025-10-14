@@ -79,8 +79,8 @@ bindsym XF86MonBrightnessUp exec $i3/bin/update-screen-brightness 0.1
 # set workspace names
 set $ws1 "1.admin"
 set $ws2 2
-set $ws3 "3.dev"
-set $ws4 4
+set $ws3 "3.ai"
+set $ws4 "4.dev"
 set $ws5 5
 set $ws6 6
 set $ws7 "7.ref"
