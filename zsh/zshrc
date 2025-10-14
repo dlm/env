@@ -5,6 +5,7 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "zdharma/fast-syntax-highlighting", defer:2
 zplug "Tarrasch/zsh-colors"
+zplug "jeffreytse/zsh-vi-mode"
 zplug "ohmyzsh/oh-my-zsh", use:"lib/history.zsh"
 zplug "ohmyzsh/oh-my-zsh", use:"lib/directories.zsh"
 
