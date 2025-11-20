@@ -4,6 +4,9 @@ alias l = ls
 alias g = git
 alias t = tmux-sessionizer
 
+# simple functions
+def nr [package: string] { nix run $"nixpkgs#($package)" }
+
 # set the editor
 $env.buffer_editor = "nvim"
 $env.EDITOR = "nvim"
