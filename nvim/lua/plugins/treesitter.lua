@@ -1,24 +1,22 @@
-return  {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    main = "nvim-treesitter.configs", -- Sets main module to use for opts
-    opts = {
-      ensure_installed = { "lua", "bash", "go", "markdown", "lua", "vim", "vimdoc" },
-      -- Automatically install missing parsers when entering buffer
-      -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-      auto_install = true,
+return {
+	"nvim-treesitter/nvim-treesitter",
+	build = ":TSUpdate",
+	main = "nvim-treesitter.configs", -- Sets main module to use for opts
+	opts = {
+		ensure_installed = { "lua", "bash", "go", "markdown", "lua", "vim", "vimdoc" },
+		-- Automatically install missing parsers when entering buffer
+		-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+		auto_install = true,
 
-
-      highlight = {
-        enable = true,
-        -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-        --  If you are experiencing weird indenting issues, add the language to
-        --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        additional_vim_regex_highlighting = { 'ruby' },
-      },
-      indent = { enable = true, disable = { 'ruby' } },
-
-   },
+		highlight = {
+			enable = true,
+			-- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
+			--  If you are experiencing weird indenting issues, add the language to
+			--  the list of additional_vim_regex_highlighting and disabled languages for indent.
+			additional_vim_regex_highlighting = { "ruby" },
+		},
+		indent = { enable = true, disable = { "ruby" } },
+	},
 }
 
 -- these are all kind of broken
@@ -110,5 +108,3 @@ return  {
 -- vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F)
 -- vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t)
 -- vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
-
-
