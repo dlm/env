@@ -3,6 +3,7 @@ alias v = nvim
 alias l = ls
 alias g = git
 alias t = tmux-sessionizer
+alias j = journal edit
 
 # simple functions
 def nr [package: string] { nix run $"nixpkgs#($package)" }
