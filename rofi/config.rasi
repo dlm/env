@@ -1,0 +1,19 @@
+configuration {
+  display-ssh:                    " :";
+  display-run:                    " :";
+  display-drun:                   "󱓞 :";
+  display-window:                 " :";
+  display-combi:                  " :";
+  display-filebrowser:            "󰉋 :";
+  show-icons: true;
+  timeout {
+    action: "kb-cancel";
+    delay:  0;
+  }
+  filebrowser {
+    directories-first: true;
+    sorting-method:    "name";
+  }
+}
+
+@theme "~/.config/rofi/themes/catppuccin-mocha.rasi"
