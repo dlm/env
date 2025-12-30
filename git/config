@@ -5,6 +5,9 @@
     default = upstream
 [core]
     editor = nvim
+    # use delta as the pager in side by side mode if the
+    # screen is wide enough else, use the standard mode
+    pager = [ "${COLUMNS}" -ge 120 ] && delta --side-by-side || delta
 [alias]
     ap = add -p
     aa = add --all
@@ -20,32 +23,14 @@
     publish = "!git push -u origin $(git rev-parse --abbrev-ref HEAD)"
     st = status
 
-# Disable below here for carpentries
 [merge]
-    conflictstyle = diff3
-    tool = opendiff
-[color]
-    ui = always
-[color "diff"]
-    meta = yellow bold
-    commit = green bold
-    frag = magenta bold
-    old = red bold
-    new = green bold
-    whitespace = red reverse
-[color "diff-highlight"]
-    oldNormal = red bold
-    oldHighlight = "red bold 52"
-    newNormal = "green bold"
-    newHighlight = "green bold 22"
-[color "branch"]
-    current = yellow reverse
-    local = yellow
-    remote = green
-[color "status"]
-    added = yellow
-    changed = green
-    untracked = cyan
+    conflictStyle = zdiff3
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    line-numbers = true
 [hub]
 	protocol = ssh
 [init]
