@@ -1,2 +1,0 @@
-#!/bin/bash
-cal | grep -C6 --color "\b$(date +%e)\b"
