@@ -1,9 +1,23 @@
 #!/usr/bin/env bash
 
 inc=${1:-0.1}
-currentBrightness=$(xrandr --verbose | awk '/Brightness/ { print $2; exit }')
-nextBrightness=$(python -c "x=$currentBrightness+$inc; print(max(min(x,1), 0))")
-echo $nextBrightness
 
-display=$(xrandr -q | grep ' connected' | cut -d' ' -f1)
-xrandr --output "$display" --brightness "$nextBrightness"
+# Get all connected displays
+displays=$(xrandr -q | grep ' connected' | cut -d' ' -f1)
+
+# Get current brightness (from first connected display)
+currentBrightness=$(xrandr --verbose | awk '/Brightness/ { print $2; exit }')
+
+# Calculate next brightness (capped between 0.1 and 1.0)
+nextBrightness=$(python -c "x=$currentBrightness+$inc; print(max(min(x,1.0), 0.1))")
+
+# Apply to all connected displays
+for display in $displays; do
+    xrandr --output "$display" --brightness "$nextBrightness"
+done
+
+# Convert to percentage for notification
+brightnessPercent=$(python -c "print(int($nextBrightness * 100))")
+
+# Send notification
+notify-send -t 1000 -h int:value:$brightnessPercent -h string:synchronous:brightness "Brightness: ${brightnessPercent}%"
