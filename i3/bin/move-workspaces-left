@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Get the leftmost monitor based on x-position
+leftMonitor=$(i3-msg -t get_outputs | jq -r 'map(select(.active==true)) | sort_by(.rect.x) | .[0].name')
+
+# Move all workspaces to the left monitor
+for workspace in $(i3-msg -t get_workspaces | jq -r '.[].name'); do
+    i3-msg "workspace $workspace; move workspace to output $leftMonitor"
+done
+
+# Send notification
+notify-send -t 2000 "Moved all workspaces to $leftMonitor (left monitor)"

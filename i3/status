@@ -7,12 +7,19 @@ general {
 }
 
 order = "wireless wlp0s20f3"
+order += "volume master"
 order += "battery 0"
 order += "time"
 
 wireless wlp0s20f3 {
     format_up = "(%quality at %essid) %ip"
     format_down = "no wifi"
+}
+
+volume master {
+    format = "Vol: %volume"
+    format_muted = "Vol: muted"
+    device = "default"
 }
 
 ethernet eth1 {

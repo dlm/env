@@ -9,20 +9,21 @@ set $i3 ~/.config/i3
 # font for window titles. ISO 10646 = Unicode
 #font -misc-fixed-medium-r-normal-*-13-120-75-75-C-70-iso10646-1
 
-force_xinerama yes
+# force_xinerama yes
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
+# start apps
 bindsym $mod+Return exec ghostty
 bindsym $mod+Shift+Return exec i3-sensible-terminal
+bindsym $mod+Shift+b exec flatpak run io.github.zen_browser.zen
 
 # kill focused window
 bindsym $mod+Shift+C kill
 
 # start (a program launcher)
-bindsym $mod+p exec ~/.config/rofi/my-rofi
+bindsym $mod+p exec rofi -show drun
 
 # change focus
 bindsym $mod+h focus left
@@ -44,15 +45,30 @@ bindsym $mod+Shift+i move workspace to output right
 bindsym $mod+n split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+# bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+Shift+f fullscreen
 
+# move all workspaces to left/right monitor
+bindsym $mod+Shift+Ctrl+u exec $i3/bin/move-workspaces-left
+bindsym $mod+Shift+Ctrl+i exec $i3/bin/move-workspaces-right
+
+
 # change container layout (stacked, tabbed, default)
-bindsym $mod+Shift+a layout tabbed
-bindsym $mod+Shift+s layout stacking
-bindsym $mod+Shift+d layout default
+mode "layout" {
+    bindsym e layout default
+    bindsym a layout tabbed
+    bindsym s layout stacking
+    bindsym d layout default
+    bindsym Tab layout toggle splith tabbed stacked splitv
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+e mode "layout"
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -124,8 +140,7 @@ bindsym $mod+r reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+R restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
+bindsym $mod+Shift+Escape exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # take screen shots
 bindsym Print --release exec "scrot -s -e 'mv $f ~/Pictures/Screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/Screenshots/$n'; sleep 1; exec notify-send 'screenshot has been saved to ~/Pictures/Screenshots'"
@@ -144,17 +159,17 @@ bind $mod+Shift+96 exec sudo /usr/sbin/pm-suspend
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-    bindsym h resize shrink left 5 px or 5 ppt
-    bindsym Shift+H resize grow   left 5 px or 5 ppt
+    bindsym h resize grow left 5 px or 5 ppt
+    bindsym Shift+H resize shrink left 5 px or 5 ppt
 
-    bindsym j resize shrink down 5 px or 5 ppt
-    bindsym Shift+J resize grow   down 5 px or 5 ppt
+    bindsym j resize grow down 5 px or 5 ppt
+    bindsym Shift+J resize shrink down 5 px or 5 ppt
 
-    bindsym k resize shrink up 5 px or 5 ppt
-    bindsym Shift+K resize grow   up 5 px or 5 ppt
+    bindsym k resize grow up 5 px or 5 ppt
+    bindsym Shift+K resize shrink up 5 px or 5 ppt
 
-    bindsym l resize shrink right 5 px or 5 ppt
-    bindsym Shift+L resize grow   right 5 px or 5 ppt
+    bindsym l resize grow right 5 px or 5 ppt
+    bindsym Shift+L resize shrink right 5 px or 5 ppt
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
