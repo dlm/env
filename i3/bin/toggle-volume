@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 
-dir=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
-active_sink=$($dir/active-sink)
+# Toggle mute
+wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 
-pactl set-sink-mute "$active_sink" toggle
+# Get mute status and send notification
+muted=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -o "MUTED")
+if [ -n "$muted" ]; then
+    notify-send -t 1000 -h string:synchronous:volume "Volume: Muted"
+else
+    volume=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}')
+    notify-send -t 1000 -h int:value:$volume -h string:synchronous:volume "Volume: ${volume}%"
+fi

@@ -2,16 +2,15 @@
 
 inc=${1:-10}
 
-dir=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
-activeSink=$($dir/active-sink)
-currentVolume=$(pactl list sinks | grep '^[[:space:]]Volume:' \
-    | head -n $(( $activeSink + 1 )) | tail -n 1 \
-    | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,' )
+# Get current volume percentage
+currentVolume=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}')
 
-echo $currentVolume
-
+# Calculate next volume (capped at 100%)
 nextVolume=$(python -c "x=$currentVolume+$inc; print(max(min(x,100), 0))")
-echo $nextVolume
 
-pactl set-sink-mute "$activeSink" false
-pactl set-sink-volume "$activeSink" "$nextVolume"%
+# Unmute and set volume
+wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
+wpctl set-volume @DEFAULT_AUDIO_SINK@ "${nextVolume}%"
+
+# Send notification
+notify-send -t 1000 -h int:value:$nextVolume -h string:synchronous:volume "Volume: ${nextVolume}%"
