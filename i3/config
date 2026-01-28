@@ -1,37 +1,35 @@
 # i3 config file (v4)
-#
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
 # set $mod Mod1
 set $i3 ~/.config/i3
 
-# font for window titles. ISO 10646 = Unicode
-#font -misc-fixed-medium-r-normal-*-13-120-75-75-C-70-iso10646-1
-
-# force_xinerama yes
-
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# auto-float terminal setup
+set $auto_float_terminal_title auto-float-terminal
+for_window [title=$auto_float_terminal_title] floating enable
+
 # start apps
-bindsym $mod+Return exec ghostty
-bindsym $mod+Shift+Return exec i3-sensible-terminal
-bindsym $mod+Shift+b exec flatpak run io.github.zen_browser.zen
+bindsym $mod+Return split h; exec $i3/bin/launch terminal
+bindsym $mod+Shift+Return split v; exec $i3/bin/launch terminal
+bindsym $mod+Ctrl+Return exec $i3/bin/launch terminal --title "$auto_float_terminal_title"
+bindsym $mod+p exec  $i3/bin/launch launcher
+bindsym $mod+Shift+b exec $i3/bin/launch browser
+bindsym $mod+Shift+a exec $i3/bin/launch webapp https://chatgpt.com/
+bindsym $mod+Shift+x exec $i3/bin/launch clipboard
+bindsym $mod+Shift+d exec $i3/bin/launch terminal --title "$auto_float_terminal_title" yazi
+bindsym Print --release exec $i3/bin/launch screenshot
 
 # kill focused window
 bindsym $mod+Shift+C kill
-
-# start (a program launcher)
-bindsym $mod+p exec rofi -show drun
 
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-# bindsym $mod+u focus left
-# bindsym $mod+i focus right
 
 # move focused window
 bindsym $mod+Shift+h move left
@@ -45,14 +43,18 @@ bindsym $mod+Shift+i move workspace to output right
 bindsym $mod+n split h
 
 # split in vertical orientation
-# bindsym $mod+v split v
+bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+Shift+f fullscreen
 
 # move all workspaces to left/right monitor
-bindsym $mod+Shift+Ctrl+u exec $i3/bin/move-workspaces-left
-bindsym $mod+Shift+Ctrl+i exec $i3/bin/move-workspaces-right
+bindsym $mod+Shift+Ctrl+h exec $i3/bin/move-workspaces-left
+bindsym $mod+Shift+Ctrl+l exec $i3/bin/move-workspaces-right
+
+# scratchpad management
+bindsym $mod+grave scratchpad show
+bindsym $mod+Shift+grave move scratchpad
 
 
 # change container layout (stacked, tabbed, default)
@@ -60,15 +62,16 @@ mode "layout" {
     bindsym e layout default
     bindsym a layout tabbed
     bindsym s layout stacking
-    bindsym d layout default
+    bindsym d layout splith
+    bindsym f layout splitv
     bindsym Tab layout toggle splith tabbed stacked splitv
 
     # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+    bindsym Return mode "default"; exec pkill i3-nagbar
+    bindsym Escape mode "default"; exec pkill i3-nagbar
 }
 
-bindsym $mod+e mode "layout"
+bindsym $mod+e mode "layout"; exec i3-nagbar -m "LAYOUT MODE: a=tabbed s=stacking d=default Tab=toggle split" -t warning
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -125,11 +128,12 @@ bindsym $mod+Shift+8 move workspace $ws8, workspace $ws8
 bindsym $mod+Shift+9 move workspace $ws9, workspace $ws9
 bindsym $mod+Shift+0 move workspace $ws10, workspace $ws10
 
-# bind applications to workspaces
-assign [class="wavebox"] → workspace $ws1
-assign [class="qutebrowser"] → workspace $ws7
-assign [class="Slack"] → workspace $ws8
-assign [class="Remember The Milk"] → workspace $ws9
+# setup ghostty scrollback floatting window
+set $ghostty_scrollback_title "Ghostty Scrollback"
+
+bindsym $mod+Shift+y exec --no-startup-id \
+  ~/bin/scripts/ghostty-scrollback-float '$ghostty_scrollback_title'
+for_window [title=$ghostty_scrollback_title] floating enable
 
 # reload the configuration file
 bindsym $mod+r reload
@@ -138,8 +142,6 @@ bindsym $mod+Shift+R restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+Escape exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-# take screen shots
-bindsym Print --release exec "scrot -s -e 'mv $f ~/Pictures/Screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/Screenshots/$n'; sleep 1; exec notify-send 'screenshot has been saved to ~/Pictures/Screenshots'"
 
 
 # $mod+F12 locks the screen and
@@ -168,11 +170,11 @@ mode "resize" {
     bindsym Shift+L resize shrink right 5 px or 5 ppt
 
     # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+    bindsym Return mode "default"; exec pkill i3-nagbar
+    bindsym Escape mode "default"; exec pkill i3-nagbar
 }
 
-bindsym $mod+q mode "resize"
+bindsym $mod+q mode "resize"; exec i3-nagbar -m "RESIZE MODE: hjkl=grow Shift+HJKL=shrink" -t warning
 
 # add some style
 font pango: Dejavu Sans Mono 9
@@ -221,10 +223,8 @@ client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
 client.background        $base
 
 # commands to run at startup
-exec_always --no-startup-id feh --bg-fill $i3/assets/wallpaper.png
 exec_always --no-startup-id nm-applet
 exec dropbox start
-exec --no-startup-id udiskie
 #TODO make stuff below here work
 # exec_always --no-startup-id sh $i3/bin/keyboard
 
