@@ -37,3 +37,22 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
 
 vim.opt.spell = true
+
+-- copy the contents of the clipboard to the
+-- system clipboard when we exit neovim
+vim.api.nvim_create_autocmd("VimLeave", {
+	callback = function()
+		if vim.fn.has("clipboard") == 0 then
+			return
+		end
+
+		local clipboard_content = vim.fn.getreg("+")
+		if vim.fn.executable("xclip") == 1 then
+			vim.fn.system("xclip -selection clipboard", clipboard_content)
+		elseif vim.fn.executable("xsel") == 1 then
+			vim.fn.system("xsel --clipboard --input", clipboard_content)
+		elseif vim.fn.executable("wl-copy") == 1 then -- Wayland
+			vim.fn.system("wl-copy", clipboard_content)
+		end
+	end,
+})
