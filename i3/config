@@ -22,6 +22,9 @@ bindsym $mod+Shift+x exec $i3/bin/launch clipboard
 bindsym $mod+Shift+d exec $i3/bin/launch terminal --title "$auto_float_terminal_title" yazi
 bindsym Print --release exec $i3/bin/launch screenshot
 
+# setup ghostty scrollback floatting window
+bindsym $mod+Shift+y exec ~/bin/scripts/ghostty-scrollback-float '$auto_float_terminal_title'
+
 # kill focused window
 bindsym $mod+Shift+C kill
 
@@ -127,13 +130,6 @@ bindsym $mod+Shift+7 move workspace $ws7, workspace $ws7
 bindsym $mod+Shift+8 move workspace $ws8, workspace $ws8
 bindsym $mod+Shift+9 move workspace $ws9, workspace $ws9
 bindsym $mod+Shift+0 move workspace $ws10, workspace $ws10
-
-# setup ghostty scrollback floatting window
-set $ghostty_scrollback_title "Ghostty Scrollback"
-
-bindsym $mod+Shift+y exec --no-startup-id \
-  ~/bin/scripts/ghostty-scrollback-float '$ghostty_scrollback_title'
-for_window [title=$ghostty_scrollback_title] floating enable
 
 # reload the configuration file
 bindsym $mod+r reload
