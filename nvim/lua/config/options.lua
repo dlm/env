@@ -25,6 +25,9 @@ vim.opt.smartcase = true
 
 vim.opt.termguicolors = true
 
+-- make vertical splits open to the right (affects things like Oil preview)
+vim.opt.splitright = true
+
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
