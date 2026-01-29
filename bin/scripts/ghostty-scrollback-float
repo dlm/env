@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+EXPORT_KEYS="super+ctrl+shift+j"
+TITLE="${1:-Ghostty Scrollback}"   # passed from i3
+
+# --- helpers ---
+notify() {
+    notify-send "$TITLE" "$1"
+}
+
+get_clipboard() {
+    xclip -o -selection clipboard 2>/dev/null
+}
+
+notify "title: $TITLE"
+
+# --- guard: focused window must be Ghostty ---
+focused_class="$(
+  i3-msg -t get_tree \
+    | jq -r '.. | objects | select(.focused? == true) | .window_properties.class // empty' \
+    | head -n1
+)"
+
+if [[ "$focused_class" != "com.mitchellh.ghostty" ]]; then
+  notify "Focused window is not Ghostty (class: ${focused_class:-unknown})."
+  exit 0
+fi
+
+# Get the focused window ID from i3
+focused_id="$(
+  i3-msg -t get_tree \
+    | jq -r '.. | objects | select(.focused? == true) | .window // empty' \
+    | head -n1
+)"
+
+if [[ -z "$focused_id" ]]; then
+    notify "Could not determine focused window ID"
+    exit 1
+fi
+
+notify "Focused window ID: $focused_id"
+
+# 0) Clear clipboard
+echo "" | xclip -selection clipboard
+
+sleep 0.05
+
+# 1) Trigger Ghostty export+copy
+xdotool key --window "$focused_id" --clearmodifiers "$EXPORT_KEYS"
+xdotool keyup Super_L Super_R Alt_L Alt_R Control_L Control_R Shift_L Shift_R
+
+# 2) Wait for clipboard + file
+path=""
+for _ in $(seq 1 60); do
+  path="$(get_clipboard | tr -d '\r\n')"
+  if [[ -n "$path" && -f "$path" ]]; then
+    break
+  fi
+  echo $path
+  sleep 0.01
+done
+
+if [[ -z "$path" || ! -f "$path" ]]; then
+  notify "Couldn't get scrollback filepath from clipboard."
+  exit 1
+fi
+
+# 3) Open floating Ghostty with RO nvim
+exec ghostty --title="$TITLE" -e nvim -R -c "normal G" "$path"
+
