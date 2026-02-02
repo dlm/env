@@ -1,0 +1,32 @@
+# NOTE: After editing this file, press ctrl+shift+, in Ghostty to reload the config!
+
+# === Window/Desktop Integration ===
+# This disables the gtk title bar.
+# In the case of i3, it allows us to get the same i3 highlighting
+# as in other applications.
+# Note that when changing this, you will need to close all windows
+# and restart ghostty for the change to take effect.
+gtk-titlebar = false
+window-decoration = server
+
+# === Appearance ===
+font-size = 10
+theme = catppuccin-frappe.conf
+
+# === Behavior ===
+mouse-hide-while-typing = true
+copy-on-select = clipboard
+
+# === Keybindings ===
+# Custom scroll keybinds optimized for nav-layer ergonomics:
+# - Hold 'a' (nav mode) + 's' (ctrl) + 'u/i' for line scrolling
+# - Add 'd' (shift) for 5-line scrolling
+
+# Single line scrolling (fine control)
+keybind = ctrl+page_up=scroll_page_lines:-1
+keybind = ctrl+page_down=scroll_page_lines:1
+
+# Multi-line scrolling (faster but still granular)
+keybind = ctrl+shift+page_up=scroll_page_lines:-5
+keybind = ctrl+shift+page_down=scroll_page_lines:5
+
