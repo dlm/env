@@ -47,6 +47,12 @@ $env.config.keybindings ++= [
     }
 ]
 
+# set the history management
+$env.config.history = {
+    file_format: "sqlite"
+    isolation: true
+}
+
 # set the path
 $env.PATH = [
     ($nu.home-path | path join "bin/scripts")
@@ -58,7 +64,6 @@ source ~/.local/share/nushell/vendor/plugins/starship.nu
 source ~/.local/share/nushell/vendor/plugins/atuin.nu
 source ~/.local/share/nushell/vendor/plugins/zoxide.nu
 source ~/.local/share/nushell/vendor/plugins/carapace.nu
-
 
 # Set the start banner
 def show_banner [] {
