@@ -30,3 +30,5 @@ keybind = ctrl+page_down=scroll_page_lines:1
 keybind = ctrl+shift+page_up=scroll_page_lines:-5
 keybind = ctrl+shift+page_down=scroll_page_lines:5
 
+# so that shift+enter adds a newline for claude-code
+keybind = shift+enter=text:\x1b\r
