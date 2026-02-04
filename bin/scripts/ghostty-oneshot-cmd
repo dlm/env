@@ -1,0 +1,123 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+TITLE="auto-float-terminal"
+
+#─── i3 context ──────────────────────────────────────────────────
+focused_pid="$(
+  i3-msg -t get_tree | jq -r '
+    recurse(.nodes[]?, .floating_nodes[]?)
+    | select(.focused==true)
+    | .pid
+  '
+)"
+focused_id="$(
+  i3-msg -t get_tree | jq -r '
+    recurse(.nodes[]?, .floating_nodes[]?)
+    | select(.focused==true)
+    | .id
+  '
+)"
+
+focused_cwd=""
+if [[ -n "${focused_pid:-}" && "$focused_pid" != "null" && -r "/proc/$focused_pid/cwd" ]]; then
+  focused_cwd="$(readlink -f "/proc/$focused_pid/cwd" || true)"
+fi
+[[ -z "$focused_cwd" ]] && focused_cwd="$PWD"
+export ONESHOT_CWD="$focused_cwd"
+
+#─── clipboard prefill ───────────────────────────────────────────
+ONESHOT_PREFILL=""
+if [[ "${ONESHOT_NO_PREFILL:-0}" != "1" ]]; then
+  raw=""
+  if command -v xclip >/dev/null 2>&1; then
+    raw="$(xclip -o -selection primary 2>/dev/null || true)"
+    [[ -z "$raw" ]] && raw="$(xclip -o -selection clipboard 2>/dev/null || true)"
+  elif command -v xsel >/dev/null 2>&1; then
+    raw="$(xsel --primary 2>/dev/null || true)"
+    [[ -z "$raw" ]] && raw="$(xsel --clipboard 2>/dev/null || true)"
+  fi
+  trimmed="$(printf "%s" "${raw:-}" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+  lines="$(printf "%s" "$trimmed" | grep -c "^" || true)"
+  [[ -n "$trimmed" && "$lines" -le 5 && "${#trimmed}" -le 500 ]] && ONESHOT_PREFILL="$trimmed"
+fi
+export ONESHOT_PREFILL
+
+#─── nushell popup script ────────────────────────────────────────
+# Passed via env to avoid the '\'' quoting hell in the ghostty invocation.
+read -r -d '' ONESHOT_NU <<'NUEOF' || true
+# ── palette ────────────────────────────────────────────────────
+# base-16 names; catppuccin theme remaps these automatically
+let ca = (ansi {fg: "magenta"})      # accent (mauve)
+let cb = (ansi {attr: "bold"})
+let cd = (ansi {attr: "dim"})
+let cg = (ansi {fg: "green"})
+let cr = (ansi {fg: "red"})
+let cx = (ansi reset)
+
+# ── fixed-width rules (50 cols) ────────────────────────────────
+let HR  = $"($ca)──────────────────────────────────────────────────($cx)"
+let HDR = $"($ca)─────────────────────── cmd ──────────────────────($cx)"
+
+# ── input phase ────────────────────────────────────────────────
+print $HDR
+let prefill = ($env.ONESHOT_PREFILL? | default "")
+let prompt_str = if not ($prefill | str trim | is-empty) {
+  $"($cb)($ca)  ❯($cx) ($cd)[($prefill)]($cx) "
+} else {
+  $"($cb)($ca)  ❯($cx) "
+}
+print -n $prompt_str
+let entered = (run-external "bash" "-c" "read -r line; printf '%s' \"$line\"" | str trim)
+let cmd = if ($entered | str trim | is-empty) { $prefill } else { $entered }
+if ($cmd | str trim | is-empty) { exit 0 }
+
+# ── resize for output ──────────────────────────────────────────
+run-external "i3-msg" "[title=\"^auto-float-terminal\"] resize set width 650 height 450"
+run-external "i3-msg" "[title=\"^auto-float-terminal\"] move position center"
+
+# ── output phase ───────────────────────────────────────────────
+print ""
+print $HR
+if ($env.ONESHOT_CWD? != null and ($env.ONESHOT_CWD | path exists)) {
+  cd $env.ONESHOT_CWD
+}
+print $"($cd)  (pwd)($cx)"
+print $"($cb)($ca)  ❯($cx) ($cmd)"
+print $HR
+print ""
+
+run-external "bash" "-lc" $"set -o pipefail; ($cmd) | tee /tmp/.oneshot-out"
+let rc = $env.LAST_EXIT_CODE
+
+# copy stdout to clipboard if non-empty
+run-external "bash" "-c" "[ -s /tmp/.oneshot-out ] && setsid xclip -selection clipboard < /tmp/.oneshot-out"
+let copied = ($env.LAST_EXIT_CODE == 0)
+
+print ""
+print $HR
+let cp = if $copied { " · copied" } else { "" }
+if ($rc == 0) {
+  print $"($cg)($cb)  ✓($cx) ($rc)($cd)($cp)  · any key($cx)"
+} else {
+  print $"($cr)($cb)  ✗($cx) ($rc)($cd)($cp)  · any key($cx)"
+}
+run-external "bash" "-c" "read -s -n1"
+exit $rc
+NUEOF
+export ONESHOT_NU
+
+#─── launch ──────────────────────────────────────────────────────
+ghostty --title="$TITLE" -e bash -lc 'nu -c "$ONESHOT_NU"' &
+
+# ── i3: small centered popup (input phase) ─────────────────────
+sleep 0.08
+i3-msg "[title=\"^${TITLE}$\"] border pixel 1"                  >/dev/null 2>&1 || true
+i3-msg "[title=\"^${TITLE}$\"] resize set width 500 height 85"  >/dev/null 2>&1 || true
+i3-msg "[title=\"^${TITLE}$\"] move position center"            >/dev/null 2>&1 || true
+i3-msg "[title=\"^${TITLE}$\"] focus"                           >/dev/null 2>&1 || true
+
+#─── restore focus on exit ───────────────────────────────────────
+wait || true
+[[ -n "${focused_id:-}" && "$focused_id" != "null" ]] &&
+  i3-msg "[con_id=${focused_id}] focus" >/dev/null 2>&1 || true
