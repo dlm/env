@@ -33,3 +33,6 @@ tags
 
 # jj
 .jj
+
+# claude project local settings
+**/.claude/settings.local.json
