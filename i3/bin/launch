@@ -22,7 +22,7 @@ export def --wrapped "main terminal" [--title: string, ...cmd] {
     ghostty ...$args
 }
 export def "main launcher" [] { rofi -show drun }
-export def "main browser" [] { flatpak run io.github.zen_browser.zen }
+export def "main browser" [] { flatpak run app.zen_browser.zen }
 export def "main webapp" [url: string] { google-chrome-stable --app=($url) }
 export def "main clipboard" [] { with-env { CM_LAUNCHER: "rofi" } { clipmenu } }
 export def "main sreenshot" [] {
