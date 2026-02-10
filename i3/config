@@ -15,7 +15,7 @@ for_window [title=$auto_float_terminal_title] floating enable
 bindsym $mod+Return split h; exec $i3/bin/launch terminal
 bindsym $mod+Shift+Return split v; exec $i3/bin/launch terminal
 bindsym $mod+Ctrl+Return exec $i3/bin/launch terminal --title "$auto_float_terminal_title"
-bindsym $mod+p exec  $i3/bin/launch launcher
+bindsym $mod+space exec  $i3/bin/launch launcher
 bindsym $mod+Shift+b exec $i3/bin/launch browser
 bindsym $mod+Shift+a exec $i3/bin/launch webapp https://chatgpt.com/
 bindsym $mod+Shift+x exec $i3/bin/launch clipboard
@@ -33,31 +33,46 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
+bindsym $mod+apostrophe scratchpad show
+bindsym $mod+m focus parent
+bindsym $mod+comma focus child
+bindsym $mod+n exec $i3/bin/focus-workspace
+# I will add the following to move to the next view in a project
+#bindsym $mod+i exec muxwm project focus next
+#bindsym $mod+u exec muxwm project focus prev
+
+# ... to and from fullscreen mode
+# one could aruue that this should be a shift command since it is moving
+# the current container to and from full screen mode.  I will need to think
+# about this more. But at least for now, it seems like a very nice use of
+# the semicolon key combo.
+bindsym $mod+semicolon fullscreen
+
+# change focus between tiling and floating
+# I am not sure if o is a good option.
+# it was $mod+space in the original config
+# but that is a pretty nice key combo.  Since I almost never use floating
+# windows, that is a huge waste of a very easy key combo
+# if I do change it, make sure to update the $mod+Shift+o
+# which toggle the current container to floating
+bindsym $mod+o focus mode_toggle
 
 # move focused window
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
-bindsym $mod+Shift+u move workspace to output left
-bindsym $mod+Shift+i move workspace to output right
+bindsym $mod+Shift+apostrophe move scratchpad
+bindsym $mod+Shift+n exec $i3/bin/move-to-workspace
 
-# split in horizontal orientation
-bindsym $mod+n split h
+# ... to and from floating mode
+bindsym $mod+Shift+o floating toggle
 
-# split in vertical orientation
-bindsym $mod+v split v
-
-# enter fullscreen mode for the focused container
-bindsym $mod+Shift+f fullscreen
-
-# move all workspaces to left/right monitor
-bindsym $mod+Shift+Ctrl+h exec $i3/bin/move-workspaces-left
-bindsym $mod+Shift+Ctrl+l exec $i3/bin/move-workspaces-right
-
-# scratchpad management
-bindsym $mod+grave scratchpad show
-bindsym $mod+Shift+grave move scratchpad
+# move workspaces to left/right monitor
+bindsym $mod+Left move workspace to output left
+bindsym $mod+Right move workspace to output right
+bindsym $mod+Ctrl+Left exec $i3/bin/move-workspaces-left
+bindsym $mod+Ctrl+Right exec $i3/bin/move-workspaces-right
 
 
 # change container layout (stacked, tabbed, default)
@@ -75,18 +90,15 @@ mode "layout" {
 }
 
 bindsym $mod+e mode "layout"; exec i3-nagbar -m "LAYOUT MODE: a=tabbed s=stacking d=default Tab=toggle split" -t warning
+# Note that I have had these in my config for a very long time
+# but I very rarely use them.  I think it would be worth freeing up these
+# keys in the base because I can do this in a layer, should I want to.
+# split in horizontal orientation
+# bindsym $mod+n split h
+# split in vertical orientation
+# bindsym $mod+v split v
 
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
 
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
-# focus the parent container
-bindsym $mod+a focus parent
-
-# focus the child container
-bindcode $mod+d focus child
 
 bindsym XF86AudioMute exec $i3/bin/toggle-volume
 bindsym XF86AudioLowerVolume exec $i3/bin/update-volume -10
@@ -118,6 +130,16 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
+
+bindsym $mod+a exec muxwm pin focus a
+bindsym $mod+s exec muxwm pin focus s
+bindsym $mod+d exec muxwm pin focus d
+bindsym $mod+f exec muxwm pin focus f
+bindsym $mod+g exec muxwm pin focus g
+bindsym $mod+grave exec muxwm pin focus '`'
+
+# todo: add a script that gives all the workspaces in rofi
+# so that we can select it even if it is not pinned
 
 # move focused container to workspace and keep focus
 bindsym $mod+Shift+1 move workspace $ws1, workspace $ws1
