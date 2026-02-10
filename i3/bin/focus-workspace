@@ -1,0 +1,31 @@
+#!/usr/bin/env nu
+# Move focused container to a chosen/new workspace (rofi), then follow.
+
+# Get workspace names
+let ws_list = (
+  ^i3-msg -t get_workspaces
+  | from json
+  | get name
+)
+
+# Feed workspaces into rofi; user can also type a new name.
+let choice = (
+  $ws_list
+  | str join "\n"
+  | ^rofi -dmenu -i -p "Focus on workspace →"
+  | str trim
+)
+
+if ($choice | is-empty) {
+  notify-send "No workspace selected"
+  exit 0
+}
+
+if ($choice | str contains '"') {
+  notify-send "Cannot process workspaces with double-quotes"
+  exit 0
+}
+
+# Move the focused container, then switch to that workspace
+^i3-msg $"workspace \"($choice)\"" | ignore
+

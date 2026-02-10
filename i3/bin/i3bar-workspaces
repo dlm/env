@@ -1,0 +1,18 @@
+#!/usr/bin/env nu
+
+def filtered [] {
+  ^i3-msg -t get_workspaces
+  | from json
+  | where {|w| $w.focused or $w.urgent or $w.visible }
+  | to json -r
+}
+
+# initial list
+print (filtered)
+
+# then on every workspace/output event, print again
+^i3-msg -t subscribe -m '["workspace","output"]'
+  | lines
+  | each {|_| print (filtered) }
+  | ignore
+
