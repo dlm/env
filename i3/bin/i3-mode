@@ -9,6 +9,7 @@
 def exit-mode [] {
     i3-msg mode default
     pkill i3-nagbar
+    dunstctl close-all
 }
 
 # Enter an i3 mode and display a nagbar notification
@@ -18,7 +19,8 @@ export def "main enter" [
 ] {
     let message = $"mode '($mode_name)': ($nagbar_message)"
     i3-msg mode $mode_name
-    i3-nagbar -m $message -t warning
+    notify-send -t 0 $mode_name $nagbar_message
+    i3-nagbar -m $mode_name -t warning
 }
 
 # Exit the current mode and kill any active nagbar

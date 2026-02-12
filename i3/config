@@ -25,7 +25,7 @@ mode "app_launch" {
     bindsym Escape exec $i3/bin/i3-mode exit
 }
 
-bindsym $mod+p exec $i3/bin/i3-mode enter "app_launch" "launch an app"
+bindsym $mod+p exec $i3/bin/i3-mode enter "app_launch" "b=browser\na=ai\nx=clipboard\nd=terminal\np=screenshot"
 
 bindsym $mod+Return split h; exec $i3/bin/i3-launch terminal
 bindsym $mod+Shift+Return split v; exec $i3/bin/i3-launch terminal
@@ -99,7 +99,7 @@ mode "layout" {
     bindsym Escape exec $i3/bin/i3-mode exit
 }
 
-bindsym $mod+e exec $i3/bin/i3-mode enter "layout" "d=default h=splith s=stacking t=tabbed v=splitv Tab=toggle layout"
+bindsym $mod+e exec $i3/bin/i3-mode enter "layout" "d=default\nh=splith\ns=stacking\nt=tabbed\nv=splitv\nTab=toggle layout"
 # Note that I have had these in my config for a very long time
 # but I very rarely use them.  I think it would be worth freeing up these
 # keys in the base because I can do this in a layer, should I want to.
@@ -201,7 +201,7 @@ mode "resize" {
     bindsym Escape exec $i3/bin/i3-mode exit
 }
 
-bindsym $mod+q exec $i3/bin/i3-mode enter resize "hjkl=grow HJKL=shrink"
+bindsym $mod+q exec $i3/bin/i3-mode enter resize "hjkl=grow\nHJKL=shrink"
 
 # add some style
 font pango: Dejavu Sans Mono 9
@@ -271,6 +271,6 @@ bar {
         active_workspace   $base $base $blue
         inactive_workspace $base $base $surface1
         urgent_workspace   $base $base $red
-        binding_mode       $base $base $surface1
+        binding_mode       $base $base $yellow
     }
 }
