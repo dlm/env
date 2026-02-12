@@ -1,35 +1,72 @@
 #!/usr/bin/env nu
 
+# i3-mode: Lifecycle management for i3 window manager modes
+#
+# Provides utilities for entering/exiting modes and executing commands
+# with automatic mode management (stay in mode or exit after execution).
+
+# Exit current mode and kill any active nagbar
 def exit-mode [] {
     i3-msg mode default
     pkill i3-nagbar
 }
 
+# Enter an i3 mode and display a nagbar notification
 export def "main enter" [
-    mode_name: string,
-    nagbar_message: string,
+    mode_name: string,      # Name of the i3 mode to enter
+    nagbar_message: string, # Message to display in the nagbar
 ] {
     let message = $"mode '($mode_name)': ($nagbar_message)"
     i3-msg mode $mode_name
     i3-nagbar -m $message -t warning
 }
 
+# Exit the current mode and kill any active nagbar
 export def "main exit" [] {
     exit-mode
 }
 
-export def "main msg-leave" [ ...cmd ] {
+# Send an i3-msg command and then exit the current mode
+export def --wrapped "main msg-leave" [
+    ...cmd  # i3 command(s) to send via i3-msg
+] {
     i3-msg ($cmd | str join ' ')
     exit-mode
 }
 
-export def --wrapped "main launch-leave" [ ...args ] {
+# Launch an application via the launch script and exit the current mode
+export def --wrapped "main launch-leave" [
+    ...args  # Arguments to pass to the launch script
+] {
     i3-msg exec ~/bin/scripts/launch ($args | str join ' ')
     exit-mode
 }
 
-export def --wrapped main [subcmd: string, ...args] {
-    match $subcmd {
-        _ => { die $"unknown subcommand: '($subcmd)'"; return; }
-    }
+# Lifecycle management for i3 window manager modes
+#
+# Provides utilities for entering/exiting modes and executing commands
+# with automatic mode management.
+#
+# TYPICAL i3 CONFIG USAGE:
+#   mode "app_launch" {
+#       bindsym b exec i3-mode launch-leave browser
+#       bindsym Escape exec i3-mode exit
+#   }
+#   bindsym $mod+p exec i3-mode enter app_launch "App Launch Mode"
+export def main [] {
+    print "i3-mode: Lifecycle management for i3 modes"
+    print ""
+    print "USAGE:"
+    print "  i3-mode <COMMAND> [OPTIONS]"
+    print ""
+    print "COMMANDS:"
+    print "  enter <mode> <message>    Enter a mode and show nagbar with message"
+    print "  exit                      Exit current mode and kill nagbar"
+    print "  msg-leave <command>       Execute i3 command and exit mode"
+    print "  launch-leave <args>       Launch app via launch script and exit mode"
+    print ""
+    print "EXAMPLES:"
+    print "  i3-mode enter resize \"RESIZE MODE: hjkl=grow\""
+    print "  i3-mode msg-leave \"layout tabbed\""
+    print "  i3-mode launch-leave browser"
 }
