@@ -4,7 +4,7 @@
 
   # Notification position and size
   width = 350
-  height = 100
+  height = 300
   origin = top-right
   offset = 15x15
 
