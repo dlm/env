@@ -1,0 +1,35 @@
+#!/usr/bin/env nu
+
+def exit-mode [] {
+    i3-msg mode default
+    pkill i3-nagbar
+}
+
+export def "main enter" [
+    mode_name: string,
+    nagbar_message: string,
+] {
+    let message = $"mode '($mode_name)': ($nagbar_message)"
+    i3-msg mode $mode_name
+    i3-nagbar -m $message -t warning
+}
+
+export def "main exit" [] {
+    exit-mode
+}
+
+export def "main msg-leave" [ ...cmd ] {
+    i3-msg ($cmd | str join ' ')
+    exit-mode
+}
+
+export def --wrapped "main launch-leave" [ ...args ] {
+    i3-msg exec ~/bin/scripts/launch ($args | str join ' ')
+    exit-mode
+}
+
+export def --wrapped main [subcmd: string, ...args] {
+    match $subcmd {
+        _ => { die $"unknown subcommand: '($subcmd)'"; return; }
+    }
+}

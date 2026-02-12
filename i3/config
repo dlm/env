@@ -11,15 +11,26 @@ floating_modifier $mod
 set $auto_float_terminal_title auto-float-terminal
 for_window [title=$auto_float_terminal_title] floating enable
 
-# start apps
-bindsym $mod+Return split h; exec $i3/bin/launch terminal
-bindsym $mod+Shift+Return split v; exec $i3/bin/launch terminal
-bindsym $mod+Ctrl+Return exec $i3/bin/launch terminal --title "$auto_float_terminal_title"
-bindsym $mod+space exec  $i3/bin/launch launcher
-bindsym $mod+Shift+b exec $i3/bin/launch browser
-bindsym $mod+Shift+a exec $i3/bin/launch webapp https://chatgpt.com/
-bindsym $mod+Shift+x exec $i3/bin/launch clipboard
-bindsym $mod+Shift+d exec $i3/bin/launch terminal --title "$auto_float_terminal_title" yazi
+# apps
+mode "app_launch" {
+    bindsym Return exec $i3/bin/i3-mode launch-leave terminal
+    bindsym space exec $i3/bin/i3-mode launch-leave launcher
+    bindsym b exec $i3/bin/i3-mode launch-leave browser
+    bindsym a exec $i3/bin/i3-mode launch-leave webapp https://chatgpt.com/
+    bindsym x exec $i3/bin/i3-mode launch-leave clipboard
+    bindsym d exec $i3/bin/i3-mode launch-leave terminal --title "$auto_float_terminal_title" yazi
+    bindsym p exec $i3/bin/i3-mode launch-leave screenshot
+
+    # back to normal: Escape
+    bindsym Escape exec $i3/bin/i3-mode exit
+}
+
+bindsym $mod+p exec $i3/bin/i3-mode enter "app_launch" "launch an app"
+
+bindsym $mod+Return split h; exec $i3/bin/i3-launch terminal
+bindsym $mod+Shift+Return split v; exec $i3/bin/i3-launch terminal
+bindsym $mod+Ctrl+Return exec $i3/bin/i3-launch terminal --title "$auto_float_terminal_title"
+bindsym $mod+space exec $i3/bin/i3-launch launcher
 bindsym Print --release exec $i3/bin/launch screenshot
 
 # setup ghostty scrollback floatting window
@@ -77,19 +88,18 @@ bindsym $mod+Ctrl+Right exec $i3/bin/move-workspaces-right
 
 # change container layout (stacked, tabbed, default)
 mode "layout" {
-    bindsym e layout default
-    bindsym a layout tabbed
-    bindsym s layout stacking
-    bindsym d layout splith
-    bindsym f layout splitv
+    bindsym d exec $i3/bin/i3-mode msg-leave "layout default"
+    bindsym h exec $i3/bin/i3-mode msg-leave "layout splith"
+    bindsym s exec $i3/bin/i3-mode msg-leave "layout stacking"
+    bindsym t exec $i3/bin/i3-mode msg-leave "layout tabbed"
+    bindsym v exec $i3/bin/i3-mode msg-leave "layout splitv"
     bindsym Tab layout toggle splith tabbed stacked splitv
 
     # back to normal: Enter or Escape
-    bindsym Return mode "default"; exec pkill i3-nagbar
-    bindsym Escape mode "default"; exec pkill i3-nagbar
+    bindsym Escape exec $i3/bin/i3-mode exit
 }
 
-bindsym $mod+e mode "layout"; exec i3-nagbar -m "LAYOUT MODE: a=tabbed s=stacking d=default Tab=toggle split" -t warning
+bindsym $mod+e exec $i3/bin/i3-mode enter "layout" "d=default h=splith s=stacking t=tabbed v=splitv Tab=toggle layout"
 # Note that I have had these in my config for a very long time
 # but I very rarely use them.  I think it would be worth freeing up these
 # keys in the base because I can do this in a layer, should I want to.
@@ -175,24 +185,23 @@ bind $mod+Shift+96 exec sudo /usr/sbin/pm-suspend
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
+    # grow
     bindsym h resize grow left 5 px or 5 ppt
-    bindsym Shift+H resize shrink left 5 px or 5 ppt
-
     bindsym j resize grow down 5 px or 5 ppt
-    bindsym Shift+J resize shrink down 5 px or 5 ppt
-
     bindsym k resize grow up 5 px or 5 ppt
-    bindsym Shift+K resize shrink up 5 px or 5 ppt
-
     bindsym l resize grow right 5 px or 5 ppt
-    bindsym Shift+L resize shrink right 5 px or 5 ppt
 
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"; exec pkill i3-nagbar
-    bindsym Escape mode "default"; exec pkill i3-nagbar
+    # shrink
+    bindsym Shift+h resize shrink left 5 px or 5 ppt
+    bindsym Shift+j resize shrink down 5 px or 5 ppt
+    bindsym Shift+k resize shrink up 5 px or 5 ppt
+    bindsym Shift+l resize shrink right 5 px or 5 ppt
+
+    # back to normal
+    bindsym Escape exec $i3/bin/i3-mode exit
 }
 
-bindsym $mod+q mode "resize"; exec i3-nagbar -m "RESIZE MODE: hjkl=grow Shift+HJKL=shrink" -t warning
+bindsym $mod+q exec $i3/bin/i3-mode enter resize "hjkl=grow HJKL=shrink"
 
 # add some style
 font pango: Dejavu Sans Mono 9
