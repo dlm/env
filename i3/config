@@ -47,7 +47,9 @@ bindsym $mod+l focus right
 bindsym $mod+apostrophe scratchpad show
 bindsym $mod+m focus parent
 bindsym $mod+comma focus child
-bindsym $mod+n exec $i3/bin/focus-workspace
+bindsym $mod+n exec $i3/bin/focus-project
+bindsym $mod+ctrl+n exec $i3/bin/focus-workspace
+bindsym $mod+y exec $i3/bin/set-pin
 # I will add the following to move to the next view in a project
 #bindsym $mod+i exec muxwm project focus next
 #bindsym $mod+u exec muxwm project focus prev
@@ -85,6 +87,19 @@ bindsym $mod+Right move workspace to output right
 bindsym $mod+Ctrl+Left exec $i3/bin/move-workspaces-left
 bindsym $mod+Ctrl+Right exec $i3/bin/move-workspaces-right
 
+# switch to workspace via pins
+bindsym $mod+grave exec muxwm pin focus '`'
+bindsym $mod+a exec muxwm pin focus a
+bindsym $mod+s exec muxwm pin focus s
+bindsym $mod+d exec muxwm pin focus d
+bindsym $mod+f exec muxwm pin focus f
+bindsym $mod+g exec muxwm pin focus g
+bindsym $mod+colon exec muxwm pin focus ':'
+bindsym $mod+minus exec muxwm pin focus '-'
+bindsym $mod+3 exec muxwm pin focus 3
+bindsym $mod+2 exec muxwm pin focus 2
+bindsym $mod+1 exec muxwm pin focus 1
+bindsym $mod+plus exec muxwm pin focus '+'
 
 # change container layout (stacked, tabbed, default)
 mode "layout" {
@@ -117,51 +132,6 @@ bindsym XF86AudioRaiseVolume exec $i3/bin/update-volume +10
 bindsym XF86MonBrightnessDown exec $i3/bin/update-screen-brightness -0.1
 bindsym XF86MonBrightnessUp exec $i3/bin/update-screen-brightness 0.1
 
-# set workspace names
-set $ws1 "1.admin"
-set $ws2 2
-set $ws3 "3.ai"
-set $ws4 "4.dev"
-set $ws5 5
-set $ws6 6
-set $ws7 "7.ref"
-set $ws8 "8.msg"
-set $ws9 "9.todo"
-set $ws10 "10.share"
-
-# switch to workspace
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10
-
-bindsym $mod+a exec muxwm pin focus a
-bindsym $mod+s exec muxwm pin focus s
-bindsym $mod+d exec muxwm pin focus d
-bindsym $mod+f exec muxwm pin focus f
-bindsym $mod+g exec muxwm pin focus g
-bindsym $mod+grave exec muxwm pin focus '`'
-
-# todo: add a script that gives all the workspaces in rofi
-# so that we can select it even if it is not pinned
-
-# move focused container to workspace and keep focus
-bindsym $mod+Shift+1 move workspace $ws1, workspace $ws1
-bindsym $mod+Shift+2 move workspace $ws2, workspace $ws2
-bindsym $mod+Shift+3 move workspace $ws3, workspace $ws3
-bindsym $mod+Shift+4 move workspace $ws4, workspace $ws4
-bindsym $mod+Shift+5 move workspace $ws5, workspace $ws5
-bindsym $mod+Shift+6 move workspace $ws6, workspace $ws6
-bindsym $mod+Shift+7 move workspace $ws7, workspace $ws7
-bindsym $mod+Shift+8 move workspace $ws8, workspace $ws8
-bindsym $mod+Shift+9 move workspace $ws9, workspace $ws9
-bindsym $mod+Shift+0 move workspace $ws10, workspace $ws10
 
 # reload the configuration file
 bindsym $mod+r reload
