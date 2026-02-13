@@ -53,7 +53,7 @@ bindsym $mod+n exec $i3/bin/focus-workspace
 #bindsym $mod+u exec muxwm project focus prev
 
 # ... to and from fullscreen mode
-# one could aruue that this should be a shift command since it is moving
+# one could argue that this should be a shift command since it is moving
 # the current container to and from full screen mode.  I will need to think
 # about this more. But at least for now, it seems like a very nice use of
 # the semicolon key combo.
