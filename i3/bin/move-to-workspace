@@ -8,11 +8,11 @@ let ws_list = (
   | get name
 )
 
-# Feed workspaces into rofi; user can also type a new name.
+# Feed workspaces into picker; user can also type a new name.
 let choice = (
   $ws_list
   | str join "\n"
-  | ^rofi -dmenu -i -p "Move to workspace →"
+  | ~/bin/scripts/launch picker "Move to workspace →"
   | str trim
 )
 
