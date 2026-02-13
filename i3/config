@@ -175,6 +175,10 @@ bindsym $mod+q exec $i3/bin/i3-mode enter resize "hjkl=grow\nHJKL=shrink"
 
 # add some style
 font pango: Dejavu Sans Mono 9
+
+# do not show the window decorations
+default_border pixel 2
+
 # nice orange coloring
 # class                   border  backgr. text
 # client.focused            #CD6D37 #CD6D37 #000000
