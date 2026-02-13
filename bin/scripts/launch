@@ -21,7 +21,7 @@ export def --wrapped "main terminal" [--title: string, ...cmd] {
     if not ($cmd | is-empty) { $args = [...$args, "-e", ...$cmd] }
     ghostty ...$args
 }
-export def "main launcher" [] { rofi -show drun }
+export def "main app-launcher" [] { rofi -show drun }
 export def "main browser" [] { flatpak run app.zen_browser.zen }
 export def "main webapp" [url: string] { google-chrome-stable --app=($url) }
 export def "main clipboard" [] { with-env { CM_LAUNCHER: "rofi" } { clipmenu } }
