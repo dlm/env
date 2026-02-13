@@ -233,6 +233,7 @@ exec dropbox start
 bar {
     status_command i3status --config $i3/status
     workspace_command exec $i3/bin/i3bar-workspaces
+    tray_output primary
     colors {
 
         # catpuccin
