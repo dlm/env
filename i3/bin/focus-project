@@ -1,0 +1,24 @@
+#!/usr/bin/env nu
+
+let choice = (
+  ^muxwm project list --with-pins
+  | from tsv --noheaders
+  | sort-by column0
+  | each { |row|
+        let pin = if ($row.column1 | is-empty) { "∅" } else { $row.column1 }
+        $"($pin):($row.column0)"
+    }
+  | str join "\n"
+  | ~/bin/scripts/launch picker --no-custom "Focus on project →"
+  | split column ":"
+  | get column2.0
+  | str trim
+)
+
+if ($choice | is-empty) {
+  notify-send "No project selected"
+  exit 0
+}
+
+^muxwm project focus $choice
+

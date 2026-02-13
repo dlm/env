@@ -1,0 +1,13 @@
+#!/usr/bin/env nu
+
+let key = (
+    ~/bin/scripts/launch text-input "Set pin →"
+    | str trim
+)
+
+if ($key | str length) != 1 {
+    notify-send "Pins can only be 1 char long"
+    exit 0
+}
+
+^muxwm pin set $key
