@@ -14,7 +14,7 @@ for_window [title=$auto_float_terminal_title] floating enable
 # apps
 mode "app_launch" {
     bindsym Return exec $i3/bin/i3-mode launch-leave terminal
-    bindsym space exec $i3/bin/i3-mode launch-leave launcher
+    bindsym space exec $i3/bin/i3-mode launch-leave app-launcher
     bindsym b exec $i3/bin/i3-mode launch-leave browser
     bindsym a exec $i3/bin/i3-mode launch-leave webapp https://chatgpt.com/
     bindsym x exec $i3/bin/i3-mode launch-leave clipboard
@@ -30,7 +30,7 @@ bindsym $mod+p exec $i3/bin/i3-mode enter "app_launch" "b=browser\na=ai\nx=clipb
 bindsym $mod+Return split h; exec $i3/bin/i3-launch terminal
 bindsym $mod+Shift+Return split v; exec $i3/bin/i3-launch terminal
 bindsym $mod+Ctrl+Return exec $i3/bin/i3-launch terminal --title "$auto_float_terminal_title"
-bindsym $mod+space exec $i3/bin/i3-launch launcher
+bindsym $mod+space exec $i3/bin/i3-launch app-launcher
 bindsym Print --release exec $i3/bin/launch screenshot
 
 # setup ghostty scrollback floatting window
