@@ -1,18 +1,29 @@
 #!/usr/bin/env nu
 
-def filtered [] {
+# get the active focused workspace
+def get_focused_proj_name [] {
   ^i3-msg -t get_workspaces
   | from json
-  | where {|w| $w.focused or $w.urgent or $w.visible }
-  | to json -r
+  | where focused
+  | first
+  | get name
+  | split row '#'
+  | first
 }
 
-# initial list
-print (filtered)
+
+def filtered [] {
+  let focused_proj = (get_focused_proj_name)
+
+  ^i3-msg -t get_workspaces
+  | from json
+  | where {|w| $w.focused or $w.urgent or $w.visible or ($w.name | str starts-with $focused_proj) }
+  | to json -r
+}
 
 # then on every workspace/output event, print again
 ^i3-msg -t subscribe -m '["workspace","output"]'
   | lines
-  | each {|_| print (filtered) }
+  | each {|_| print (filtered)}
   | ignore
 
