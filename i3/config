@@ -51,8 +51,8 @@ bindsym $mod+n exec $i3/bin/focus-project
 bindsym $mod+ctrl+n exec $i3/bin/focus-workspace
 bindsym $mod+y exec $i3/bin/set-pin
 # I will add the following to move to the next view in a project
-#bindsym $mod+i exec muxwm project focus next
-#bindsym $mod+u exec muxwm project focus prev
+bindsym $mod+i exec muxwm project activate-next-view
+bindsym $mod+u exec muxwm project activate-prev-view
 
 # ... to and from fullscreen mode
 # one could argue that this should be a shift command since it is moving
