@@ -1,31 +1,21 @@
 #!/usr/bin/env nu
-# Move focused container to a chosen/new workspace (rofi), then follow.
+#  Focus on a workspace
 
-# Get workspace names
-let ws_list = (
-  ^i3-msg -t get_workspaces
-  | from json
-  | get name
-)
-
-# Feed workspaces into picker
 let choice = (
-  $ws_list
+  muxwm view list --with-pins --with-unmanaged
+  | from tsv --noheaders
+  | sort-by column0
+  | each { |row|
+        let pin = if ($row.column1 | is-empty) { "∅" } else { $row.column1 }
+        $"($pin):($row.column0)"
+    }
   | str join "\n"
   | ~/bin/scripts/launch picker --no-custom "Focus on workspace →"
+  | if ($in | is-empty) { notify-send "No project selected"; exit 0 } else { $in }
+  | split column ":"
+  | get column2.0
   | str trim
 )
 
-if ($choice | is-empty) {
-  notify-send "No workspace selected"
-  exit 0
-}
-
-if ($choice | str contains '"') {
-  notify-send "Cannot process workspaces with double-quotes"
-  exit 0
-}
-
 # Move the focused container, then switch to that workspace
 ^i3-msg $"workspace \"($choice)\"" | ignore
-
