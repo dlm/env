@@ -32,11 +32,13 @@ export def "main screenshot" [] {
 
 export def "main picker" [
     prompt: string
+    --selected: string
     --no-custom
 ] {
     mut args = []
     if not ($prompt | is-empty) { $args = [...$args, "-p", $prompt] }
     if $no_custom { $args = [...$args, "-no-custom"] }
+    if not ($selected | is-empty) { $args = [...$args, "-select", $selected] }
     rofi -matching fuzzy -dmenu -i ...$args
 }
 
