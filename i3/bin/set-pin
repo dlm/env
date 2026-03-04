@@ -10,4 +10,4 @@ if ($key | str length) != 1 {
     exit 0
 }
 
-^muxwm pin set $key
+^muxwm pin set --project $key
