@@ -18,8 +18,8 @@ let choice = (
   | str join "\n"
   | ~/bin/scripts/launch picker --no-custom --selected=($current_workspace) "Focus on workspace →"
   | if ($in | is-empty) { notify-send "No project selected"; exit 0 } else { $in }
-  | split column ":"
-  | first
+  | split row ":"
+  | last
   | str trim
 )
 
