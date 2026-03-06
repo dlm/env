@@ -1,0 +1,255 @@
+#!/usr/bin/env nu
+
+# Interactive command palette for muxwm
+
+def notify [title: string, message: string] {
+    notify-send $title $message
+}
+
+# Parse commands from help output
+def parse-commands [help_text: string] {
+    $help_text
+    | lines
+    | skip until {|line| $line =~ "Commands:"}
+    | skip 1
+    | take until {|line| $line =~ "Arguments:" or $line =~ "Options:"}
+    | where {|line| ($line | str trim | str length) > 0}
+    | each {|line|
+        ($line | str trim | split row " " | first)
+    }
+    | where $it != "help"
+}
+
+# Get all scripts from bin directory
+def get-scripts [] {
+    let bin_dir = ($env.HOME | path join ".config" "i3" "bin")
+
+    if not ($bin_dir | path exists) {
+        return []
+    }
+
+    ls $bin_dir
+    | where type == "file"
+    | get name
+    | path basename
+    | where $it != "command-palette"
+    | each {|script| $"scripts:($script)"}
+}
+
+# Get i3 commands
+def get-i3-commands [] {
+    [
+        { label: "i3:reload", cmd: "reload", needs_input: false }
+        { label: "i3:restart", cmd: "restart", needs_input: false }
+        { label: "i3:exit", cmd: "exit", needs_input: false }
+        { label: "i3:kill", cmd: "kill", needs_input: false }
+        { label: "i3:split toggle", cmd: "split toggle", needs_input: false }
+        { label: "i3:sticky toggle", cmd: "sticky toggle", needs_input: false }
+        { label: "i3:move position center", cmd: "move position center", needs_input: false }
+        { label: "i3:mark", cmd: "mark", needs_input: true, prompt: "Mark name" }
+        { label: "i3:unmark", cmd: "unmark", needs_input: false }
+        { label: "i3:focus marked", cmd: "[con_mark={}] focus", needs_input: true, prompt: "Mark name to focus" }
+        { label: "i3:move to output", cmd: "move to output {}", needs_input: true, prompt: "Output name" }
+        { label: "i3:border toggle", cmd: "border toggle", needs_input: false }
+        { label: "i3:border none", cmd: "border none", needs_input: false }
+        { label: "i3:border pixel", cmd: "border pixel", needs_input: false }
+        { label: "i3:rename workspace", cmd: "rename workspace to {}", needs_input: true, prompt: "New workspace name" }
+        { label: "i3:move workspace to output", cmd: "move workspace to output {}", needs_input: true, prompt: "Output name" }
+        { label: "i3:move container to mark", cmd: "move container to mark {}", needs_input: true, prompt: "Mark name" }
+        { label: "i3:swap container with mark", cmd: "swap container with mark {}", needs_input: true, prompt: "Mark name" }
+        { label: "i3:focus output", cmd: "focus output {}", needs_input: true, prompt: "Output name" }
+        { label: "i3:focus floating", cmd: "focus floating", needs_input: false }
+        { label: "i3:focus tiling", cmd: "focus tiling", needs_input: false }
+        { label: "i3:title_format", cmd: "title_format {}", needs_input: true, prompt: "Title format" }
+        { label: "i3:gaps inner", cmd: "gaps inner {}", needs_input: true, prompt: "Gap size (pixels)" }
+        { label: "i3:gaps outer", cmd: "gaps outer {}", needs_input: true, prompt: "Gap size (pixels)" }
+    ]
+    | get label
+}
+
+# Get main muxwm commands
+def get-main-commands [] {
+    let help_output = (^muxwm --help)
+    parse-commands $help_output
+    | each {|cmd| $"muxwm:($cmd)"}
+}
+
+# Get subcommands for a given main command
+def get-subcommands [cmd: string] {
+    let help_output = (^muxwm $cmd --help)
+    parse-commands $help_output
+}
+
+# Get help text for a specific command
+def get-command-help [cmd1: string, cmd2: string] {
+    ^muxwm $cmd1 $cmd2 --help
+}
+
+# Parse required arguments from help text
+def get-required-args [help_text: string] {
+    let args_section = (
+        $help_text
+        | lines
+        | skip until {|line| $line =~ "Arguments:"}
+        | skip 1
+        | take until {|line| $line =~ "Options:" or ($line | str trim | str length) == 0}
+        | where {|line| ($line | str trim | str length) > 0 and ($line | str contains "<")}
+    )
+
+    if ($args_section | is-empty) {
+        []
+    } else {
+        $args_section | each {|line|
+            let parts = ($line | str trim | split row " ")
+            let arg_name = ($parts | first | str trim --char "<" | str trim --char ">")
+            {
+                name: $arg_name
+                description: ($parts | skip 1 | str join " ")
+            }
+        }
+    }
+}
+
+# Main interactive flow
+def main [] {
+    # Step 1: Select script, i3 command, or muxwm command
+    let scripts = (get-scripts)
+    let i3_commands = (get-i3-commands)
+    let muxwm_commands = (get-main-commands)
+    let all_options = ($scripts | append $i3_commands | append $muxwm_commands)
+    let menu1 = ($all_options | str join "\n")
+
+    let selection = (
+        $menu1
+        | ~/bin/scripts/launch picker --no-custom "command →"
+        | str trim
+    )
+
+    if ($selection | is-empty) {
+        return
+    }
+
+    # Check if it's a script, i3 command, or muxwm command
+    if ($selection | str starts-with "scripts:") {
+        # Execute script directly
+        let script_name = ($selection | str replace "scripts:" "")
+        let bin_dir = ($env.HOME | path join ".config" "i3" "bin")
+        let script_path = ($bin_dir | path join $script_name)
+
+        let result = (^$script_path | complete)
+
+        if $result.exit_code != 0 and not ($result.stderr | is-empty) {
+            notify "Error" $result.stderr
+        }
+    } else if ($selection | str starts-with "i3:") {
+        # Handle i3 command
+        let i3_commands_full = [
+            { label: "i3:reload", cmd: "reload", needs_input: false }
+            { label: "i3:restart", cmd: "restart", needs_input: false }
+            { label: "i3:exit", cmd: "exit", needs_input: false }
+            { label: "i3:kill", cmd: "kill", needs_input: false }
+            { label: "i3:split toggle", cmd: "split toggle", needs_input: false }
+            { label: "i3:sticky toggle", cmd: "sticky toggle", needs_input: false }
+            { label: "i3:move position center", cmd: "move position center", needs_input: false }
+            { label: "i3:mark", cmd: "mark", needs_input: true, prompt: "Mark name" }
+            { label: "i3:unmark", cmd: "unmark", needs_input: false }
+            { label: "i3:focus marked", cmd: "[con_mark={}] focus", needs_input: true, prompt: "Mark name to focus" }
+            { label: "i3:move to output", cmd: "move to output {}", needs_input: true, prompt: "Output name" }
+            { label: "i3:border toggle", cmd: "border toggle", needs_input: false }
+            { label: "i3:border none", cmd: "border none", needs_input: false }
+            { label: "i3:border pixel", cmd: "border pixel", needs_input: false }
+            { label: "i3:rename workspace", cmd: "rename workspace to {}", needs_input: true, prompt: "New workspace name" }
+            { label: "i3:move workspace to output", cmd: "move workspace to output {}", needs_input: true, prompt: "Output name" }
+            { label: "i3:move container to mark", cmd: "move container to mark {}", needs_input: true, prompt: "Mark name" }
+            { label: "i3:swap container with mark", cmd: "swap container with mark {}", needs_input: true, prompt: "Mark name" }
+            { label: "i3:focus output", cmd: "focus output {}", needs_input: true, prompt: "Output name" }
+            { label: "i3:focus floating", cmd: "focus floating", needs_input: false }
+            { label: "i3:focus tiling", cmd: "focus tiling", needs_input: false }
+            { label: "i3:title_format", cmd: "title_format {}", needs_input: true, prompt: "Title format" }
+            { label: "i3:gaps inner", cmd: "gaps inner {}", needs_input: true, prompt: "Gap size (pixels)" }
+            { label: "i3:gaps outer", cmd: "gaps outer {}", needs_input: true, prompt: "Gap size (pixels)" }
+        ]
+
+        let matched = ($i3_commands_full | where label == $selection | first)
+
+        if not ($matched | is-empty) {
+            mut cmd = $matched.cmd
+
+            if $matched.needs_input {
+                let user_input = (
+                    ~/bin/scripts/launch text-input $matched.prompt
+                    | str trim
+                )
+
+                if ($user_input | is-empty) {
+                    notify "Cancelled" "No input provided"
+                    return
+                }
+
+                $cmd = ($cmd | str replace "{}" $user_input)
+            }
+
+            let result = (i3-msg $cmd | complete)
+
+            if $result.exit_code == 0 {
+                notify "i3" "Command executed"
+            } else {
+                notify "Error" $result.stderr
+            }
+        }
+    } else if ($selection | str starts-with "muxwm:") {
+        # Handle muxwm command
+        let cmd1 = ($selection | str replace "muxwm:" "")
+
+        # Step 2: Select subcommand
+        let subcommands = (get-subcommands $cmd1)
+        let menu2 = ($subcommands | str join "\n")
+
+        let cmd2 = (
+            $menu2
+            | ~/bin/scripts/launch picker --no-custom $"muxwm ($cmd1) →"
+            | str trim
+        )
+
+        if ($cmd2 | is-empty) {
+            return
+        }
+
+        # Step 3: Check if command needs arguments
+        let help_text = (get-command-help $cmd1 $cmd2)
+        let required_args = (get-required-args $help_text)
+
+        mut extra_args = []
+
+        if not ($required_args | is-empty) {
+            # Show help text and prompt for input
+            for arg in $required_args {
+                let prompt = $"($arg.name) - ($arg.description)"
+                let user_input = (
+                    ~/bin/scripts/launch text-input $prompt
+                    | str trim
+                )
+
+                if ($user_input | is-empty) {
+                    notify "Cancelled" "No input provided"
+                    return
+                }
+
+                $extra_args = ($extra_args | append $user_input)
+            }
+        }
+
+        # Execute the command with any additional arguments
+        let result = (^muxwm $cmd1 $cmd2 ...$extra_args | complete)
+
+        if $result.exit_code == 0 {
+            if not ($result.stdout | is-empty) {
+                notify "muxwm" $result.stdout
+            } else {
+                notify "muxwm" "Command executed successfully"
+            }
+        } else {
+            notify "Error" $result.stderr
+        }
+    }
+}
