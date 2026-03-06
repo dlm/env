@@ -14,10 +14,20 @@ def get_focused_proj_name [] {
 
 def filtered [] {
   let focused_proj = (get_focused_proj_name)
+  let ordered_views = (^muxwm project list-views | lines)
+  let workspaces = (
+    ^i3-msg -t get_workspaces
+    | from json
+    | where {|w| $w.focused or $w.urgent or $w.visible or ($w.name | str starts-with $focused_proj) }
+  )
 
-  ^i3-msg -t get_workspaces
-  | from json
-  | where {|w| $w.focused or $w.urgent or $w.visible or ($w.name | str starts-with $focused_proj) }
+  $workspaces
+  | each {|w|
+    let idx = ($ordered_views | enumerate | where {|e| $e.item == $w.name} | first | get index)
+    $w | insert order_index (if ($idx | is-empty) { 9999 } else { $idx })
+  }
+  | sort-by order_index
+  | reject order_index
   | to json -r
 }
 
