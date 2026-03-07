@@ -23,7 +23,7 @@ def filtered [] {
 
   $workspaces
   | each {|w|
-    let idx = ($ordered_views | enumerate | where {|e| $e.item == $w.name} | first | get index)
+    let idx = ($ordered_views | enumerate | where {|e| $e.item == $w.name} | get index)
     $w | insert order_index (if ($idx | is-empty) { 9999 } else { $idx })
   }
   | sort-by order_index
