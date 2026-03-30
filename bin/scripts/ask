@@ -1,0 +1,170 @@
+#!/usr/bin/env nu
+
+# Unified ask command with pluggable subcommands
+# Usage: ask <subcommand> [args...]
+
+def main [] {
+    print "Usage: ask <subcommand> [args...]"
+    print ""
+    print "Available subcommands:"
+    print "  claude [question]  - Ask Claude AI (use -c to continue conversation)"
+    print "  weather [location] - Get weather forecast"
+    print "  cheat <command>    - Get command cheatsheet"
+    print "  define <word>      - Get word definition"
+    print "  ip                 - Get your public IP address"
+    print ""
+    print "Tip: Use '?' as a shortcut for 'ask claude'"
+}
+
+# Ask Claude AI
+def "main claude" [
+    --continue (-c)  # Continue into interactive chat
+    ...question: string
+] {
+    let prompt = ($question | str join ' ')
+    let has_prompt = ($prompt | is-not-empty)
+
+    # Show usage if no args and no continue flag
+    if (not $has_prompt) and (not $continue) {
+        print "Usage: ? your question here"
+        print "       ? -c (continue last conversation)"
+        print "       ? -c your question (ask then continue)"
+        return
+    }
+
+    # Ask the question first if we have one
+    if $has_prompt {
+        gum spin --spinner dot --title "Thinking..." --show-output -- claude -p $prompt
+    }
+
+    # Continue into interactive mode if requested
+    if $continue {
+        claude --continue
+    }
+}
+
+# Get weather
+def "main weather" [
+    --short (-s)  # Show one-line summary instead of full forecast
+    location?: string  # Optional location (defaults to your location)
+] {
+    # Build the URL
+    let encoded_location = ($location | default "" | str replace --all " " "+")
+    let path = if ($encoded_location | is-empty) { "" } else { $"/($encoded_location)" }
+    let format = if $short { "&format=3" } else { "" }
+    let url = $"wttr.in($path)?u($format)"
+
+    # Remove the "Follow @igor_chubin" footer
+    curl -s $url
+        | lines
+        | where {|line| not ($line | str contains "Follow")}
+        | str join (char newline)
+}
+
+# Get command cheatsheet
+def "main cheat" [
+    command: string  # Command to get cheatsheet for
+    ...args: string  # Additional arguments (e.g., specific topics)
+] {
+    let args_str = ($args | str join '+')
+    let delim = if ($args_str | is-empty) { "" } else { "/" }
+    curl -s $"cheat.sh/($command)($delim)($args_str)"
+}
+
+# Helper function to wrap text with indentation
+def wrap-text [
+    text: string
+    prefix: string
+    continuation_indent: string
+    max_width: int
+] {
+    let words = ($text | split words)
+    let first_line_width = $max_width - ($prefix | str length)
+    let cont_width = $max_width - ($continuation_indent | str length)
+
+    mut lines = []
+    mut current_line = ""
+    mut is_first = true
+
+    for word in $words {
+        let test_line = if ($current_line | is-empty) { $word } else { $"($current_line) ($word)" }
+        let width_limit = if $is_first { $first_line_width } else { $cont_width }
+
+        if ($test_line | str length) <= $width_limit {
+            $current_line = $test_line
+        } else {
+            $lines = ($lines | append (if $is_first { $"($prefix)($current_line)" } else { $"($continuation_indent)($current_line)" }))
+            $current_line = $word
+            $is_first = false
+        }
+    }
+
+    if ($current_line | is-not-empty) {
+        $lines = ($lines | append (if $is_first { $"($prefix)($current_line)" } else { $"($continuation_indent)($current_line)" }))
+    }
+
+    $lines
+}
+
+# Get word definition
+def "main define" [
+    word: string  # Word to define
+] {
+    let result = (curl -s $"https://api.dictionaryapi.dev/api/v2/entries/en/($word)" | from json)
+
+    if ($result | is-empty) {
+        print $"No definition found for '($word)'"
+        return
+    }
+
+    let entry = ($result | first)
+
+    # Print word and phonetic
+    print $"(ansi green_bold)($entry.word)(ansi reset)"
+    if ($entry.phonetic? | is-not-empty) {
+        print $"(ansi cyan)($entry.phonetic)(ansi reset)"
+    }
+    print ""
+
+    # Print meanings
+    for meaning in $entry.meanings {
+        print $"(ansi yellow_bold)($meaning.partOfSpeech)(ansi reset)"
+
+        # Show part-of-speech level synonyms if they exist
+        if ($meaning.synonyms? | is-not-empty) and (($meaning.synonyms | length) > 0) {
+            print $"  (ansi cyan)→ ($meaning.synonyms | str join ', ')(ansi reset)"
+        }
+
+        let defs = $meaning.definitions
+        for i in 0..<($defs | length) {
+            let def = ($defs | get $i)
+
+            # Wrap and print definition
+            let lines = (wrap-text $def.definition $"  ($i + 1). " "     " 80)
+            for line in $lines {
+                print $line
+            }
+
+            # Show definition-specific synonyms if they exist
+            if ($def.synonyms? | is-not-empty) and (($def.synonyms | length) > 0) {
+                print $"     (ansi cyan)→ ($def.synonyms | str join ', ')(ansi reset)"
+            }
+        }
+        print ""
+    }
+}
+
+# Get public IP address
+def "main ip" [] {
+    let ip = (curl -s https://api.ipify.org)
+    let info = (curl -s $"https://ipapi.co/($ip)/json/" | from json)
+
+    print $"(ansi green_bold)($ip)(ansi reset)"
+    print ""
+    print $"(ansi yellow_bold)Location(ansi reset)"
+    print $"  ($info.city), ($info.region)"
+    print $"  ($info.country_name)"
+    print ""
+    print $"(ansi yellow_bold)ISP(ansi reset)"
+    print $"  ($info.org)"
+}
