@@ -27,17 +27,17 @@ def "main focus-project" [] {
     let current_project = (current-project-name)
 
     let choice = (
-      ^muxwm project list --with-pins
-      | from tsv --noheaders
-      | rename project pin
-      | sort-by project
-      | each { |row| $"($row.pin | default --empty "∅"):($row.project)" }
-      | str join "\n"
-      | pick-item --selected ($current_project) --no-custom "Focus on project →"
-      | if ($in | is-empty) { notify-send "No project selected"; exit 0 } else { $in }
-      | split row ":"
-      | last
-      | str trim
+        ^muxwm project list --with-pins
+        | from tsv --noheaders
+        | rename project pin
+        | sort-by project
+        | each { |row| $"($row.pin | default --empty "∅"):($row.project)" }
+        | str join "\n"
+        | pick-item --selected ($current_project) --no-custom "Focus on project →"
+        | if ($in | is-empty) { notify-send "No project selected"; exit 0 } else { $in }
+        | split row ":"
+        | last
+        | str trim
     )
 
     ^muxwm project focus $choice
@@ -55,13 +55,13 @@ def "main focus-workspace" [] {
     let current_workspace = (current-workspace-name)
 
     let choice = (
-      list-workspaces
-      | str join "\n"
-      | pick-item --no-custom --selected=($current_workspace) "Focus on workspace →"
-      | if ($in | is-empty) { notify-send "No workspace selected"; exit 0 } else { $in }
-      | split row ":"
-      | last
-      | str trim
+        list-workspaces
+        | str join "\n"
+        | pick-item --no-custom --selected=($current_workspace) "Focus on workspace →"
+        | if ($in | is-empty) { notify-send "No workspace selected"; exit 0 } else { $in }
+        | split row ":"
+        | last
+        | str trim
     )
 
     # Move the focused container, then switch to that workspace
@@ -70,13 +70,13 @@ def "main focus-workspace" [] {
 
 def "main move-to-workspace" [] {
     let choice = (
-      list-workspaces
-      | str join "\n"
-      | pick-item --no-custom "Move to workspace →"
-      | if ($in | is-empty) { notify-send "No workspace selected"; exit 0 } else { $in }
-      | split column ":"
-      | get column2.0
-      | str trim
+        list-workspaces
+        | str join "\n"
+        | pick-item --no-custom "Move to workspace →"
+        | if ($in | is-empty) { notify-send "No workspace selected"; exit 0 } else { $in }
+        | split column ":"
+        | get column2.0
+        | str trim
     )
 
     # Move the focused container, then switch to that workspace
@@ -98,35 +98,35 @@ def "main set-pin" [] {
 
 
 def visable-workspaces [] {
-  let focused_proj = (current-project-name)
-  let ordered_views = (^muxwm project list-views | lines)
-  let workspaces = (
-    ^i3-msg -t get_workspaces
-    | from json
-    | where {|w| $w.focused or $w.urgent or $w.visible or ($w.name | str starts-with $focused_proj) }
-  )
-  let project_output = (
-    $workspaces |
-    | where {|w| $w.name | str starts-with $focused_proj }
-    | get -o output.0
-  )
+    let focused_proj = (current-project-name)
+    let ordered_views = (^muxwm project list-views | lines)
+    let workspaces = (
+        ^i3-msg -t get_workspaces
+        | from json
+        | where {|w| $w.focused or $w.urgent or $w.visible or ($w.name | str starts-with $focused_proj) }
+    )
+    let project_output = (
+        $workspaces |
+        | where {|w| $w.name | str starts-with $focused_proj }
+        | get -o output.0
+    )
 
-  let existing_names = ($workspaces | get name)
-  let fake_workspaces = (
-    $ordered_views
-    | where {|v| not ($existing_names | any {|n| $n == $v.name}) }
-    | each {|v| {name: $v, output: $project_output} }
-  )
+    let existing_names = ($workspaces | get name)
+    let fake_workspaces = (
+        $ordered_views
+        | where {|v| not ($existing_names | any {|n| $n == $v.name}) }
+        | each {|v| {name: $v, output: $project_output} }
+    )
 
-  $workspaces
-  | append $fake_workspaces
-  | each {|w|
-    let idx = ($ordered_views | enumerate | where {|e| $e.item == $w.name} | get index)
-    $w | insert order_index (if ($idx | is-empty) { 9999 } else { $idx })
-  }
-  | sort-by order_index
-  | reject order_index
-  | to json -r
+    $workspaces
+    | append $fake_workspaces
+    | each {|w|
+        let idx = ($ordered_views | enumerate | where {|e| $e.item == $w.name} | get index)
+        $w | insert order_index (if ($idx | is-empty) { 9999 } else { $idx })
+    }
+    | sort-by order_index
+    | reject order_index
+    | to json -r
 }
 
 def "main i3bar-visable-workspaces" [] {
