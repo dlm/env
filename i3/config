@@ -48,8 +48,8 @@ bindsym $mod+l focus right
 bindsym $mod+apostrophe scratchpad show
 bindsym $mod+m focus parent
 bindsym $mod+comma focus child
-bindsym $mod+n exec $i3/bin/focus-project
-bindsym $mod+ctrl+n exec $i3/bin/focus-workspace
+bindsym $mod+n exec $i3/bin/muxwm-i3 focus-project
+bindsym $mod+ctrl+n exec $i3/bin/muxwm-i3 focus-workspace
 bindsym $mod+p exec $i3/bin/command-palette
 bindsym $mod+y exec $i3/bin/set-pin
 bindsym $mod+i exec muxwm project activate-next-view
@@ -77,7 +77,7 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 bindsym $mod+Shift+apostrophe move scratchpad
-bindsym $mod+Shift+n exec $i3/bin/move-to-workspace
+bindsym $mod+Shift+n exec $i3/bin/muxwm-i3 move-to-workspace
 
 # ... to and from floating mode
 bindsym $mod+Shift+o floating toggle
@@ -233,7 +233,7 @@ exec_always --no-startup-id nm-applet
 # Start start bar
 bar {
     status_command i3status --config $i3/status
-    workspace_command exec $i3/bin/i3bar-workspaces
+    workspace_command exec $i3/bin/muxwm-i3 i3bar-workspaces
     tray_output primary
     colors {
 

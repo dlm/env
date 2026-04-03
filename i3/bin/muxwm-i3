@@ -1,0 +1,135 @@
+#!/usr/bin/env nu
+
+def pick-item --wrapped [...args] {
+    ~/.local/bin/launch picker ...$args
+}
+
+def get-text-input --wrapped [...args] {
+    ~/.local/bin/launch text-input ...$args
+}
+
+
+def current-workspace-name [] {
+    i3-msg -t get_workspaces
+    | from json
+    | where "focused"
+    | get name
+    | first
+}
+
+def current-project-name [] {
+    current-workspace-name
+    | split row '#'
+    | first
+}
+
+def "main focus-project" [] {
+    let current_project = (current-project-name)
+
+    let choice = (
+      ^muxwm project list --with-pins
+      | from tsv --noheaders
+      | rename project pin
+      | sort-by project
+      | each { |row| $"($row.pin | default --empty "∅"):($row.project)" }
+      | str join "\n"
+      | pick-item --selected ($current_project) --no-custom "Focus on project →"
+      | if ($in | is-empty) { notify-send "No project selected"; exit 0 } else { $in }
+      | split row ":"
+      | last
+      | str trim
+    )
+
+    ^muxwm project focus $choice
+}
+
+def list-workspaces [] {
+    ^muxwm view list --with-pins --with-unmanaged
+    | from tsv --noheaders
+    | rename workspace pin
+    | sort-by workspace
+    | each { |row| $"($row.pin | default --empty "∅"):($row.workspace)" }
+}
+
+def "main focus-workspace" [] {
+    let current_workspace = (current-workspace-name)
+
+    let choice = (
+      list-workspaces
+      | str join "\n"
+      | pick-item --no-custom --selected=($current_workspace) "Focus on workspace →"
+      | if ($in | is-empty) { notify-send "No workspace selected"; exit 0 } else { $in }
+      | split row ":"
+      | last
+      | str trim
+    )
+
+    # Move the focused container, then switch to that workspace
+    ^i3-msg $"workspace \"($choice)\"" | ignore
+}
+
+def "main move-to-workspace" [] {
+    let choice = (
+      list-workspaces
+      | str join "\n"
+      | pick-item --no-custom "Move to workspace →"
+      | if ($in | is-empty) { notify-send "No workspace selected"; exit 0 } else { $in }
+      | split column ":"
+      | get column2.0
+      | str trim
+    )
+
+    # Move the focused container, then switch to that workspace
+    ^i3-msg $"move container to workspace \"($choice)\"; workspace \"($choice)\""
+}
+
+
+
+def "main set-pin" [] {
+    let key = (get-text-input "Set pin →" | str trim)
+
+    if ($key | str length) != 1 {
+        notify-send "Pins can only be 1 char long"
+        exit 0
+    }
+
+    ^muxwm pin set --project $key
+}
+
+
+def visable-workspaces [] {
+  let focused_proj = (current-project-name)
+  let ordered_views = (^muxwm project list-views | lines)
+  let workspaces = (
+    ^i3-msg -t get_workspaces
+    | from json
+    | where {|w| $w.focused or $w.urgent or $w.visible or ($w.name | str starts-with $focused_proj) }
+  )
+
+  $workspaces
+  | each {|w|
+    let idx = ($ordered_views | enumerate | where {|e| $e.item == $w.name} | get index)
+    $w | insert order_index (if ($idx | is-empty) { 9999 } else { $idx })
+  }
+  | sort-by order_index
+  | reject order_index
+  | to json -r
+}
+
+def "main i3bar-workspaces" [] {
+    ^i3-msg -t subscribe -m '["workspace","output"]'
+    | lines
+    | each {|_| print (visable-workspaces)}
+    | ignore
+}
+
+def main [] {
+    print "Usage: muxwm-i3 <subcommand>"
+    print ""
+    print "Available subcommands:"
+    print "  focus-project - Focus on project"
+    print "  focus-workspace - Focus on workspace"
+    print "  move-to-workspace - Move focused container to a chosen/new workspace"
+    print "  set-pin - Set pin for current project"
+    print "  i3bar-workspaces - Print workspaces for i3bar"
+}
