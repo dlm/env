@@ -51,7 +51,21 @@ export def "main text-input" [
 }
 
 
-export def --wrapped main [subcmd: string, ...args] {
+export def --wrapped main [subcmd?: string, ...args] {
+    if ($subcmd | is-empty) {
+        print "Usage: launch <subcommand> [args...]"
+        print ""
+        print "Available subcommands:"
+        print "  terminal [--title <title>] [cmd]  - Open a terminal (ghostty)"
+        print "  app-launcher                      - Open application launcher (rofi)"
+        print "  browser                           - Open browser (zen)"
+        print "  webapp <url>                      - Open a URL as a webapp (chrome)"
+        print "  clipboard                         - Open clipboard manager (clipmenu)"
+        print "  screenshot                        - Take a screenshot"
+        print "  picker <prompt>                   - Fuzzy picker (rofi dmenu)"
+        print "  text-input <prompt>               - Text input prompt (rofi)"
+        return
+    }
     match $subcmd {
         _ => { die $"unknown subcommand: '($subcmd)'"; return; }
     }
