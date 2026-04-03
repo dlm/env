@@ -1,6 +1,0 @@
-#!/usr/bin/env nu
-
-export def --wrapped main [...args] {
-    ~/bin/scripts/launch ...$args
-}
-

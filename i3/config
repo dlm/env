@@ -3,6 +3,7 @@
 set $mod Mod4
 # set $mod Mod1
 set $i3 ~/.config/i3
+set $launch ~/.local/bin/launch
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -27,11 +28,11 @@ mode "app_launch" {
 
 bindsym $mod+Shift+space exec $i3/bin/i3-mode enter "app_launch" "b=browser\na=ai\nx=clipboard\nd=terminal\np=screenshot"
 
-bindsym $mod+Return split h; exec $i3/bin/i3-launch terminal
-bindsym $mod+Shift+Return split v; exec $i3/bin/i3-launch terminal
-bindsym $mod+Ctrl+Return exec $i3/bin/i3-launch terminal --title "$auto_float_terminal_title"
-bindsym $mod+space exec $i3/bin/i3-launch app-launcher
-bindsym Print --release exec $i3/bin/launch screenshot
+bindsym $mod+Return split h; exec $launch terminal
+bindsym $mod+Shift+Return split v; exec $launch terminal
+bindsym $mod+Ctrl+Return exec $launch terminal --title "$auto_float_terminal_title"
+bindsym $mod+space exec $launch app-launcher
+bindsym Print --release exec $launch screenshot
 
 # setup ghostty scrollback floatting window
 bindsym $mod+Shift+y exec ~/bin/scripts/ghostty-scrollback-float '$auto_float_terminal_title'

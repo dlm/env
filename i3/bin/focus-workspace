@@ -1,6 +1,10 @@
 #!/usr/bin/env nu
 #  Focus on a workspace
 
+def pick-item [...args] {
+    ~/.local/bin/launch picker ...$args
+}
+
 let current_workspace = (
     i3-msg -t get_workspaces
     | from json
@@ -16,7 +20,7 @@ let choice = (
   | sort-by workspace
   | each { |row| $"($row.pin | default --empty "∅"):($row.workspace)" }
   | str join "\n"
-  | ~/bin/scripts/launch picker --no-custom --selected=($current_workspace) "Focus on workspace →"
+  | pick-item --no-custom --selected=($current_workspace) "Focus on workspace →"
   | if ($in | is-empty) { notify-send "No project selected"; exit 0 } else { $in }
   | split row ":"
   | last

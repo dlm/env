@@ -1,7 +1,11 @@
 #!/usr/bin/env nu
 
+def get-text-input --wrapped [...args] {
+    ~/.local/bin/launch text-input ...$args
+}
+
 let key = (
-    ~/bin/scripts/launch text-input "Set pin →"
+    get-text-input "Set pin →"
     | str trim
 )
 

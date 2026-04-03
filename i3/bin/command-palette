@@ -2,6 +2,14 @@
 
 # Interactive command palette for muxwm
 
+def pick-item --wrapped [...args] {
+    ~/.local/bin/launch picker ...$args
+}
+
+def get-text-input --wrapped [...args] {
+    ~/.local/bin/launch text-input ...$args
+}
+
 def notify [title: string, message: string] {
     notify-send $title $message
 }
@@ -121,7 +129,7 @@ def main [] {
 
     let selection = (
         $menu1
-        | ~/bin/scripts/launch picker --no-custom "command →"
+        | pick-item --no-custom "command →"
         | str trim
     )
 
@@ -176,10 +184,7 @@ def main [] {
             mut cmd = $matched.cmd
 
             if $matched.needs_input {
-                let user_input = (
-                    ~/bin/scripts/launch text-input $matched.prompt
-                    | str trim
-                )
+                let user_input = (get-text-input $matched.prompt | str trim)
 
                 if ($user_input | is-empty) {
                     notify "Cancelled" "No input provided"
@@ -207,7 +212,7 @@ def main [] {
 
         let cmd2 = (
             $menu2
-            | ~/bin/scripts/launch picker --no-custom $"muxwm ($cmd1) →"
+            | pick-item --no-custom $"muxwm ($cmd1) →"
             | str trim
         )
 
@@ -225,10 +230,7 @@ def main [] {
             # Show help text and prompt for input
             for arg in $required_args {
                 let prompt = $"($arg.name) - ($arg.description)"
-                let user_input = (
-                    ~/bin/scripts/launch text-input $prompt
-                    | str trim
-                )
+                let user_input = (get-text-input $prompt | str trim)
 
                 if ($user_input | is-empty) {
                     notify "Cancelled" "No input provided"
