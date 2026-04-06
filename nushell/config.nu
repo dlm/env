@@ -12,6 +12,7 @@ def nr [package: string] { nix run $"nixpkgs#($package)" }
 # set the editor
 $env.buffer_editor = "nvim"
 $env.EDITOR = "nvim"
+$env.SOPS_EDITOR = "nvim -u NONE -n --cmd 'set noswapfile noundofile nobackup nowritebackup shadafile=NONE nomodeline secure'"
 
 # setup env management
 $env.config.hooks.pre_prompt ++= [
