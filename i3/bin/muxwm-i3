@@ -114,7 +114,7 @@ def visable-workspaces [] {
     let existing_names = ($workspaces | get name)
     let fake_workspaces = (
         $ordered_views
-        | where {|v| not ($existing_names | any {|n| $n == $v.name}) }
+        | where {|v| not ($existing_names | any {|n| $n == $v}) }
         | each {|v| {name: $v, output: $project_output} }
     )
 
