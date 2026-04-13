@@ -1,23 +1,15 @@
-#!/usr/bin/env bash
+#!/usr/bin/env nu
 
-inc=${1:-0.1}
+def main [inc: int = 10] {
+    let delta = if ($inc < 0) {
+        $"($inc | math abs)%-"
+    } else {
+        $"($inc)%+"
+    }
+    ^brightnessctl set $delta
 
-# Get all connected displays
-displays=$(xrandr -q | grep ' connected' | cut -d' ' -f1)
-
-# Get current brightness (from first connected display)
-currentBrightness=$(xrandr --verbose | awk '/Brightness/ { print $2; exit }')
-
-# Calculate next brightness (capped between 0.1 and 1.0)
-nextBrightness=$(python -c "x=$currentBrightness+$inc; print(max(min(x,1.0), 0.1))")
-
-# Apply to all connected displays
-for display in $displays; do
-    xrandr --output "$display" --brightness "$nextBrightness"
-done
-
-# Convert to percentage for notification
-brightnessPercent=$(python -c "print(int($nextBrightness * 100))")
-
-# Send notification
-notify-send -t 1000 -h int:value:$brightnessPercent -h string:synchronous:brightness "Brightness: ${brightnessPercent}%"
+    let cur = (^brightnessctl get | into int)
+    let max = (^brightnessctl max | into int)
+    let percent = $cur / $max * 100 | math round
+    ^notify-send -t 1000 -h $"int:value:($percent)" -h string:synchronous:brightness $"Brightness: ($percent)%"
+}
