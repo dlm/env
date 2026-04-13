@@ -1,2 +1,4 @@
 tmux/plugins/*
 *__pycache__
+
+ghostty/config.local
