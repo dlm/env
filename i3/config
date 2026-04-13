@@ -227,8 +227,6 @@ client.background        $base
 # commands to run at startup
 exec_always --no-startup-id nm-applet
 # exec dropbox start
-#TODO make stuff below here work
-# exec_always --no-startup-id sh $i3/bin/keyboard
 
 # Start start bar
 bar {
