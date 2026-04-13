@@ -61,12 +61,6 @@ $env.PATH = [
     ($nu.home-path | path join "bin/scripts-bky")
 ] ++ $env.PATH
 
-# setup "plugins"
-source ~/.local/share/nushell/vendor/plugins/starship.nu
-source ~/.local/share/nushell/vendor/plugins/atuin.nu
-source ~/.local/share/nushell/vendor/plugins/zoxide.nu
-source ~/.local/share/nushell/vendor/plugins/carapace.nu
-
 # Set the start banner
 def show_banner [] {
     let ellie = [
