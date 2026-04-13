@@ -51,7 +51,7 @@ bindsym $mod+comma focus child
 bindsym $mod+n exec $i3/bin/muxwm-i3 focus-project
 bindsym $mod+ctrl+n exec $i3/bin/muxwm-i3 focus-workspace
 bindsym $mod+p exec $i3/bin/command-palette
-bindsym $mod+y exec $i3/bin/set-pin
+bindsym $mod+y exec $i3/bin/muxwm-i3 set-pin
 bindsym $mod+i exec muxwm project activate-next-view
 bindsym $mod+u exec muxwm project activate-prev-view
 
