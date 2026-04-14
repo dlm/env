@@ -1,6 +1,6 @@
 #/usr/bin/env bash
 
-NOTES_DIR="$HOME/Dropbox/var/notes/journal"
+NOTES_DIR="$HOME/sync/notes/journal"
 PROG_NAME=$(basename $0)
 EDITOR=nvim
 
