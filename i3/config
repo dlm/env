@@ -27,7 +27,7 @@ mode "app_launch" {
     bindsym Escape exec $i3/bin/i3-mode exit
 }
 
-bindsym $mod+Shift+space exec $i3/bin/i3-mode enter "app_launch" "b=browser\na=ai\nx=clipboard\nd=terminal\np=screenshot\nw=windows"
+bindsym $mod+Shift+space exec $i3/bin/i3-mode enter "app_launch" "b=browser\na=ai\nx=clipboard\nd=terminal file manager\np=screenshot\nw=windows"
 
 bindsym $mod+Return split h; exec $launch terminal
 bindsym $mod+Shift+Return split v; exec $launch terminal
