@@ -18,8 +18,8 @@ def notify [title: string, message: string] {
 export def --wrapped "main terminal" [--title: string, ...cmd] {
     mut args = []
     if not ($title | is-empty) { $args = [...$args, $"--title=($title)"] }
-    if not ($cmd | is-empty) { $args = [...$args, "-e", ...$cmd] }
-    ghostty ...$args
+    if not ($cmd | is-empty) { $args = [...$args, "--", ...$cmd] }
+    kitty ...$args
 }
 export def "main app-launcher" [] { rofi -show drun }
 export def "main window-switcher" [] { rofi -show window }
@@ -57,7 +57,7 @@ export def --wrapped main [subcmd?: string, ...args] {
         print "Usage: launch <subcommand> [args...]"
         print ""
         print "Available subcommands:"
-        print "  terminal [--title <title>] [cmd]  - Open a terminal (ghostty)"
+        print "  terminal [--title <title>] [cmd]  - Open a terminal (kitty)"
         print "  app-launcher                      - Open application launcher (rofi)"
         print "  browser                           - Open browser (zen)"
         print "  webapp <url>                      - Open a URL as a webapp (chrome)"

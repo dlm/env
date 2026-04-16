@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+tmp=$(mktemp /tmp/kitty-scrollback-XXXXXX)
+cat > "$tmp"
+nu -c "open '$tmp' | ansi strip | save --force '$tmp'"
+nvim -R -c "normal G" "$tmp"
+rm -f "$tmp"
