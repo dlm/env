@@ -27,8 +27,8 @@ export def "main browser" [] { flatpak run app.zen_browser.zen }
 export def "main webapp" [url: string] { google-chrome-stable --app=($url) }
 export def "main clipboard" [] { with-env { CM_LAUNCHER: "rofi" } { clipmenu } }
 export def "main screenshot" [] {
-    scrot -s -e 'mv $f ~/Pictures/Screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/Screenshots/$n'
-    notify "Screenshot" 'successfully saved to ~/Pictures/Screenshots'
+    scrot -s -e 'mv $f ~/tmp/screenshots && xclip -selection clipboard -t image/png -i ~/tmp/screenshots/$n'
+    notify "Screenshot" 'successfully saved to ~/tmp/screenshots'
 }
 
 export def "main picker" [
