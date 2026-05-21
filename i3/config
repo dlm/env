@@ -162,21 +162,21 @@ bind $mod+Shift+96 exec sudo /usr/sbin/pm-suspend
 mode "resize" {
     # grow
     bindsym h resize grow left 5 px or 5 ppt
-    bindsym j resize grow down 5 px or 5 ppt
+    bindsym l resize shrink left 5 px or 5 ppt
+    bindsym j resize shrink up 5 px or 5 ppt
     bindsym k resize grow up 5 px or 5 ppt
-    bindsym l resize grow right 5 px or 5 ppt
 
     # shrink
-    bindsym Shift+h resize shrink left 5 px or 5 ppt
-    bindsym Shift+j resize shrink down 5 px or 5 ppt
-    bindsym Shift+k resize shrink up 5 px or 5 ppt
-    bindsym Shift+l resize shrink right 5 px or 5 ppt
+    bindsym Shift+h resize shrink right 5 px or 5 ppt
+    bindsym Shift+l resize grow right 5 px or 5 ppt
+    bindsym Shift+j resize grow down 5 px or 5 ppt
+    bindsym Shift+k resize shrink down 5 px or 5 ppt
 
     # back to normal
     bindsym Escape exec $i3/bin/i3-mode exit
 }
 
-bindsym $mod+q exec $i3/bin/i3-mode enter resize "hjkl=grow\nHJKL=shrink"
+bindsym $mod+q exec $i3/bin/i3-mode enter resize "h/l=left border\nj/k=top border\nH/L=right border\nJ/K=bottom border"
 
 # add some style
 font pango: Dejavu Sans Mono 9
