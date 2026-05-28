@@ -1,5 +1,7 @@
 #!/usr/bin/env nu
 
+const not_pinned = "∅"
+
 def pick-item --wrapped [...args] {
     ~/.local/bin/launch picker ...$args
 }
@@ -48,7 +50,7 @@ def list-workspaces [] {
     | from tsv --noheaders
     | rename workspace pin
     | sort-by workspace
-    | each { |row| $"($row.pin | default --empty "∅"):($row.workspace)" }
+    | each { |row| $"($row.pin | default --empty $not_pinned):($row.workspace)" }
 }
 
 def "main focus-workspace" [] {
