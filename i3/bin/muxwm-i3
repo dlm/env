@@ -102,6 +102,40 @@ def "main set-pin" [] {
     ^muxwm pin set --project $key
 }
 
+def "main repin" [] {
+    let current_project = (current-project-name)
+
+    let pin = (
+        ^muxwm project list --with-pins
+        | from tsv --noheaders
+        | rename project pin
+        | where { |x| $x.project == $current_project }
+        | get 0.pin
+    )
+
+    if ($pin | str length) != 1 {
+        notify-send "Can only repin on a pinned project"
+        exit 0
+    }
+
+    let choice = (
+        list-projects
+        | str join "\n"
+        | pick-item --selected ($current_project) --no-custom $"Pin project to '($pin)' →"
+        | if ($in | is-empty) { notify-send "No project selected"; exit 0 } else { $in }
+        | from csv --separator ':' --noheaders
+        | rename pin project
+        | first
+    )
+
+    if ($choice.pin != $not_pinned) {
+        notify-send "Cannot repin a pinned project"
+        exit 0
+    }
+
+    ^muxwm project focus $choice.project
+    ^muxwm pin set --project $pin
+}
 
 def visable-workspaces [] {
     let focused_proj = (current-project-name)
