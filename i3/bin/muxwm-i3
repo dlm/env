@@ -25,15 +25,19 @@ def current-project-name [] {
     | first
 }
 
+def list-projects [] {
+    ^muxwm project list --with-pins
+    | from tsv --noheaders
+    | rename project pin
+    | sort-by project
+    | each { |row| $"($row.pin | default --empty $not_pinned):($row.project)" }
+}
+
 def "main focus-project" [] {
     let current_project = (current-project-name)
 
     let choice = (
-        ^muxwm project list --with-pins
-        | from tsv --noheaders
-        | rename project pin
-        | sort-by project
-        | each { |row| $"($row.pin | default --empty "∅"):($row.project)" }
+        list-projects
         | str join "\n"
         | pick-item --selected ($current_project) --no-custom "Focus on project →"
         | if ($in | is-empty) { notify-send "No project selected"; exit 0 } else { $in }
