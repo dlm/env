@@ -36,3 +36,6 @@ tags
 
 # claude project local settings
 **/.claude/settings.local.json
+
+# codex local settings
+.codex
