@@ -3,7 +3,8 @@ alias v = nvim
 alias l = ls
 alias g = git
 alias t = tmux-sessionizer
-alias j = journal edit
+alias jl = journal edit
+alias jp = nvim $"($env.home)/sync/notes/byte-binder/projects.md"
 alias ? = ask claude
 
 # simple functions
