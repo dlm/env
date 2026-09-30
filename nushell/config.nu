@@ -82,3 +82,10 @@ $env.config.show_banner = false
 if $nu.is-interactive {
     show_banner
 }
+
+# Wrap the external completer so that we return a null instead of an
+# empty list, which makes nushell produce file system based completions.
+let base_completer = $env.config.completions.external.completer
+$env.config.completions.external.completer = {|spans|
+    do $base_completer $spans | if ($in | is-not-empty) { $in }
+}
