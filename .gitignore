@@ -3,3 +3,5 @@ tmux/plugins/*
 
 ghostty/config.local
 kitty/local.conf
+nvim/*.spl
+nvim/*.sug
