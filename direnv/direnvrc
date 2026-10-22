@@ -1,0 +1,6 @@
+key_safe_secret() {
+    local path
+    path=$(printf '["%s"]' "$@")
+    sops decrypt --extract "$path" "$HOME/repos/dlm/key-safe/on-demand.enc.yaml"
+}
+
