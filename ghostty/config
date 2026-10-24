@@ -33,4 +33,4 @@ keybind = ctrl+shift+page_down=scroll_page_lines:5
 keybind = shift+enter=text:\x1b\r
 
 # === Machine-specific overrides ===
-config-file = ~/.config/ghostty/config.local
+config-file = ~/.config/ghostty-local.conf
