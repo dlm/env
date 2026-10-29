@@ -1,0 +1,65 @@
+// Minimal waybar config for niri. Hand-edited, symlinked in via home-manager
+// (mkOutOfStoreSymlink), same as niri/config.kdl -- waybar restarts itself
+// on config changes, so edits here take effect on next launch.
+{
+  "layer": "top",
+  "position": "top",
+  "height": 22,
+  "spacing": 0,
+  "modules-left": [
+    "niri/workspaces"
+  ],
+  "modules-center": [
+    "niri/window"
+  ],
+  "modules-right": [
+    "network",
+    "pulseaudio",
+    "battery",
+    "clock"
+  ],
+  "niri/workspaces": {
+    "format": "{index}"
+  },
+  "niri/window": {
+    "format": "{title}",
+    "max-length": 60
+  },
+  "network": {
+    "format-wifi": " {essid} ({signalStrength}%)",
+    "format-ethernet": "eth",
+    "format-disconnected": "no net",
+    "tooltip-format": "{ifname}: {ipaddr}/{cidr}"
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": " muted",
+    "format-icons": {
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+  },
+  "battery": {
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "states": {
+      "warning": 25,
+      "critical": 10
+    }
+  },
+  "clock": {
+    "format": " {:%Y-%m-%d %H:%M}",
+    "tooltip-format": "{:%A, %d %B %Y}"
+  }
+}

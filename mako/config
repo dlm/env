@@ -1,0 +1,45 @@
+# Catppuccin Frappe, matching fuzzel's theme (env/fuzzel/fuzzel.ini) and
+# the waybar/i3 bar palette. Hand-edited, same out-of-store-symlink pattern as
+# fuzzel/waybar -- reload with `makoctl reload` after editing (mako is a
+# long-running daemon, unlike fuzzel which re-reads on each launch).
+#
+# Note: unlike fuzzel.ini, mako's parser doesn't strip inline "# ..." comments
+# off the end of a value line -- they get parsed as part of the value and
+# break the whole file. Comments here always get their own line.
+
+font=JetBrainsMono Nerd Font 11
+
+# mantle
+background-color=#292c3cf2
+# text
+text-color=#c6d0f5ff
+# surface2, same as fuzzel's border
+border-color=#626880ff
+border-size=2
+border-radius=8
+
+width=350
+height=120
+margin=10
+padding=10,14
+
+icons=1
+max-icon-size=48
+icon-border-radius=6
+
+# Default is 0 (never expire) -- auto-dismiss after 5s so notifications
+# (e.g. "Claude finished") don't sit there needing a manual click.
+default-timeout=5000
+
+[urgency=low]
+# surface1
+border-color=#51576dff
+# subtext0
+text-color=#a5adceff
+
+[urgency=critical]
+# red
+border-color=#e78284ff
+text-color=#e78284ff
+# stays until dismissed
+default-timeout=0

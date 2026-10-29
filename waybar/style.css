@@ -1,0 +1,72 @@
+/* Catppuccin Frappe, matching env/i3/config's bar colors -- flat, no
+ * per-module pill backgrounds, which is most of what makes stock waybar
+ * loud and space-hungry. */
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "DejaVu Sans Mono", monospace;
+    font-size: 11px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: #292c3c; /* mantle */
+    color: #c6d0f5; /* text */
+}
+
+.modules-left {
+    margin-left: 8px;
+}
+
+.modules-right {
+    margin-right: 8px;
+}
+
+#workspaces button {
+    padding: 0 4px;
+    margin: 0;
+    min-width: 0;
+    background: transparent;
+    color: #a5adce; /* subtext0 */
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+}
+
+#workspaces button.focused {
+    color: #8caaee; /* blue */
+    border-bottom: 2px solid #8caaee;
+}
+
+#workspaces button.urgent {
+    color: #e78284; /* red */
+}
+
+#window {
+    padding: 0 8px;
+    color: #737994; /* overlay0 -- dimmer than text, it's just a title */
+}
+
+#network,
+#pulseaudio,
+#battery,
+#clock {
+    padding: 0 10px;
+    color: #b5bfe2; /* subtext1 */
+    border-left: 1px solid #51576d; /* surface1 -- subtle divider */
+}
+
+#network {
+    border-left: none;
+}
+
+#battery.warning {
+    color: #e5c890; /* yellow */
+}
+
+#battery.critical {
+    color: #e78284; /* red */
+}
+
+#clock {
+    color: #c6d0f5; /* text -- brightest, it's the anchor */
+}
