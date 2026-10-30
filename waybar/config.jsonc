@@ -13,7 +13,7 @@
     "niri/window"
   ],
   "modules-right": [
-    "network",
+    "tray",
     "pulseaudio",
     "battery",
     "clock"
@@ -24,12 +24,6 @@
   "niri/window": {
     "format": "{title}",
     "max-length": 60
-  },
-  "network": {
-    "format-wifi": " {essid} ({signalStrength}%)",
-    "format-ethernet": "eth",
-    "format-disconnected": "no net",
-    "tooltip-format": "{ifname}: {ipaddr}/{cidr}"
   },
   "pulseaudio": {
     "format": "{icon} {volume}%",
