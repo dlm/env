@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# Mod+Shift+F wrapper: fullscreen/unfullscreen the focused window without it
+# getting permanently ejected from a shared column.
+#
+# A regular niri column can't hold a fullscreen window alongside a sibling,
+# so niri ejects it into its own column -- and unfullscreening doesn't
+# restore the old slot (see niri's Fullscreen-and-Maximize docs). A *tabbed*
+# column has no such restriction, since only one tab is visible at a time.
+# So: tab the column, then fullscreen; on the way out, unfullscreen first,
+# then untab -- order matters, since toggling the column back to non-tabbed
+# while still fullscreen would hit the same ejection problem transiently.
+#
+# Toggling tabbed-display is a no-op for a single-window column, so this is
+# safe to use unconditionally, not just for multi-window columns.
+#
+# niri's IPC doesn't expose "is this window currently fullscreen", so we
+# track our own enter/exit state per window id instead of querying it.
+set -euo pipefail
+
+focused=$(niri msg --json focused-window)
+id=$(jq -r '.id // empty' <<<"$focused")
+is_floating=$(jq -r '.is_floating // false' <<<"$focused")
+
+if [[ -z "$id" ]]; then
+    exit 0
+fi
+
+# Floating windows already round-trip fullscreen correctly on their own
+# (niri moves them to the scrolling layout and back automatically).
+if [[ "$is_floating" == "true" ]]; then
+    niri msg action fullscreen-window --id "$id"
+    exit 0
+fi
+
+state_dir="${XDG_RUNTIME_DIR:-/tmp}/niri-fullscreen-toggle"
+mkdir -p "$state_dir"
+state_file="$state_dir/$id"
+
+if [[ -f "$state_file" ]]; then
+    niri msg action fullscreen-window --id "$id"
+    niri msg action toggle-column-tabbed-display
+    rm -f "$state_file"
+else
+    niri msg action toggle-column-tabbed-display
+    niri msg action fullscreen-window --id "$id"
+    touch "$state_file"
+fi

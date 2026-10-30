@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# Spawn a command and, once its window appears, merge it into the column to
+# the left -- i.e. "open a terminal stacked below my current one" as a
+# single bind, instead of spawn-then-manually-consume.
+#
+# Chaining spawn + consume-or-expel-window-left in a single niri bind races:
+# spawn is fire-and-forget, so the new window usually doesn't exist yet when
+# the next bind action runs. Niri's own FAQ ("Can I open a window directly
+# in the current column?") says the fix is to watch the IPC event stream for
+# the window to open and act then, which is what this does.
+set -euo pipefail
+
+height=""
+if [[ "${1:-}" == "--height" ]]; then
+    height="$2"
+    shift 2
+fi
+
+if [[ $# -eq 0 ]]; then
+    echo "usage: $(basename "$0") [--height PERCENT] <command...>" >&2
+    exit 1
+fi
+
+coproc EVENTS { niri msg --json event-stream; }
+watchdog=""
+trap 'kill "$EVENTS_PID" "$watchdog" 2>/dev/null || true' EXIT
+
+# The event stream always opens with a WindowsChanged snapshot of
+# currently-open windows -- record their ids so a genuinely new window can
+# be told apart from a property change (e.g. a title update) on one we
+# already know about.
+read -r -u "${EVENTS[0]}" snapshot
+known_ids=$(jq -c '.WindowsChanged.windows[]?.id' <<<"$snapshot" 2>/dev/null || true)
+
+"$@" &
+
+# Safety net: don't hang forever if the target never opens a window.
+(sleep 10; kill "$$" 2>/dev/null) &
+watchdog=$!
+
+while IFS= read -r -u "${EVENTS[0]}" line; do
+    id=$(jq -r 'select(.WindowOpenedOrChanged) | .WindowOpenedOrChanged.window.id' <<<"$line" 2>/dev/null || true)
+    [[ -z "$id" ]] && continue
+    if ! grep -qx "$id" <<<"$known_ids"; then
+        niri msg action consume-or-expel-window-left
+        if [[ -n "$height" ]]; then
+            niri msg action set-window-height --id "$id" "$height"
+        fi
+        break
+    fi
+    known_ids+=$'\n'"$id"
+done
