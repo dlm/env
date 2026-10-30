@@ -19,7 +19,7 @@
     "clock"
   ],
   "niri/workspaces": {
-    "format": "{index}"
+    "format": "{value}"
   },
   "niri/window": {
     "format": "{title}",
