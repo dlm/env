@@ -30,4 +30,8 @@ require("lazy").setup({
     enabled = false,
     notify = false,
   },
+  -- none of the plugins need luarocks
+  rocks = {
+    enabled = false,
+  },
 })
