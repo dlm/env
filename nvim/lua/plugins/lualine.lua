@@ -37,7 +37,7 @@ return {
 				lualine_y = {},
 				lualine_z = {},
 			},
-			vim.api.nvim_set_hl(0, "StatusLineNC", { bg = inactive_bg }),
 		})
+		vim.api.nvim_set_hl(0, "StatusLineNC", { bg = inactive_bg })
 	end,
 }

@@ -22,7 +22,7 @@ return {
 					map("gD", vim.lsp.buf.declaration, "[g]oto [D]eclaration")
 
 					-- Find references for the word under your cursor.
-					map("gr", require("telescope.builtin").lsp_references, "[g]oto [r]eferences")
+					map("grr", require("telescope.builtin").lsp_references, "[g]oto [r]eferences")
 
 					-- Jump to the implementation of the word under your cursor.
 					--  Useful when your language has ways of declaring types without an actual implementation.

@@ -15,18 +15,6 @@ vim.diagnostic.config({
 			[vim.diagnostic.severity.INFO] = "󰋼 ",
 			[vim.diagnostic.severity.HINT] = "󰌵 ",
 		},
-		texthl = {
-			[vim.diagnostic.severity.ERROR] = "Error",
-			[vim.diagnostic.severity.WARN] = "Error",
-			[vim.diagnostic.severity.INFO] = "Info",
-			[vim.diagnostic.severity.HINT] = "Hint",
-		},
-		numhl = {
-			[vim.diagnostic.severity.ERROR] = "",
-			[vim.diagnostic.severity.WARN] = "",
-			[vim.diagnostic.severity.INFO] = "",
-			[vim.diagnostic.severity.HINT] = "",
-		},
 	},
 })
 
@@ -37,7 +25,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
 			focusable = false,
 			close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
 			border = "rounded",
-			source = "always",
+			source = true,
 			prefix = " ",
 			scope = "cursor",
 		}

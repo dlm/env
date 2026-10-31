@@ -3,7 +3,7 @@ return {
 
 	tag = "0.1.8",
 
-	depends = { "nvim-lua/plenary.nvim" },
+	dependencies = { "nvim-lua/plenary.nvim" },
 
 	config = function()
 		local builtin = require("telescope.builtin")

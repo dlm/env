@@ -4,6 +4,6 @@ vim.api.nvim_create_autocmd("Filetype", {
 	group = dlmGoGroup,
 	pattern = "go",
 	callback = function()
-		vim.opt.expandtab = false
+		vim.bo.expandtab = false
 	end,
 })

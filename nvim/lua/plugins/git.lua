@@ -28,18 +28,13 @@ return {
 					gitsigns.diffthis("~")
 				end)
 
-				-- Undoing the last staged hunk is not very useful
-				-- unless you are playing with the git signs plugin.
-				-- But, since it is useful for that, I will leave it in.
-				map("<leader>hu", "[h]g..it [u]ndo stage hunk", gitsigns.undo_stage_hunk)
-				--
 				map("<leader>hb", "[h]g..it [b]lame", function()
 					gitsigns.blame_line({ full = true })
 				end)
 
 				-- Mode toggles
 				map("<leader>htb", "[h]g..it [t]oggle cur line [b]lame", gitsigns.toggle_current_line_blame)
-				map("<leader>htd", "[h]g..it [t]oggle show [d]elted", gitsigns.toggle_deleted)
+				map("<leader>htd", "[h]g..it [t]oggle show [d]eleted inline", gitsigns.preview_hunk_inline)
 
 				-- Navigation
 				local mapNav = function(keys, direction, desc)

@@ -6,7 +6,7 @@ return {
 		local s = ls.snippet
 		local t = ls.text_node
 		local i = ls.insert_node
-		-- local f = ls.function_node
+		local f = ls.function_node
 		-- local fmt = require("luasnip.extras.fmt").fmt
 		local rep = require("luasnip.extras").rep
 		local ps = ls.parser.parse_snippet
@@ -17,11 +17,11 @@ return {
 		--     return args[1]
 		-- end
 
-		ls.add_snippets("all", {
+		ls.add_snippets("go", {
 			ps(
 				{
 					trig = "trun",
-					namr = "T.Run",
+					name = "T.Run",
 					dscr = "create a t.Run for go",
 				},
 				[[
@@ -34,7 +34,7 @@ return {
 			ps(
 				{
 					trig = "truntodo",
-					namr = "T.Run TODO",
+					name = "T.Run TODO",
 					dscr = "create a t.Run with a t.FailNow(",
 				},
 				[[
@@ -43,10 +43,12 @@ return {
             })
             ]]
 			),
+		})
 
+		ls.add_snippets("all", {
 			s({
 				trig = "bky-jira-link",
-				namr = "Blocky Jira Link",
+				name = "Blocky Jira Link",
 				dscr = "create a link to a blocky jira ticket the ticket number",
 			}, {
 				t("[bky-"),
@@ -58,10 +60,13 @@ return {
 
 			s({
 				trig = "date-journal",
-				namr = "Date Journal",
+				name = "Date Journal",
 				dscr = "create the date for a journal entry",
 			}, {
-				i(1, os.date("%B %0e, %Y")),
+				-- evaluated on expansion, not when the config loads
+				f(function()
+					return os.date("%B %0e, %Y")
+				end),
 			}),
 		})
 	end,
