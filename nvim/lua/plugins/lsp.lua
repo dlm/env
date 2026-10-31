@@ -42,7 +42,51 @@ return {
 				},
 			})
 
-			vim.lsp.enable({ "gopls", "rust_analyzer", "lua_ls" })
+			-- completion/hover for nixpkgs and NixOS options, evaluated from the
+			-- project's flake when it defines nixosConfigurations (e.g. homelab),
+			-- otherwise from this machine's config in the nixos flake
+			local default_flake = vim.env.HOME .. "/repos/dlm/nixos"
+
+			-- this machine's host if the flake defines it, otherwise the first one
+			local nixos_options = function(flake)
+				return string.format(
+					'(let cs = (builtins.getFlake "%s").nixosConfigurations; in cs."%s" or cs.${builtins.head (builtins.attrNames cs)}).options',
+					flake,
+					vim.uv.os_gethostname()
+				)
+			end
+
+			local defines_nixos = function(dir)
+				local f = dir and io.open(dir .. "/flake.nix")
+				if not f then
+					return false
+				end
+				local found = f:read("*a"):find("nixosConfigurations", 1, true) ~= nil
+				f:close()
+				return found
+			end
+
+			vim.lsp.config("nixd", {
+				settings = {},
+				-- one client per flake (root_markers), so each gets its own settings;
+				-- modify in place, the client already holds this settings table
+				before_init = function(_, config)
+					local flake = defines_nixos(config.root_dir) and config.root_dir or default_flake
+					local nixd = {
+						nixpkgs = { expr = string.format('import (builtins.getFlake "%s").inputs.nixpkgs { }', flake) },
+						options = { nixos = { expr = nixos_options(flake) } },
+					}
+					if flake == default_flake then
+						-- home-manager is a NixOS module there
+						nixd.options.home_manager = {
+							expr = nixos_options(flake) .. ".home-manager.users.type.getSubOptions [ ]",
+						}
+					end
+					config.settings.nixd = nixd
+				end,
+			})
+
+			vim.lsp.enable({ "gopls", "rust_analyzer", "lua_ls", "nixd" })
 		end,
 	},
 
