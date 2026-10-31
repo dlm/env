@@ -1,16 +1,16 @@
 return {
-    "rgroli/other.nvim",
+	"rgroli/other.nvim",
 
-    keys = {
-        {
-            "<leader>a",
-            ":OtherVSplit<CR>",
-            desc = "Open [a]lternate file in a vertical split",
-            silent = true
-        },
-    },
+	keys = {
+		{
+			"<leader>a",
+			":OtherVSplit<CR>",
+			desc = "Open [a]lternate file in a vertical split",
+			silent = true,
+		},
+	},
 
-    config = function()
-        require("other-nvim").setup({ mappings = { "golang" } })
-    end,
+	config = function()
+		require("other-nvim").setup({ mappings = { "golang" } })
+	end,
 }
