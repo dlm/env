@@ -16,14 +16,10 @@ return {
 			nerd_font_variant = "mono",
 		},
 		completion = {
-			menu = {
-				border = "rounded",
-			},
 			documentation = {
 				auto_show = false,
 				auto_show_delay_ms = 200,
 				window = {
-					border = "rounded",
 					max_width = 80,
 					max_height = 20,
 				},
@@ -31,9 +27,6 @@ return {
 		},
 		signature = {
 			enabled = true,
-			window = {
-				border = "rounded",
-			},
 		},
 		sources = {
 			default = { "lsp", "path", "snippets", "buffer" },

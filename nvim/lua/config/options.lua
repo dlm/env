@@ -31,6 +31,9 @@ vim.opt.splitright = true
 
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
+
+-- default border for all floating windows (hover, diagnostics, blink, ...)
+vim.opt.winborder = "rounded"
 vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50

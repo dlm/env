@@ -1,101 +1,59 @@
 return {
 	{ -- LSP Plugins
+		-- nvim-lspconfig now only provides server configs (lsp/*.lua);
+		-- setup is done with the built-in vim.lsp.config / vim.lsp.enable
 		"neovim/nvim-lspconfig",
-		version = "v0.1.8",
 		dependencies = { "saghen/blink.cmp" },
 		config = function()
+			-- Built-in defaults (0.11+) cover the rest:
+			--   K hover, grn rename, gra code action, grr references,
+			--   gri implementation, grt type definition, gO document symbols,
+			--   <C-s> signature help (insert)
 			vim.api.nvim_create_autocmd("LspAttach", {
-				-- group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 				callback = function(ev)
 					local map = function(keys, func, desc, mode)
 						mode = mode or "n"
 						vim.keymap.set(mode, keys, func, { buffer = ev.buf, desc = "LSP: " .. desc })
 					end
+					local builtin = require("telescope.builtin")
 
-					-- Jump to the definition of the word under your cursor.
-					--  This is where a variable was first declared, or where a function is defined, etc.
-					--  To jump back, press <C-t>.
-					map("gd", require("telescope.builtin").lsp_definitions, "[g]oto [d]efinition")
-
-					-- WARN: This is not Goto Definition, this is Goto Declaration.
-					--  For example, in C this would take you to the header.
+					-- Telescope pickers in place of the quickfix-based defaults
+					map("gd", builtin.lsp_definitions, "[g]oto [d]efinition")
 					map("gD", vim.lsp.buf.declaration, "[g]oto [D]eclaration")
+					map("grr", builtin.lsp_references, "[g]oto [r]eferences")
+					map("gI", builtin.lsp_implementations, "[g]oto [I]mplementation")
 
-					-- Find references for the word under your cursor.
-					map("grr", require("telescope.builtin").lsp_references, "[g]oto [r]eferences")
-
-					-- Jump to the implementation of the word under your cursor.
-					--  Useful when your language has ways of declaring types without an actual implementation.
-					map("gI", require("telescope.builtin").lsp_implementations, "[g]oto [I]mplementation")
-
-					-- Fuzzy find all the symbols in your current document.
-					--  Symbols are things like variables, functions, types, etc.
-					map("<leader>lds", require("telescope.builtin").lsp_document_symbols, "[l]sp [d]ocument [s]ymbols")
-
-					-- Jump to the type of the word under your cursor.
-					--  Useful when you're not sure what type a variable is and you want to see
-					--  the definition of its *type*, not where it was *defined*.
-					map("<leader>ltd", require("telescope.builtin").lsp_type_definitions, "[l]sp [t]ype [d]efinition")
-
-					-- Fuzzy find all the symbols in your current workspace.
-					--  Similar to document symbols, except searches over your entire project.
-					map(
-						"<leader>lws",
-						require("telescope.builtin").lsp_dynamic_workspace_symbols,
-						"[l]sp dynamic [w]orkspace [s]ymbols"
-					)
-
-					-- Rename the variable under your cursor.
-					--  Most Language Servers support renaming across files, etc.
+					-- quick <leader>l shortcuts for exploring a codebase
+					map("<leader>lds", builtin.lsp_document_symbols, "[l]sp [d]ocument [s]ymbols")
+					map("<leader>ltd", builtin.lsp_type_definitions, "[l]sp [t]ype [d]efinition")
+					map("<leader>lws", builtin.lsp_dynamic_workspace_symbols, "[l]sp dynamic [w]orkspace [s]ymbols")
 					map("<leader>lr", vim.lsp.buf.rename, "[l]sp [r]ename")
-
-					-- Execute a code action, usually your cursor needs to be on top of an error
-					-- or a suggestion from your LSP for this to activate.
 					map("<leader>lca", vim.lsp.buf.code_action, "[l]sp [c]ode [a]ction", { "n", "x" })
-
-					-- Show hover information
-					map("K", function()
-						vim.lsp.buf.hover({
-							border = "rounded",
-							width = 80,
-							wrap = true,
-							height = 20,
-						})
-					end, "lsp [K]ode docs")
 				end,
 			})
 
-			local lspconfig = require("lspconfig")
-
 			-- Configure LSP servers (managed outside of Neovim)
 			-- You'll need to install these LSPs externally
-
-			-- Go
-			lspconfig.gopls.setup({})
-
-			-- Rust
-			lspconfig.rust_analyzer.setup({})
-
-			-- Lua
-			lspconfig.lua_ls.setup({
+			vim.lsp.config("lua_ls", {
 				settings = {
 					Lua = {
-						runtime = {
-							version = "LuaJIT",
-						},
-						diagnostics = {
-							globals = { "vim" },
-						},
-						workspace = {
-							library = vim.api.nvim_get_runtime_file("", true),
-						},
-						telemetry = {
-							enable = false,
-						},
+						telemetry = { enable = false },
 					},
 				},
 			})
+
+			vim.lsp.enable({ "gopls", "rust_analyzer", "lua_ls" })
 		end,
+	},
+
+	{ -- Neovim runtime/plugin types for lua_ls, only loaded when editing lua
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {
+			library = {
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+			},
+		},
 	},
 
 	{ -- Autoformat

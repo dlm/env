@@ -8,6 +8,11 @@ vim.diagnostic.config({
 	underline = true,
 	update_in_insert = false,
 	severity_sort = false,
+	float = {
+		source = true,
+		prefix = " ",
+		scope = "cursor",
+	},
 	signs = {
 		text = {
 			[vim.diagnostic.severity.ERROR] = " ",
@@ -21,14 +26,9 @@ vim.diagnostic.config({
 -- and the popup
 vim.api.nvim_create_autocmd("CursorHold", {
 	callback = function()
-		local opts = {
+		vim.diagnostic.open_float({
 			focusable = false,
 			close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-			border = "rounded",
-			source = true,
-			prefix = " ",
-			scope = "cursor",
-		}
-		vim.diagnostic.open_float(nil, opts)
+		})
 	end,
 })
