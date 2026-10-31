@@ -11,23 +11,8 @@ return {
 
 		local ts = require("nvim-treesitter")
 
-		-- always installed; anything else is installed the first time a
-		-- buffer of that filetype is opened (see the FileType autocmd)
-		ts.install({
-			"lua",
-			"bash",
-			"go",
-			"markdown",
-			"markdown_inline",
-			"vim",
-			"vimdoc",
-			"nix",
-			"json",
-			"gitcommit",
-			"git_rebase",
-			"git_config",
-			"diff",
-		})
+		-- parsers are installed the first time a buffer of that filetype is
+		-- opened (see the FileType autocmd); dependencies come along with them
 
 		local start = function(buf, lang)
 			vim.treesitter.start(buf, lang)
