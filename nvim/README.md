@@ -13,8 +13,12 @@ From the nixos repo (`~/repos/dlm/nixos`):
     filetype is opened. Without it (or a C compiler, `gcc` below),
     highlighting silently stays regex-only.
   - `ripgrep` (telescope live grep), `git` (fugitive, gitsigns).
-- `hosts/common/configuration.nix`: `gcc`, `lua-language-server`, `nixd`,
-  `stylua` and `nixfmt` (formatters used by conform).
+- `hosts/common/configuration.nix`: `gcc`, `nixd` and `nixfmt` (formatter
+  used by conform).
+
+`lua-language-server` and `stylua` come from this repo's devShell
+(`../flake.nix`), so they're only available when nvim is started from inside
+the env repo, not through the `~/.config/nvim` symlink.
 
 Per-project tools come from the project's devShell (direnv), e.g. `gopls`,
 `rust-analyzer`, `goimports`. Servers are enabled in `lua/plugins/lsp.lua`
