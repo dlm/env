@@ -1,10 +1,12 @@
 -- Suggestions for displaying diagnostics in a more useful way came from:
 --https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#customizing-how-diagnostics-are-displayed
 
--- Setup the diagnostics to present a sign in the gutter and
--- full text in a popup.
+-- Setup the diagnostics to present a sign in the gutter and the full
+-- text as virtual lines under the cursor's line. The float is still
+-- available on demand with <C-w>d.
 vim.diagnostic.config({
 	virtual_text = false,
+	virtual_lines = { current_line = true },
 	underline = true,
 	update_in_insert = false,
 	severity_sort = false,
@@ -23,12 +25,3 @@ vim.diagnostic.config({
 	},
 })
 
--- and the popup
-vim.api.nvim_create_autocmd("CursorHold", {
-	callback = function()
-		vim.diagnostic.open_float({
-			focusable = false,
-			close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-		})
-	end,
-})

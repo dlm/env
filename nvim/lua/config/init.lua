@@ -3,5 +3,4 @@ require("config/lazy")
 
 require("config/diagnostic")
 require("config/keymap")
-require("config/prog-langs")
 require("config/ui")
