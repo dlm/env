@@ -1,8 +1,8 @@
 return {
 	-- colors, main one last
-	"folke/tokyonight.nvim",
-	"ellisonleao/gruvbox.nvim",
-	"navarasu/onedark.nvim",
+	{ "folke/tokyonight.nvim", lazy = true },
+	{ "ellisonleao/gruvbox.nvim", lazy = true },
+	{ "navarasu/onedark.nvim", lazy = true },
 	{
 		"catppuccin/nvim",
 		lazy = false, -- make sure we load this during startup if it is your main colorscheme
@@ -11,15 +11,6 @@ return {
 			require("catppuccin").setup({
 				flavour = "frappe",
 				transparent_background = true,
-				-- integrations = {
-				-- 	cmp = true,
-				-- 	gitsigns = true,
-				-- 	telescope = true,
-				-- 	nvimtree = true,
-				-- 	notify = true,
-				-- 	mini = true,
-				-- 	-- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
-				-- },
 			})
 
 			vim.cmd.colorscheme("catppuccin")
@@ -28,7 +19,7 @@ return {
 
 	"tpope/vim-surround",
 	{ "stevearc/oil.nvim", opts = {} },
-	{ "echasnovski/mini.trailspace", opts = {} },
+	{ "nvim-mini/mini.trailspace", opts = {} },
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v3.x",
@@ -39,17 +30,4 @@ return {
 			-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 		},
 	},
-
-	--   {
-	--       "github/copilot.vim",
-	-- -- config = function()
-	-- --           -- vim.g.copilot_no_tab_map = true
-	-- --           -- vim.api.nvim_set_keymap("i", "<C-y>", 'copilot#Accept("<CR>")', { expr = true, silent = true })
-	-- -- end,
-	--   },
-	--
-	-- {
-	-- 	"supermaven-inc/supermaven-nvim",
-	-- 	opts = {},
-	-- },
 }
