@@ -14,7 +14,8 @@ where.
 `lua-language-server` for the nvim config). With direnv, add an `.envrc`
 containing `use flake` and run `direnv allow`.
 
-## TODO
+## zsh
 
-- zsh: still needed occasionally, but broken as written. `zshrc.local`
-  expects zplug at `~/.zplug`, which isn't installed on the NixOS machines.
+Plugins are managed by [zplug](https://github.com/zplug/zplug). On NixOS it's
+installed by the nixos repo; elsewhere, clone it to `~/.zplug`. On first
+start zsh offers to install any missing plugins.

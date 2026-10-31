@@ -1,16 +1,32 @@
-source ~/.zplug/init.zsh
+# zplug itself comes from a git clone into ~/.zplug, or from nix (installed
+# by the nixos repo). Either way plugins are installed into ~/.zplug.
+export ZPLUG_HOME="${ZPLUG_HOME:-$HOME/.zplug}"
+for zplug_init in "$ZPLUG_HOME/init.zsh" "$HOME/.nix-profile/share/zplug/init.zsh"; do
+    [[ -r $zplug_init ]] && source $zplug_init && break
+done
+unset zplug_init
 
-zplug "b4b4r07/zplug"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
-zplug "zdharma/fast-syntax-highlighting", defer:2
+zplug "zdharma-continuum/fast-syntax-highlighting", defer:2
 zplug "Tarrasch/zsh-colors"
-zplug "jeffreytse/zsh-vi-mode"
 zplug "ohmyzsh/oh-my-zsh", use:"lib/history.zsh"
 zplug "ohmyzsh/oh-my-zsh", use:"lib/directories.zsh"
 
-# use default readline keybindings
-bindkey -e
+# vi keybindings, with no delay switching to normal mode on <esc>
+bindkey -v
+export KEYTIMEOUT=1
+
+# block cursor in normal mode, line cursor in insert mode
+function zle-keymap-select zle-line-init {
+    if [[ $KEYMAP == vicmd ]]; then
+        printf '\e[2 q'
+    else
+        printf '\e[6 q'
+    fi
+}
+zle -N zle-keymap-select
+zle -N zle-line-init
 
 # do not update the title in every command
 export DISABLE_AUTO_TITLE="true";
