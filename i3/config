@@ -148,15 +148,8 @@ bindsym $mod+Shift+Escape exec "i3-nagbar -t warning -m 'You pressed the exit sh
 
 
 
-# $mod+F12 locks the screen and
-# $mod+Shift+F12 suspends the screen.
-# Note that pn-suspend needs to be run as root.
-# To have this run without needing a password I ran:
-# > sudo visudo
-# and added the line
-# dave ALL=NOPASSWD:/usr/sbin/pm-suspen
+# $mod+F12 locks the screen
 bind $mod+96 exec $i3/bin/lock
-bind $mod+Shift+96 exec sudo /usr/sbin/pm-suspend
 
 
 # resize window (you can also use the mouse for that)
