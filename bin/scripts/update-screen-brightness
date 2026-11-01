@@ -1,0 +1,23 @@
+#!/usr/bin/env nu
+
+def main [inc: int = 10] {
+    let delta = if ($inc < 0) {
+        $"($inc | math abs)%-"
+    } else {
+        $"($inc)%+"
+    }
+    # --class=backlight so it never picks up a keyboard/LED device
+    ^brightnessctl --class=backlight set $delta
+
+    let cur = (^brightnessctl --class=backlight get | into int)
+    let max = (^brightnessctl --class=backlight max | into int)
+    let percent = $cur / $max * 100 | math round
+
+    # replace the previous brightness notification rather than stacking a
+    # new one; replace-by-id works with any notification daemon
+    let id_file = $"($env.XDG_RUNTIME_DIR? | default '/tmp')/notify-id-brightness"
+    let replace_id = if ($id_file | path exists) { open $id_file | str trim } else { "0" }
+    ^notify-send -p -r $replace_id -t 1000 -h $"int:value:($percent)" $"Brightness: ($percent)%"
+    | str trim
+    | save --force $id_file
+}

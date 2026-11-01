@@ -128,12 +128,12 @@ bindsym $mod+e exec $i3/bin/i3-mode enter "layout" "d=default\nh=splith\ns=stack
 
 
 
-bindsym XF86AudioMute exec $i3/bin/toggle-volume
-bindsym XF86AudioLowerVolume exec $i3/bin/update-volume -10
-bindsym XF86AudioRaiseVolume exec $i3/bin/update-volume +10
+bindsym XF86AudioMute exec ~/bin/scripts/toggle-volume
+bindsym XF86AudioLowerVolume exec ~/bin/scripts/update-volume -10
+bindsym XF86AudioRaiseVolume exec ~/bin/scripts/update-volume +10
 
-bindsym XF86MonBrightnessDown exec $i3/bin/update-screen-brightness -10
-bindsym XF86MonBrightnessUp exec $i3/bin/update-screen-brightness 10
+bindsym XF86MonBrightnessDown exec ~/bin/scripts/update-screen-brightness -10
+bindsym XF86MonBrightnessUp exec ~/bin/scripts/update-screen-brightness 10
 
 
 # reload the configuration file

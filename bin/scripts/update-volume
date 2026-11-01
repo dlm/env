@@ -12,5 +12,9 @@ nextVolume=$(python -c "x=$currentVolume+$inc; print(max(min(x,100), 0))")
 wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
 wpctl set-volume @DEFAULT_AUDIO_SINK@ "${nextVolume}%"
 
-# Send notification
-notify-send -t 1000 -h int:value:$nextVolume -h string:synchronous:volume "Volume: ${nextVolume}%"
+# Send notification, replacing the previous volume notification rather than
+# stacking a new one (shared with toggle-volume). Replace-by-id works with
+# any notification daemon (dunst and mako alike).
+idFile="${XDG_RUNTIME_DIR:-/tmp}/notify-id-volume"
+notify-send -p -r "$(cat "$idFile" 2>/dev/null || echo 0)" \
+    -t 1000 -h int:value:$nextVolume "Volume: ${nextVolume}%" > "$idFile"

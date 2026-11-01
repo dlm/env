@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# Toggle mute
+wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+
+# Get mute status and send notification, replacing the previous volume
+# notification (shared with update-volume)
+idFile="${XDG_RUNTIME_DIR:-/tmp}/notify-id-volume"
+replaceId=$(cat "$idFile" 2>/dev/null || echo 0)
+muted=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -o "MUTED")
+if [ -n "$muted" ]; then
+    notify-send -p -r "$replaceId" -t 1000 "Volume: Muted" > "$idFile"
+else
+    volume=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}')
+    notify-send -p -r "$replaceId" -t 1000 -h int:value:$volume "Volume: ${volume}%" > "$idFile"
+fi
