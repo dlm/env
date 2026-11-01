@@ -119,7 +119,7 @@ layout {
 spawn-at-startup "waybar"
 spawn-at-startup "mako"
 spawn-at-startup "polkit-agent"
-spawn-sh-at-startup "swaybg -i ~/.config/feh/background -m fill"
+spawn-sh-at-startup "swaybg -i ~/.config/wallpaper/current -m fill"
 
 hotkey-overlay {
 }

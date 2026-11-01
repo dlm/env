@@ -16,4 +16,4 @@ configuration {
   }
 }
 
-@theme "~/.config/rofi/themes/catppuccin-mocha.rasi"
+@theme "~/.config/rofi/themes/catppuccin-frappe.rasi"

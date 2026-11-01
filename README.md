@@ -8,6 +8,19 @@ into place with `mkOutOfStoreSymlink`, so edits here take effect without a
 rebuild. See `hosts/common/home.nix` and `modules/home/` there for what goes
 where.
 
+## Shared assets
+
+Files used by more than one app live in their own directory rather than
+under any one app. Right now that's `wallpaper/`, linked to
+`~/.config/wallpaper`: `current` points at the image in use, read by feh
+(i3) and swaybg (niri).
+
+Only things my own session reads can live here. Anything read by a system
+service or another user (e.g. the lightdm greeter, which runs as `lightdm`)
+can't follow a symlink into my home directory, and a pure flake can't copy
+files from this repo into the store, so those assets belong in the nixos
+repo instead.
+
 ## Dev shell
 
 `flake.nix` provides the tooling for editing this repo (`stylua`,
