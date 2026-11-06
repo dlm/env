@@ -59,7 +59,6 @@ $env.config.history = {
 # set the path
 $env.PATH = [
     ($nu.home-dir | path join "bin/scripts")
-    ($nu.home-dir | path join "bin/scripts-bky")
 ] ++ $env.PATH
 
 # Set the start banner

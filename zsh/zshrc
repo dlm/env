@@ -54,7 +54,6 @@ zstyle ':completion:*' special-dirs true
 
 # Add local bin path
 export PATH="$HOME/bin/scripts/:$PATH"
-export PATH="$HOME/bin/scripts-bky/:$PATH"
 export PATH="$HOME/bin:$PATH"
 
 # set the word characters, the stuff in the [] is removed from the
