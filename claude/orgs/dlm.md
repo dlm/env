@@ -22,6 +22,10 @@ Claude memory or notes in the repo.
   detail goes in a collapsible "Agent notes" section at the end.
 - **Repo labels** (`nixos`, `env`, `homelab`, …) are optional, for filtering
   Dugnad by codebase.
+- **Status goes in project updates**, not the project description. The
+  description holds what the project is and its `Done when`.
+- **Sessions end with `/end-session`** (or "anything else to capture?"), which
+  drafts these updates.
 
 ## Commits
 
