@@ -26,6 +26,9 @@ Claude memory or notes in the repo.
   description holds what the project is and its `Done when`.
 - **Sessions end with `/dlm:end-session`** (or "anything else to capture?"), which
   drafts these updates.
+- **Days end with `/dlm:eod`**, after closing open sessions with
+  `/dlm:end-session`. Personal skills live in `env/claude/skills` as the `dlm`
+  plugin; add a folder and run `/reload-plugins`.
 
 ## Commits
 
