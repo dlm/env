@@ -14,8 +14,9 @@ The argument is the day: empty means today, otherwise a date or a phrase like
 Run both at once:
 
 1. `${CLAUDE_PLUGIN_ROOT}/skills/eod/collect.sh YYYY-MM-DD`. It prints git commits, the
-   user's messages from Claude Code sessions (in local time) and the Linear
-   changes made from those sessions. Ignore the session running this skill.
+   user's messages from Claude Code sessions (in local time), the sessions
+   that were never closed with `/dlm:end-session`, and the Linear changes
+   made from those sessions.
 2. Strava `list_activities` with `range_start` `YYYY-MM-DDT00:00:00`,
    `range_end` `YYYY-MM-DDT23:59:59` and `use_preferred_units: true`. Load
    the tool with ToolSearch first if it is deferred.
@@ -62,4 +63,10 @@ Match this format and tone exactly:
 Print the entry in a single code block so it is easy to copy. Below it, in
 one or two lines, mention anything you were unsure about and remind the user
 to add what leaves no trace, such as meetings or time away from the computer.
+
+Then list the sessions that were not closed with `/dlm:end-session`, one per
+line with the project and the time of its last message, and suggest closing
+them before calling it a day. Skip quick one-off questions, such as a single
+how-to message, since there is nothing in them to capture. Leave this out
+when every session was closed.
 If no source has anything for the day, say so instead of inventing lines.

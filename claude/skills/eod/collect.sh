@@ -23,17 +23,39 @@ done
 
 echo
 echo "## Claude Code sessions (user messages, local time)"
+unclosed=""
 for f in ~/.claude/projects/*/*.jsonl; do
   out=$(jq -r --arg s "$start_utc" --arg e "$end_utc" '
     select(.type == "user" and (.timestamp // "") >= $s and (.timestamp // "") < $e)
     | (.timestamp | sub("\\.[0-9]+Z$"; "Z") | fromdate | strflocaltime("%H:%M")) + " "
       + (if (.message.content | type) == "string" then .message.content
          else ([.message.content[]? | select(.type == "text") | .text] | join(" ")) end)
+    # a loaded skill shows up as a user message, but its text is not work done
+    | select(test("^[0-9:]{5} Base directory for this skill:") | not)
   ' "$f" 2>/dev/null \
     | grep -vE '^[0-9:]{5} *$|<(task-notification|system-reminder|output-file|tool-use-id|command-)' \
     | sed -E 's/<pasted_content[^>]*>.*//' | cut -c1-200 || true)
-  if [ -n "$out" ]; then printf '### %s\n%s\n' "$(basename "$(dirname "$f")")" "$out"; fi
+  [ -z "$out" ] && continue
+  name=$(basename "$(dirname "$f")")
+  printf '### %s\n%s\n' "$name" "$out"
+  # a session is closed off once /dlm:end-session has run in it that day
+  closed=$(jq -r --arg s "$start_utc" --arg e "$end_utc" '
+    select(.type == "user" and (.timestamp // "") >= $s and (.timestamp // "") < $e)
+    | (if (.message.content | type) == "string" then .message.content
+       else ([.message.content[]? | select(.type == "text") | .text] | join(" ")) end)
+    | select(test("^Base directory for this skill: [^ ]*/end-session"))
+    | 1
+  ' "$f" 2>/dev/null | head -1 || true)
+  if [ -z "$closed" ]; then
+    last=$(grep -oE '^[0-9]{2}:[0-9]{2}' <<<"$out" | tail -1)
+    unclosed+="$name (last message $last)"$'\n'
+  fi
 done
+
+echo
+echo "## Sessions not closed with /dlm:end-session"
+printf '%s' "${unclosed:-none}"
+echo
 
 echo
 echo "## Linear changes made from Claude sessions"
