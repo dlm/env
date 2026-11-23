@@ -1,6 +1,6 @@
 ---
 name: end-session
-description: Wrap up a work session so nothing is left only in the conversation. Use when the user types /end-session or asks "anything else to capture?" (or similar) near the end of a session.
+description: Wrap up a work session so nothing is left only in the conversation. Use when the user types /dlm:end-session or asks "anything else to capture?" (or similar) near the end of a session.
 ---
 
 # End session

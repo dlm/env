@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# Gather local evidence of work done on one day: git commits and Claude Code sessions.
+# Usage: collect.sh [YYYY-MM-DD]   (defaults to today, local time)
+set -euo pipefail
+
+day="${1:-$(date +%F)}"
+next=$(date -d "$day + 1 day" +%F)
+# Claude transcripts are stamped in UTC, so convert the local-day window.
+start_utc=$(date -u -d "@$(date -d "$day 00:00" +%s)" +%Y-%m-%dT%H:%M)
+end_utc=$(date -u -d "@$(date -d "$next 00:00" +%s)" +%Y-%m-%dT%H:%M)
+me=$(git config --global user.name)
+
+echo "# $day ($(date -d "$day" +%A))"
+
+echo
+echo "## Git commits"
+find ~ -maxdepth 5 -name .git -type d 2>/dev/null | while read -r d; do
+  r=$(dirname "$d")
+  out=$(git -C "$r" log --all --author="$me" --since="$day 00:00" --until="$next 00:00" \
+    --format='%ad %h %s' --date=format-local:%H:%M 2>/dev/null | awk 'NF > 2' || true)
+  if [ -n "$out" ]; then printf '### %s\n%s\n' "${r/#$HOME/~}" "$out"; fi
+done
+
+echo
+echo "## Claude Code sessions (user messages, local time)"
+for f in ~/.claude/projects/*/*.jsonl; do
+  out=$(jq -r --arg s "$start_utc" --arg e "$end_utc" '
+    select(.type == "user" and (.timestamp // "") >= $s and (.timestamp // "") < $e)
+    | (.timestamp | sub("\\.[0-9]+Z$"; "Z") | fromdate | strflocaltime("%H:%M")) + " "
+      + (if (.message.content | type) == "string" then .message.content
+         else ([.message.content[]? | select(.type == "text") | .text] | join(" ")) end)
+  ' "$f" 2>/dev/null \
+    | grep -vE '^[0-9:]{5} *$|<(task-notification|system-reminder|output-file|tool-use-id|command-)' \
+    | sed -E 's/<pasted_content[^>]*>.*//' | cut -c1-200 || true)
+  if [ -n "$out" ]; then printf '### %s\n%s\n' "$(basename "$(dirname "$f")")" "$out"; fi
+done
+
+echo
+echo "## Linear changes made from Claude sessions"
+jq -r --arg s "$start_utc" --arg e "$end_utc" '
+  select(.type == "assistant" and (.timestamp // "") >= $s and (.timestamp // "") < $e)
+  | .message.content[]? | select(.type == "tool_use" and (.name | test("linear__save_(issue|comment)")))
+  | (.input.id // .input.issueId // "new issue") + " " + ((.input.state // .input.title // "") | tostring)
+' ~/.claude/projects/*/*.jsonl 2>/dev/null | sort -u

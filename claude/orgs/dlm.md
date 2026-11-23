@@ -24,7 +24,7 @@ Claude memory or notes in the repo.
   Dugnad by codebase.
 - **Status goes in project updates**, not the project description. The
   description holds what the project is and its `Done when`.
-- **Sessions end with `/end-session`** (or "anything else to capture?"), which
+- **Sessions end with `/dlm:end-session`** (or "anything else to capture?"), which
   drafts these updates.
 
 ## Commits
