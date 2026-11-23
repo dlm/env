@@ -11,13 +11,23 @@ The argument is the day: empty means today, otherwise a date or a phrase like
 
 ## Gather
 
-Run both at once:
+Run steps 1 and 3 at once, then step 2, which needs the window from step 1.
 
-1. `${CLAUDE_PLUGIN_ROOT}/skills/eod/collect.sh YYYY-MM-DD`. It prints git commits, the
-   user's messages from Claude Code sessions (in local time), the sessions
-   that were never closed with `/dlm:end-session`, and the Linear changes
-   made from those sessions.
-2. Strava `list_activities` with `range_start` `YYYY-MM-DDT00:00:00`,
+1. `${CLAUDE_PLUGIN_ROOT}/skills/eod/collect.sh YYYY-MM-DD`. It prints the
+   day's UTC window, git commits, the user's messages from Claude Code
+   sessions (in local time), the sessions that were never closed with
+   `/dlm:end-session`, and Linear edits and comments made from sessions.
+2. Linear `list_issues` with `updatedAt` set to the start of the UTC window,
+   `limit: 250` and `fields` `title`, `status`, `project`, `createdAt`,
+   `startedAt`, `completedAt` and `canceledAt`. Follow `cursor` while
+   `hasNextPage` is true. Linear can only filter on "updated after", so keep
+   only the issues whose `createdAt`, `startedAt`, `completedAt` or
+   `canceledAt` falls inside the window; the rest changed on a later day.
+   Treat this as the source of truth for card status. The last section of
+   step 1 adds the edits and comments made through Claude, which say what
+   happened on a card; edits and comments made in the Linear app are not
+   covered.
+3. Strava `list_activities` with `range_start` `YYYY-MM-DDT00:00:00`,
    `range_end` `YYYY-MM-DDT23:59:59` and `use_preferred_units: true`. Load
    the tool with ToolSearch first if it is deferred.
 
@@ -53,7 +63,11 @@ Match this format and tone exactly:
   work keeps the same prefix across days and weeks.
 - Describe outcomes, not process. Merge related commits into one line, and
   leave out commit hashes, times and chores like formatting or lint fixes.
-- Include a Linear issue ID only when an issue was completed.
+- Include a Linear issue ID only when an issue was completed. Write a
+  completed issue as an outcome under the repo it was done in, not as a
+  separate `linear:` line. Summarize cards that were only filed or canceled
+  in one line per project (e.g. "dugnad: filed 4 maintenance cards") rather
+  than listing each.
 - Put workouts last, prefixed with the kind of workout (`mtb:`, `zwift:`,
   `walk:`, `gym:`). Use the activity's own name when it says what it was
   (e.g. "TMP DJDK" → "gym: tmp with DJDK"). Add distance and climbing for

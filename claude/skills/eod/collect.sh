@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Gather local evidence of work done on one day: git commits and Claude Code sessions.
+# Linear and Strava come from their MCP servers; see SKILL.md.
 # Usage: collect.sh [YYYY-MM-DD]   (defaults to today, local time)
 set -euo pipefail
 
@@ -11,6 +12,7 @@ end_utc=$(date -u -d "@$(date -d "$next 00:00" +%s)" +%Y-%m-%dT%H:%M)
 me=$(git config --global user.name)
 
 echo "# $day ($(date -d "$day" +%A))"
+echo "UTC window: ${start_utc}:00Z to ${end_utc}:00Z"
 
 echo
 echo "## Git commits"
@@ -57,10 +59,15 @@ echo "## Sessions not closed with /dlm:end-session"
 printf '%s' "${unclosed:-none}"
 echo
 
+
 echo
-echo "## Linear changes made from Claude sessions"
+echo "## Linear edits and comments made from Claude sessions"
 jq -r --arg s "$start_utc" --arg e "$end_utc" '
   select(.type == "assistant" and (.timestamp // "") >= $s and (.timestamp // "") < $e)
   | .message.content[]? | select(.type == "tool_use" and (.name | test("linear__save_(issue|comment)")))
-  | (.input.id // .input.issueId // "new issue") + " " + ((.input.state // .input.title // "") | tostring)
+  | .input as $i
+  | if (.name | endswith("save_comment")) then ($i.issueId // "reply") + " comment: " + (($i.body // "") | split("\n")[0] | .[0:100])
+    elif $i.id == null then (if $i.title then "new issue: " + $i.title else empty end)
+    elif $i.state then $i.id + " status: " + ($i.state | tostring)
+    else $i.id + " edited" end
 ' ~/.claude/projects/*/*.jsonl 2>/dev/null | sort -u
