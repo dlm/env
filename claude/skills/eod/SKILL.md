@@ -37,7 +37,9 @@ Match this format and tone exactly:
 - gym: tmp with DJDK
 ```
 
-- Write one line per accomplishment, lowercase and terse.
+- Write one line per accomplishment, lowercase and terse. Keep every line,
+  including the `- ` and prefix, to 80 characters or fewer. Shorten the
+  wording or split it into two lines rather than wrapping.
 - Start every line with a `project:` prefix, even when it is the only line
   for that project. "writeup started" says little on its own;
   "blqsort: writeup started" says what was written. Pick the prefix in this
