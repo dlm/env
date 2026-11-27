@@ -52,3 +52,12 @@ Show the drafts and post only after the user approves.
 
 One short list: what was already captured, what you changed, and anything you
 left for the user to decide.
+
+Once nothing is waiting on the user (every approval answered or declined),
+end that final message with this line on its own, exactly:
+
+Session closed.
+
+`/dlm:eod` looks for it to tell which sessions were closed, so leave it out
+while a question is still open, and print it again if the session continues
+and you wrap up again.

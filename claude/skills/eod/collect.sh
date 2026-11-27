@@ -40,27 +40,17 @@ for f in ~/.claude/projects/*/*.jsonl; do
   [ -z "$out" ] && continue
   name=$(basename "$(dirname "$f")")
   printf '### %s\n%s\n' "$name" "$out"
-  # a session is closed off once /dlm:end-session has run in it after that day's
-  # last message, even on a later day. One reply to its questions still counts as
-  # closing if it came within 5 minutes of Claude's answer.
+  # a session is closed if /dlm:end-session finished, ending with the line
+  # "Session closed.", after that day's last user message, even on a later day
   closed=$(jq -rs --arg s "$start_utc" --arg e "$end_utc" '
-    def secs: sub("\\.[0-9]+Z$"; "Z") | fromdate;
     def text: if (.message.content | type) == "string" then .message.content
       else ([.message.content[]? | select(.type == "text") | .text] | join(" ")) end;
-    [.[] | select(.timestamp and (.type == "user" or .type == "assistant"))] as $m
-    | [$m[] | select(.type == "user" and text != "")] as $u
-    | ([$u[] | .timestamp | select(. >= $s and . < $e)] | max) as $last
-    | ([$u[] | select(text | test("^Base directory for this skill: [^ ]*/end-session"))
-        | .timestamp] | max) as $end
-    | select($end != null)
-    | if $end >= $last then 1
-      else
-        select([$u[] | select(.timestamp > $end)] | length == 1)
-        | ([$m[] | select(.type == "assistant" and .timestamp < $last) | .timestamp]
-            | max) as $answered
-        | select(($last | secs) - ($answered | secs) <= 300)
-        | 1
-      end
+    ([.[] | select(.type == "user" and .timestamp and text != "") | .timestamp
+      | select(. >= $s and . < $e)] | max) as $last
+    | ([.[] | select(.type == "assistant" and .timestamp)
+        | select(text | test("(^|\n)Session closed\\.\\s*$")) | .timestamp] | max) as $end
+    | select($end != null and $end > $last)
+    | 1
   ' "$f" 2>/dev/null | head -1 || true)
   if [ -z "$closed" ]; then
     last=$(grep -oE '^[0-9]{2}:[0-9]{2}' <<<"$out" | tail -1)
